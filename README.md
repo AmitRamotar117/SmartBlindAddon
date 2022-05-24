@@ -17,7 +17,7 @@ Blind operator add-on
 
 **Description**
 
-A smart add-on device that is used to wirelessly operate corded blinds.
+A smart add-on device that is used to wireless operate corded blinds.
 It will use a dc motor, light sensor, distance sensor, and temperature sensor in order to control and operate blinds wirelessly.
 
 The device is a basically a box that connects to most blinds operation controls that contains a motor that will control the 

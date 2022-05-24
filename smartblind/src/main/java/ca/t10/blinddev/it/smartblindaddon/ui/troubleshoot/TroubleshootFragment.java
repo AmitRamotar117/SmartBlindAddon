@@ -1,4 +1,4 @@
-package ca.t10.blinddev.it.smartblindaddon.ui.gallery;
+package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentGalleryBinding;
+import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentTroubleshootBinding;
 
-public class GalleryFragment extends Fragment {
+public class TroubleshootFragment extends Fragment {
 
-    private FragmentGalleryBinding binding;
+    private FragmentTroubleshootBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        GalleryViewModel galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        TroubleshootViewModel troubleshootViewModel =
+                new ViewModelProvider(this).get(TroubleshootViewModel.class);
 
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        troubleshootViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

@@ -1,16 +1,16 @@
-package ca.t10.blinddev.it.smartblindaddon.ui.gallery;
+package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class TroubleshootViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public TroubleshootViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("This is troubleshooting fragment");
     }
 
     public LiveData<String> getText() {

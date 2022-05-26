@@ -1,7 +1,10 @@
 # The Smart Blind Addon
+
+**Team Name**
+
 Team Ten of Software Project CENG 322
 
-**Team members**
+**Team Members**
 
 Vyacheslav Perepelytsya n01133953
 

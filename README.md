@@ -1,9 +1,5 @@
 # The Smart Blind Addon
 
-**Team Name**
-
-Team Ten of Software Project CENG 322
-
 **Team Members**
 
 Vyacheslav Perepelytsya n01133953
@@ -13,6 +9,10 @@ Amit Punit n01203930
 Chris Janelle Mutuc n01314607
 
 Andrew Fraser n01309442
+
+**Team Name**
+
+Team Ten of Software Project CENG 322
 
 **Description**
 

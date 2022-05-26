@@ -1,8 +1,4 @@
-**Project**
-
-The Smart Blind Addon
-
-# Team-Ten
+# The Smart Blind Addon
 Team Ten of Software Project CENG 322
 
 **Team members**

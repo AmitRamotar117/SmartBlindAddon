@@ -12,7 +12,7 @@ Andrew Fraser n01309442
 
 **Team Name**
 
-Team Ten of Software Project CENG 322
+Blind Dev
 
 **Description**
 

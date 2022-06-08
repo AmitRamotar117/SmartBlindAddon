@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Amit Punit n01203930 -->
+<!--Amit Punit n01203930
+    Chris Mutuc n01314607-->
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
@@ -16,5 +17,10 @@
     <item
         android:id="@+id/logout"
         android:title="Logout"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
         app:showAsAction="never"/>
 </menu>

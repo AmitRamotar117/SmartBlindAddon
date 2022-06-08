@@ -14,4 +14,5 @@
     <string name="menu_contact">Contact</string>
     <string name="menu_manage_blinds">Manage Blinds</string>
     <string name="menu_schedule_blind">Schedule Blind</string>
+    <string name="settings">Settings</string>
 </resources>

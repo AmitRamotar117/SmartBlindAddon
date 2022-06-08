@@ -21,6 +21,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 
@@ -58,7 +60,16 @@ public class ContactFragment extends Fragment {
     }
     private void getContacts() {
 
-        Toast.makeText(getActivity(), "Get contacts ....", Toast.LENGTH_LONG).show();
+        Snackbar snackbar = Snackbar
+                .make(getActivity().findViewById(android.R.id.content), "Access Granted", Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    private void denied(){
+        Snackbar snackbar = Snackbar
+                .make(getActivity().findViewById(android.R.id.content), "Denied", Snackbar.LENGTH_LONG);
+        snackbar.show();
+
     }
 
     //request permission to open contacts
@@ -68,9 +79,9 @@ public class ContactFragment extends Fragment {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                         android.Manifest.permission.READ_CONTACTS)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Read Contacts permission");
-                    builder.setPositiveButton(android.R.string.ok, null);
-                    builder.setMessage("Please enable access to contacts.");
+                    builder.setTitle(R.string.permission_contact_title);
+                    builder.setPositiveButton(R.string.enable, null);
+                    builder.setMessage(R.string.prompt1);
                     builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @TargetApi(Build.VERSION_CODES.M)
                         @Override
@@ -101,9 +112,8 @@ public class ContactFragment extends Fragment {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     getContacts();
                 } else {
-                    Toast.makeText(getActivity(), "You have disabled a contacts permission", Toast.LENGTH_LONG).show();
-                }
-                return;
+                          denied();
+                }return;
             }
         }
     }

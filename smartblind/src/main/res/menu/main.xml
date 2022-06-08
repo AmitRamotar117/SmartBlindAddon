@@ -10,17 +10,19 @@
         app:showAsAction="never" />
     <item
         android:id="@+id/to_home"
+        android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/homepage"
-        android:actionLayout="@layout/menu_home_icon"
-        app:showAsAction="always"
-        />
+
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        app:showAsAction="never"/>
+
     <item
         android:id="@+id/logout"
         android:title="Logout"
         app:showAsAction="never"/>
 
-    <item
-        android:id="@+id/settings"
-        android:title="@string/settings"
-        app:showAsAction="never"/>
+
 </menu>

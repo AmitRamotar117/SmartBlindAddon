@@ -19,4 +19,6 @@
     <string name="enable">Enable</string>
     <string name="permission_contact_title">Read Contacts permission</string>
     <string name="prompt1">Please enable access to contacts.</string>
+    <string name="schedule">Schedule</string>
+    <string name="manage_blinds">Manage blinds</string>
 </resources>

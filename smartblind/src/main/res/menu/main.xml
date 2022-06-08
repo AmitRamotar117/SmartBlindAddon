@@ -12,7 +12,6 @@
         android:id="@+id/to_home"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/homepage"
-
         app:showAsAction="always"/>
     <item
         android:id="@+id/settings"

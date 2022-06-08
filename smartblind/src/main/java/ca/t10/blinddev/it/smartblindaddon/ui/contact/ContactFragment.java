@@ -1,4 +1,4 @@
-package ca.t10.blinddev.it.smartblindaddon.ui.slideshow;
+package ca.t10.blinddev.it.smartblindaddon.ui.contact;
 //Amit Punit n01203930
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentSlideshowBinding;
+import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 
-public class SlideshowFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+public class ContactFragment extends Fragment {
+
+    private FragmentContactBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        ContactViewModel contactViewModel =
+                new ViewModelProvider(this).get(ContactViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentContactBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        contactViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

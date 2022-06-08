@@ -10,4 +10,8 @@
     <string name="menu_home">Home</string>
     <string name="menu_troubleshoot">Troubleshooting</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="homepage">Homepage</string>
+    <string name="menu_contact">Contact</string>
+    <string name="menu_manage_blinds">Manage Blinds</string>
+    <string name="menu_schedule_blind">Schedule Blind</string>
 </resources>

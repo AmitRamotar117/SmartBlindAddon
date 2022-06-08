@@ -3,8 +3,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/login"
         android:orderInCategory="100"
         android:title="Login"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/to_home"
+        android:title="@string/homepage"
+        android:actionLayout="@layout/menu_home_icon"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        app:showAsAction="never"/>
 </menu>

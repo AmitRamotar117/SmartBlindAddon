@@ -18,8 +18,20 @@
         tools:layout="@layout/fragment_troubleshoot" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="ca.t10.blinddev.it.smartblindaddon.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_contact"
+        android:name="ca.t10.blinddev.it.smartblindaddon.ui.contact.ContactFragment"
+        android:label="Contact"
+        tools:layout="@layout/fragment_contact" />
+    <fragment
+        android:id="@+id/nav_manage"
+        android:name="ca.t10.blinddev.it.smartblindaddon.ui.manage.ManageFragment"
+        android:label="Manage Blinds"
+        tools:layout="@layout/fragment_manage" />
+    <fragment
+        android:id="@+id/nav_schedule"
+        android:name="ca.t10.blinddev.it.smartblindaddon.ui.schedule.ScheduleFragment"
+        android:label="Schedule Blinds"
+        tools:layout="@layout/fragment_schedule" />
+
+
 </navigation>

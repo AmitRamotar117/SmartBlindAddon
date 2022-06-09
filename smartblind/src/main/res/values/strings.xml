@@ -15,10 +15,10 @@
     <string name="menu_manage_blinds">Manage Blinds</string>
     <string name="menu_schedule_blind">Schedule Blind</string>
     <string name="settings">Settings</string>
-    <string name="open_dialer">Open Contacts</string>
+    <string name="open_dialer">Allow Storage</string>
     <string name="enable">Enable</string>
-    <string name="permission_contact_title">Read Contacts permission</string>
-    <string name="prompt1">Please enable access to contacts.</string>
+    <string name="permission_storage_title">Read Storage permission</string>
+    <string name="prompt1">Please enable access to storage.</string>
     <string name="schedule">Schedule</string>
     <string name="manage_blinds">Manage blinds</string>
 </resources>

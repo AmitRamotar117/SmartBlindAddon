@@ -1,5 +1,6 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.contact;
 //Amit Punit n01203930
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,8 +31,8 @@ import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 public class ContactFragment extends Fragment {
 
     private FragmentContactBinding binding;
-    private Button dialerBtn;
-    public static final int PERMISSIONS_REQUEST_READ_CONTACTS = 1;
+    private Button permissionBtn;
+    public static final int PERMISSIONS_REQUEST_READ_STORAGE = 1;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,11 +42,11 @@ public class ContactFragment extends Fragment {
         binding = FragmentContactBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        dialerBtn = root.findViewById(R.id.dialerButton);
-        dialerBtn.setOnClickListener(new View.OnClickListener() {
+        permissionBtn = root.findViewById(R.id.dialerButton);
+      permissionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestContactPermission();
+                requestStoragePermission();
             }
         });
 
@@ -58,7 +59,7 @@ public class ContactFragment extends Fragment {
 
         return root;
     }
-    private void getContacts() {
+    private void getAccess() {
 
         Snackbar snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Access Granted", Snackbar.LENGTH_LONG);
@@ -73,13 +74,13 @@ public class ContactFragment extends Fragment {
     }
 
     //request permission to open contacts
-    public void requestContactPermission() {
+    public void requestStoragePermission() {
 
-            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
-                        android.Manifest.permission.READ_CONTACTS)) {
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle(R.string.permission_contact_title);
+                    builder.setTitle(R.string.permission_storage_title);
                     builder.setPositiveButton(R.string.enable, null);
                     builder.setMessage(R.string.prompt1);
                     builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -88,18 +89,18 @@ public class ContactFragment extends Fragment {
                         public void onDismiss(DialogInterface dialog) {
                             requestPermissions(
                                     new String[]
-                                            {android.Manifest.permission.READ_CONTACTS}
-                                    , PERMISSIONS_REQUEST_READ_CONTACTS);
+                                            {Manifest.permission.READ_EXTERNAL_STORAGE}
+                                    , PERMISSIONS_REQUEST_READ_STORAGE);
                         }
                     });
                     builder.show();
                 } else {
                     ActivityCompat.requestPermissions(getActivity(),
-                            new String[]{android.Manifest.permission.READ_CONTACTS},
-                            PERMISSIONS_REQUEST_READ_CONTACTS);
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                            PERMISSIONS_REQUEST_READ_STORAGE);
                 }
             } else {
-                getContacts();
+                getAccess();
             }
 
     }
@@ -107,10 +108,10 @@ public class ContactFragment extends Fragment {
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case PERMISSIONS_REQUEST_READ_CONTACTS: {
+            case PERMISSIONS_REQUEST_READ_STORAGE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getContacts();
+                    getAccess();
                 } else {
                           denied();
                 }return;

@@ -114,7 +114,8 @@ public class ContactFragment extends Fragment {
                     getAccess();
                 } else {
                           denied();
-                }return;
+                }
+                return;
             }
         }
     }

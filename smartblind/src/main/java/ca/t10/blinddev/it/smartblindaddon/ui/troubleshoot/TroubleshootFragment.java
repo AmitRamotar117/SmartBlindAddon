@@ -24,8 +24,8 @@ public class TroubleshootFragment extends Fragment {
         binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        troubleshootViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //final TextView textView = binding.textGallery;
+        //troubleshootViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

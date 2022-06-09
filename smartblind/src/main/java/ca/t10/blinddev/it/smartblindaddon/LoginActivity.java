@@ -29,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin"))
                 {
                     Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFULL", Toast.LENGTH_LONG).show();
+                    startMainActivity();
                 }
                 else
                 {
@@ -38,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
+    public void startMainActivity()
+    {
+        Intent intent = new Intent (this, MainActivity.class);
+        startActivity(intent);
+    }
 
 }

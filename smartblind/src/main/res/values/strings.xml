@@ -21,4 +21,8 @@
     <string name="prompt1">Please enable access to storage.</string>
     <string name="schedule">Schedule</string>
     <string name="manage_blinds">Manage blinds</string>
+    <string name="sign_in">Sign In</string>
+    <string name="username">UserName</string>
+    <string name="password">Password</string>
+    <string name="login">login</string>
 </resources>

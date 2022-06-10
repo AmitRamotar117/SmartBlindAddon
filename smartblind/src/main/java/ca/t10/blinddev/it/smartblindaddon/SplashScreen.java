@@ -14,11 +14,13 @@ public class SplashScreen extends AppCompatActivity {
         //Splash Screen
         //splash screen will display for three seconds and move to login screen
 
+
         new Thread() {
             public void run() {
                 try {
                     sleep(3000);
                     startActivity(new Intent(SplashScreen.this, LoginActivity.class));
+                    finish();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

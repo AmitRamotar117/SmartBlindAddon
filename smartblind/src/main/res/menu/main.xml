@@ -4,22 +4,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/login"
+        android:id="@+id/menu_login"
         android:orderInCategory="100"
         android:title="Login"
         app:showAsAction="never" />
     <item
-        android:id="@+id/to_home"
+        android:id="@+id/menu_to_home"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/homepage"
         app:showAsAction="always"/>
     <item
-        android:id="@+id/settings"
+        android:id="@+id/menu_settings"
         android:title="@string/settings"
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/logout"
+        android:id="@+id/menu_logout"
         android:title="Logout"
         app:showAsAction="never"/>
 

@@ -3,8 +3,10 @@ package ca.t10.blinddev.it.smartblindaddon;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -56,6 +58,24 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
 
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // this will open the login activity when pressed
+            case R.id.menu_login:
+                Intent open_login = new Intent(this,LoginActivity.class);
+                startActivity(open_login);
+                finish();
+                break;
+            case R.id.menu_logout:
+                Toast.makeText(this,"Logout pressed",Toast.LENGTH_SHORT).show();
+
+            default:
+                onSupportNavigateUp();// this to retain functionality of the navigation bar
+                break;
+        }
         return true;
     }
 

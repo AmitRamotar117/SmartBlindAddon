@@ -57,17 +57,28 @@
         android:textColor="@color/ic_home_icon_background"
         android:textColorHint="@color/ic_home_icon_background" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_signin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="559dp"
+        android:layout_marginEnd="135dp"
+        android:text="Sign in with Google" />
+
     <Button
         android:id="@+id/login_btn"
-        android:layout_width="154dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="137dp"
-        android:layout_marginTop="581dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="102dp"
+        android:layout_marginStart="133dp"
+        android:layout_marginTop="466dp"
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="217dp"
         android:text="@string/login" />
 </RelativeLayout>

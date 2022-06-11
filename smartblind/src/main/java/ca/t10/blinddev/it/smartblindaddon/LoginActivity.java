@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -20,8 +22,15 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView username = (TextView) findViewById(R.id.username_txt);
         TextView password = (TextView) findViewById(R.id.password_txt);
+        View googleSignInOptions = findViewById(R.id.google_signin);
 
         Button loginBtn = (Button) findViewById(R.id.login_btn);
+        googleSignInOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginActivity.this, "LOGIN google SUCCESSFULL", Toast.LENGTH_LONG).show();
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // this will open the login activity when pressed
+            case R.id.menu_settings:
+                Toast.makeText(this,"Settings pressed",Toast.LENGTH_SHORT).show();
+                break;
             case R.id.menu_login:
                 Intent open_login = new Intent(this,LoginActivity.class);
                 startActivity(open_login);
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_logout:
                 Toast.makeText(this,"Logout pressed",Toast.LENGTH_SHORT).show();
-
+                break;
             default:
                 onSupportNavigateUp();// this to retain functionality of the navigation bar
                 break;

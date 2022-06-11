@@ -28,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
         googleSignInOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //https://firebase.google.com/docs/auth/android/google-signin
+                //use this to implement the authentication
                 Toast.makeText(LoginActivity.this, "LOGIN google SUCCESSFULL", Toast.LENGTH_LONG).show();
             }
         });

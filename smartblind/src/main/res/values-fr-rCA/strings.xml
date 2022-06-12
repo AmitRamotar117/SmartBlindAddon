@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">SmartBlindAddon</string>
+    <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">En-tête de navigation</string>
+    <string name="action_settings">Paramètres</string>
+
+    <string name="menu_home">Accueil</string>
+    <string name="menu_troubleshoot">Dépannage</string>
+    <string name="menu_slideshow">Diaporama</string>
+    <string name="homepage">Accueil</string>
+    <string name="menu_contact">Contact</string>
+    <string name="menu_manage_blinds">Gérer les stores</string>
+    <string name="menu_schedule_blind">Planifier en aveugle</string>
+    <string name="settings">Paramètres</string>
+    <string name="open_dialer">Autoriser le stockage</string>
+    <string name="enable">Activer</string>
+    <string name="permission_storage_title">Lire l\'autorisation de stockage</string>
+    <string name="prompt1">Veuillez activer l\'accès au stockage.</string>
+    <string name="schedule">Calendrier</string>
+    <string name="manage_blinds">Gérer les stores</string>
+    <string name="sign_in">Connexion</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="password">Mot de passe</string>
+    <string name="login">connexion</string>
+    <string name="leave_app">Voulez-vous vraiment quitter l\'application</string>
+    <string name="ok">OK</string>
+    <string name="no">Non</string>
+    <string name="lock_screen_to_portrait_mode">Verrouiller l\'écran en mode portrait</string>
+    <string name="small">Petit</string>
+    <string name="black_white_mode"><![CDATA[Mode noir et blanc]]></string>
+    <string name="medium">Moyen</string>
+    <string name="large">Grand</string>
+    <string name="text_size">Taille du texte :</string>
+    <string name="apply_settings">Appliquer les paramètres</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="minimal_mode">Mode minimal</string>
+</resources>

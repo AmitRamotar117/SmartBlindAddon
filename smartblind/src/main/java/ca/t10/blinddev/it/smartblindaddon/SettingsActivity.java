@@ -17,5 +17,18 @@ public class SettingsActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_screen);
+        Button applyBtn = (Button) findViewById(R.id.apply_settings_button);
+    applyBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                startMainActivity();
+            }
+        });
+    }
+    public void startMainActivity()
+    {
+        Intent intent = new Intent (SettingsActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

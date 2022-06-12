@@ -18,6 +18,7 @@
         android:layout_marginBottom="572dp"
         android:gravity="center"
         android:text="@string/sign_in"
+        android:textStyle="bold"
         android:textColor="@color/ic_home_icon_background"
         android:textSize="34sp" />
 

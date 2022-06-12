@@ -48,13 +48,13 @@
 
     <RadioGroup
         android:id="@+id/text_size"
-        android:layout_width="142dp"
-        android:layout_height="146dp"
+        android:layout_width="170dp"
+        android:layout_height="139dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276">
+        app:layout_constraintVertical_bias="0.299">
 
         <RadioButton
             android:id="@+id/small_text"
@@ -114,4 +114,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.743" />
+
+    <ImageView
+        android:id="@+id/settings_wrench_img"
+        android:layout_width="140dp"
+        android:layout_height="111dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.897"
+        app:srcCompat="@mipmap/ic_settings_wrench" />
 </androidx.constraintlayout.widget.ConstraintLayout>

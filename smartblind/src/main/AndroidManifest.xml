@@ -21,6 +21,10 @@
             android:theme="@style/Theme.SmartBlindAddon.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/Theme.SmartBlindAddon.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:label="@string/app_name"

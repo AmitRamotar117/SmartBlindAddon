@@ -34,5 +34,8 @@
     <string name="medium">Medium</string>
     <string name="large">Large</string>
     <string name="text_size">Text Size:</string>
+    <string name="apply_settings">Apply Settings</string>
+    <string name="settings_title">Settings</string>
+    <string name="minimal_mode">Minimal Mode</string>
 
 </resources>

@@ -28,4 +28,11 @@
     <string name="leave_app">Are you sure you want to exit the app</string>
     <string name="ok">OK</string>
     <string name="no">No</string>
+    <string name="lock_screen_to_portrait_mode">Lock Screen to Portrait Mode</string>
+    <string name="small">Small</string>
+    <string name="black_white_mode"><![CDATA[Black & White Mode]]></string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="text_size">Text Size:</string>
+
 </resources>

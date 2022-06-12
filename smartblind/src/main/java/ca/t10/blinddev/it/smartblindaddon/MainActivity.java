@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // this will open the login activity when pressed
             case R.id.menu_settings:
-                Toast.makeText(this,"Settings pressed",Toast.LENGTH_SHORT).show();
+                Intent open_settings = new Intent(this,SettingsActivity.class);
+                startActivity(open_settings);
+                finish();
                 break;
             case R.id.menu_login:
                 Intent open_login = new Intent(this,LoginActivity.class);

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "377358611302",
+    "project_id": "smartblindaddon",
+    "storage_bucket": "smartblindaddon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377358611302:android:475e3c97be3f78e4600ea7",
+        "android_client_info": {
+          "package_name": "ca.t10.blinddev.it.smartblindaddon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377358611302-uf99u5vd88g3acite5di1vh3f7gl179d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwyuVTatLuIEkUrgDqM2ujItiH1F8_EKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377358611302-uf99u5vd88g3acite5di1vh3f7gl179d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

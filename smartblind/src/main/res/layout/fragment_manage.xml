@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="176dp"
         android:padding="25dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="-25dp" />
 

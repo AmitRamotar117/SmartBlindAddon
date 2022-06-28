@@ -38,4 +38,6 @@
     <string name="apply_settings">Appliquer les paramètres</string>
     <string name="settings_title">Paramètres</string>
     <string name="minimal_mode">Mode minimal</string>
+    <string name="dark_mode">Mode sombre</string>
+    <string name="enable_notifications">Activer les notifications</string>
 </resources>

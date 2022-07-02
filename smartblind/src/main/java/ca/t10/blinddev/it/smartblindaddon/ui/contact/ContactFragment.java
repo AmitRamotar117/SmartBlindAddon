@@ -12,7 +12,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,11 +27,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 
 
 public class ContactFragment extends Fragment {
+
+    private ListView listView;
 
     private FragmentContactBinding binding;
     private Button permissionBtn;
@@ -43,6 +50,29 @@ public class ContactFragment extends Fragment {
         View root = binding.getRoot();
 
         permissionBtn = root.findViewById(R.id.dialerButton);
+        listView = root.findViewById(R.id.devsList);
+        ArrayList<String> arrayList =  new ArrayList<>();
+
+        arrayList.add("Developer's Contact");
+        arrayList.add("chrisjanellemutuc@gmail.com");
+        arrayList.add("amitpunit117@gmail.com");
+        arrayList.add("gazaboy1001@gmail.com");
+        arrayList.add("vypere1994@gmail.com");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(arrayAdapter);
+
+
+      /*  listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(this,"email clicked"+i+" "+arrayList.get(i).toString(),Toast.LENGTH_LONG).show();
+            }
+        });*/
+
+
+
+
       permissionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

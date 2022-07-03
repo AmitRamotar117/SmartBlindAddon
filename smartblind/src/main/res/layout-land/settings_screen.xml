@@ -19,11 +19,11 @@
         app:layout_constraintVertical_bias="0.696" />
 
     <Switch
-        android:id="@+id/minimal_mode"
+        android:id="@+id/settings_dark_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:text="@string/minimal_mode"
+        android:text="@string/dark_mode"
         android:textColor="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,11 +33,11 @@
         app:layout_constraintVertical_bias="0.316" />
 
     <Switch
-        android:id="@+id/colours_mode"
+        android:id="@+id/settings_notification_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:text="@string/black_white_mode"
+        android:text="@string/enable_notifications"
         android:textColor="@color/purple_500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

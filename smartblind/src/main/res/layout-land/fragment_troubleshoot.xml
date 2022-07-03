@@ -10,11 +10,11 @@
 
     <Spinner
         android:id="@+id/troubleshoot_options"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
+        tools:layout_editor_absoluteX="345dp" />
 
     <TextView
         android:id="@+id/troubleshoot_title"
@@ -30,20 +30,28 @@
 
     <TextView
         android:id="@+id/troubleshoot_instruct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_width="692dp"
+        android:layout_height="112dp"
+        android:layout_marginTop="24dp"
+        android:text="Troubleshooting Text From Spinner Options"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/troubleshoot_options"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.021" />
 
     <ImageView
         android:id="@+id/troubleshoot_image"
-        android:layout_width="268dp"
-        android:layout_height="119dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/troubleshoot_instruct"
-        tools:layout_editor_absoluteX="231dp" />
+        android:layout_width="287dp"
+        android:layout_height="82dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.897" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

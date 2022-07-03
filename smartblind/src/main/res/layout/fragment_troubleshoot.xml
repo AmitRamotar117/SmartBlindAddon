@@ -10,11 +10,13 @@
 
     <Spinner
         android:id="@+id/troubleshoot_options"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="61dp"
+        android:layout_width="140dp"
+        android:layout_height="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
+        app:layout_constraintVertical_bias="0.103" />
 
     <TextView
         android:id="@+id/troubleshoot_title"
@@ -31,18 +33,26 @@
 
     <TextView
         android:id="@+id/troubleshoot_instruct"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_width="299dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="28dp"
+        android:text="Troubleshooting Text From Spinner Options"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/troubleshoot_options"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/troubleshoot_image"
-        android:layout_width="match_parent"
-        android:layout_height="119dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="203dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/troubleshoot_instruct"
-        tools:layout_editor_absoluteX="-16dp" />
+        app:layout_constraintVertical_bias="0.043" />
 </androidx.constraintlayout.widget.ConstraintLayout>

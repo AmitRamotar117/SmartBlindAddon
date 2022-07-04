@@ -56,6 +56,7 @@
         android:ems="10"
         android:inputType="none"
         android:editable="false"
+        android:visibility="invisible"
         android:text="@string/customer_service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

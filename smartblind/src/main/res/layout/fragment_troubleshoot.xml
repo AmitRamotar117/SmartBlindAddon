@@ -47,9 +47,10 @@
 
     <ImageView
         android:id="@+id/troubleshoot_image"
-        android:layout_width="203dp"
-        android:layout_height="71dp"
+        android:layout_width="136dp"
+        android:layout_height="132dp"
         android:layout_marginTop="12dp"
+        android:foreground="@drawable/troubleshooting_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

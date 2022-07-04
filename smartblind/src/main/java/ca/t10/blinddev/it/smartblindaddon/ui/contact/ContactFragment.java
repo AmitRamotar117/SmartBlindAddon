@@ -29,6 +29,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class ContactFragment extends Fragment {
     private Button permissionBtn;
     public static final int REQUEST_CALLS = 1;
     private EditText mEditText;
+    private Firebase Ref;
     private EditText feedBack,nameText,emailText,phoneText;
 
     private Button submitBtn;
@@ -64,6 +67,7 @@ public class ContactFragment extends Fragment {
         phoneText = root.findViewById(R.id.phoneText);
         submitBtn = root.findViewById(R.id.submitButton);
 
+
         permissionBtn = root.findViewById(R.id.dialerButton);
         listView = root.findViewById(R.id.devsList);
         ArrayList<String> arrayList =  new ArrayList<>();
@@ -82,10 +86,9 @@ public class ContactFragment extends Fragment {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               /* Firebase mFirebaseRef =
-                        new Firebase("https://smartblindaddon-default-rtdb.firebaseio.com/some/path");
+                //Firebase mFirebaseRef = new Firebase("https://smartblindaddon-default-rtdb.firebaseio.com/Issue/User");
 
-                mFirebaseyRef.setValue(feedBack.getText().toString());*/
+
                 ShowDialog();
             }
         });

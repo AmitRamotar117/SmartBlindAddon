@@ -27,6 +27,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
@@ -42,6 +43,9 @@ public class ContactFragment extends Fragment {
     private Button permissionBtn;
     public static final int REQUEST_CALLS = 1;
     private EditText mEditText;
+    private EditText feedBack,nameText,emailText,phoneText;
+
+    private Button submitBtn;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -52,12 +56,17 @@ public class ContactFragment extends Fragment {
         binding = FragmentContactBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         mEditText = root.findViewById(R.id.editText);
-
+        feedBack = root.findViewById(R.id.feedbackText);
+        nameText = root.findViewById(R.id.nameText);
+        emailText = root.findViewById(R.id.emailText);
+        phoneText = root.findViewById(R.id.phoneText);
+        submitBtn = root.findViewById(R.id.submitButton);
 
         permissionBtn = root.findViewById(R.id.dialerButton);
         listView = root.findViewById(R.id.devsList);
         ArrayList<String> arrayList =  new ArrayList<>();
 
+        arrayList.add("Slide down");
         arrayList.add("Developer's Contact");
         arrayList.add("chrisjanellemutuc@gmail.com");
         arrayList.add("amitpunit117@gmail.com");
@@ -66,6 +75,17 @@ public class ContactFragment extends Fragment {
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
+
+
+        submitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               /* Firebase mFirebaseRef =
+                        new Firebase("https://smartblindaddon-default-rtdb.firebaseio.com/some/path");
+
+                mFirebaseyRef.setValue(feedBack.getText().toString());*/
+            }
+        });
 
 
 

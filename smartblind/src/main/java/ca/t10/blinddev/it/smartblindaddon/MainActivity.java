@@ -1,7 +1,10 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Amit Punit n01203930
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //checks shared preferences for if the user want app to be portrait mode
+        checkOrientation();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -105,5 +110,13 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }
                 }).setNegativeButton(R.string.no,null).show();
+    }
+
+    public void checkOrientation(){
+        SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+        Boolean portrait = sharedPreferences.getBoolean("portrait",false);
+        if(portrait == true){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 }

@@ -39,5 +39,11 @@
     <string name="minimal_mode">Minimal Mode</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="enable_notifications">Enable Notifications</string>
+    <string name="dark_mode_disabled">dark mode is disabled</string>
+    <string name="dark_mode_enabled">dark mode is enabled</string>
+    <string name="notif_enable">notifications enabled</string>
+    <string name="notif_disable">notifications disabled</string>
+    <string name="portriat_enable">portrait mode enabled</string>
+    <string name="portrait_disable">portrait mode disabled</string>
 
 </resources>

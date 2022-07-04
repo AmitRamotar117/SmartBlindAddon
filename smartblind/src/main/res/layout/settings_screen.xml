@@ -7,7 +7,7 @@
     android:background="@color/green">
 
     <Switch
-        android:id="@+id/portrait_mode"
+        android:id="@+id/settings_portrait_mode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minHeight="48dp"

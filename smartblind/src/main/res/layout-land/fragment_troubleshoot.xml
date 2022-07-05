@@ -8,6 +8,18 @@
     tools:context=".ui.troubleshoot.TroubleshootFragment">
 
 
+    <Button
+        android:id="@+id/troubleshoot_download"
+        android:layout_width="194dp"
+        android:layout_height="79dp"
+        android:text="Download Troubleshooting Documentation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466" />
+
     <Spinner
         android:id="@+id/troubleshoot_options"
         android:layout_width="200dp"
@@ -30,8 +42,8 @@
 
     <TextView
         android:id="@+id/troubleshoot_instruct"
-        android:layout_width="692dp"
-        android:layout_height="112dp"
+        android:layout_width="334dp"
+        android:layout_height="114dp"
         android:layout_marginTop="24dp"
         android:text="Troubleshooting Text From Spinner Options"
         android:textAlignment="center"
@@ -52,7 +64,7 @@
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.897" />
+        app:layout_constraintVertical_bias="0.892" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

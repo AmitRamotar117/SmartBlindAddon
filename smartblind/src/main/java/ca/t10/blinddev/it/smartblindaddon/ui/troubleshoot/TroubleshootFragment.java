@@ -1,11 +1,13 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 //Amit Punit n01203930
+//Vyacheslav Perepelytsya n01133953
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +22,7 @@ import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentTroubleshootBindin
 public class TroubleshootFragment extends Fragment {
     TextView instruct;
     private FragmentTroubleshootBinding binding;
-
+    private Button downloadBtn;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         TroubleshootViewModel troubleshootViewModel =
@@ -29,14 +31,21 @@ public class TroubleshootFragment extends Fragment {
         binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-
-
         instruct = root.findViewById(R.id.troubleshoot_instruct);
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
         instruct.setText("Measure height of blind in cm to calibarate the blind");
         instruct.setTextSize(15);
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
+
+        //get troubleshooting file from button
+        downloadBtn = root.findViewById(R.id.troubleshoot_download);
+
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         applySettings();
         return root;
@@ -68,4 +77,5 @@ public class TroubleshootFragment extends Fragment {
         //TODO
         //add code for spinner when implemented
     }
+
 }

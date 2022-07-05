@@ -73,4 +73,18 @@
         android:layout_marginBottom="217dp"
         android:text="@string/login" />
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="223dp"
+        android:layout_height="104dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="570dp"
+        android:layout_marginEnd="79dp"
+        android:layout_marginBottom="57dp"
+        app:srcCompat="@drawable/google_signin" />
+
 </RelativeLayout>

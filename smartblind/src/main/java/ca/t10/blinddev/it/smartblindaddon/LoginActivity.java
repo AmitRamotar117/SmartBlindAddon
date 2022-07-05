@@ -17,12 +17,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class LoginActivity extends AppCompatActivity {
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+        sharedPreferences = getSharedPreferences("saved",MODE_PRIVATE);
+        SharedPreferences.Editor data = sharedPreferences.edit();
 
         TextView username = (TextView) findViewById(R.id.username_txt);
         TextView password = (TextView) findViewById(R.id.password_txt);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -58,17 +59,6 @@
         android:textColor="@color/ic_home_icon_background"
         android:textColorHint="@color/ic_home_icon_background" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_signin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="559dp"
-        android:layout_marginEnd="135dp"
-        android:text="Sign in with Google" />
-
     <Button
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
@@ -82,4 +72,5 @@
         android:layout_marginEnd="123dp"
         android:layout_marginBottom="217dp"
         android:text="@string/login" />
+
 </RelativeLayout>

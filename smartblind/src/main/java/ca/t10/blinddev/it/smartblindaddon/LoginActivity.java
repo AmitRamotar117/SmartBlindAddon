@@ -1,7 +1,9 @@
 package ca.t10.blinddev.it.smartblindaddon;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -69,5 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }).setNegativeButton(R.string.no,null).show();
     }
+
 
 }

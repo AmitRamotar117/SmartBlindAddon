@@ -3,8 +3,10 @@ package ca.t10.blinddev.it.smartblindaddon.ui.contact;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -92,14 +94,7 @@ public class ContactFragment extends Fragment {
                 ShowDialog();
             }
         });
-
-
-
-
-
-
-
-      permissionBtn.setOnClickListener(new View.OnClickListener() {
+        permissionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 makePhoneCall();
@@ -110,7 +105,7 @@ public class ContactFragment extends Fragment {
         contactViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
 
 
-
+        applySettings();
         return root;
     }
     private void phoneNumber() {
@@ -214,7 +209,27 @@ public class ContactFragment extends Fragment {
 
     }
 
+    public void applySettings(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
+        Boolean d = sharedPreferences.getBoolean("dark",false);
+        Boolean n = sharedPreferences.getBoolean("note",false);
+        String t = sharedPreferences.getString("size","");
+
+        if(d == true){//function for dark mode
+        }
+        if(n == true){//function for notification
+        }
+
+        if (t.equals("large")){setTextSize(20);}
+        if (t.equals("medium")){setTextSize(17);}
+        if (t.equals("small")){setTextSize(13);}
+    }
+    public void setTextSize(int size){
+        //listView.setTextSize(size);
+        permissionBtn.setTextSize(size);
+        submitBtn.setTextSize(size);
+    }
 
     @Override
     public void onDestroyView() {

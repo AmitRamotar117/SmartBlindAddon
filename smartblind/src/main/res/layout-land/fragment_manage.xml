@@ -7,12 +7,6 @@
     android:background="@color/yellow"
     tools:context=".ui.manage.ManageFragment">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/manage_blinds" />
-
     <Button
         android:id="@+id/manage_add_btn"
         android:layout_width="146dp"
@@ -30,7 +24,6 @@
         android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:hint="Blind Key"
-
         app:layout_constraintTop_toBottomOf="@+id/manage_add_loc"
         tools:layout_editor_absoluteX="0dp" />
 

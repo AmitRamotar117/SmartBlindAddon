@@ -1,5 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 //Amit Punit n01203930
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +18,7 @@ import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentTroubleshootBinding;
 
 public class TroubleshootFragment extends Fragment {
-
+    TextView instruct;
     private FragmentTroubleshootBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -26,13 +28,17 @@ public class TroubleshootFragment extends Fragment {
 
         binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        TextView instruct = root.findViewById(R.id.troubleshoot_instruct);
+
+
+
+
+        instruct = root.findViewById(R.id.troubleshoot_instruct);
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
         instruct.setText("Measure height of blind in cm to calibarate the blind");
         instruct.setTextSize(15);
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
-
+        applySettings();
         return root;
     }
 
@@ -40,5 +46,26 @@ public class TroubleshootFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    public void applySettings(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
+
+        Boolean d = sharedPreferences.getBoolean("dark",false);
+        Boolean n = sharedPreferences.getBoolean("note",false);
+        String t = sharedPreferences.getString("size","");
+
+        if(d == true){//function for dark mode
+             }
+        if(n == true){//function for notification
+             }
+
+        if (t.equals("large")){setTextSize(20);}
+        if (t.equals("medium")){setTextSize(17);}
+        if (t.equals("small")){setTextSize(13);}
+    }
+    public void setTextSize(int size){
+        instruct.setTextSize(size);
+        //TODO
+        //add code for spinner when implemented
     }
 }

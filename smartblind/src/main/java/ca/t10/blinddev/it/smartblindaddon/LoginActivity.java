@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         View googleSignInOptions = findViewById(R.id.google_signin);
 
         Button loginBtn = (Button) findViewById(R.id.login_btn);
+        /*
         googleSignInOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "LOGIN google SUCCESSFULL", Toast.LENGTH_LONG).show();
             }
         });
+         */
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

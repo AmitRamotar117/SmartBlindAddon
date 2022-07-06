@@ -42,7 +42,6 @@ public class TroubleshootFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         TroubleshootViewModel troubleshootViewModel =
                 new ViewModelProvider(this).get(TroubleshootViewModel.class);
-
         binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
          root = binding.getRoot();
 
@@ -104,6 +103,7 @@ public class TroubleshootFragment extends Fragment {
         //add code for spinner when implemented
     }
     public void downloadFile() {
+        Toast.makeText(getActivity(), "Trying Download File", Toast. LENGTH_SHORT);
         try {
             URL url = new URL("https://github.com/AmitPunit3930/SmartBlindAddon/edit/master/README.md");
             URLConnection conexion = url.openConnection();
@@ -127,11 +127,12 @@ public class TroubleshootFragment extends Fragment {
         }*/
                 fos.write(data, 0, count);
             }
-            Toast.makeText(getContext(), "File is Downloading", Toast. LENGTH_SHORT);
+            Toast.makeText(getActivity(), "File is Downloading", Toast. LENGTH_SHORT).show();
             is.close();
             fos.close();
         } catch (Exception e) {
             Log.e("ERROR DOWNLOADING", "Unable to download" + e.getMessage());
+            Toast.makeText(getActivity(), "Error: File is not Downloading", Toast. LENGTH_SHORT).show();
         }
     }
 }

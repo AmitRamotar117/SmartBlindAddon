@@ -3,10 +3,10 @@ package ca.t10.blinddev.it.smartblindaddon;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,24 +14,37 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 public class LoginActivity extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
+
+    Button loginBtn;
+    ImageView google_img;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
-        sharedPreferences = getSharedPreferences("saved",MODE_PRIVATE);
-        SharedPreferences.Editor data = sharedPreferences.edit();
 
         TextView username = findViewById(R.id.username_txt);
         TextView password = findViewById(R.id.password_txt);
-        View googleSignInOptions = findViewById(R.id.google_signin);
 
-        Button loginBtn = findViewById(R.id.login_btn);
+        google_img = (ImageView) findViewById(R.id.google_signin);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        gsc= GoogleSignIn.getClient(this, gso);
+
+        // if sign in with google is pressed
+
+
         /*
         googleSignInOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
          */
-
+        loginBtn = findViewById(R.id.login_btn);
+         //if login btn is pressed
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "LOGIN UNSUCCESSFUL", Toast.LENGTH_LONG).show();
                 }
             }
+
         });
 
     }

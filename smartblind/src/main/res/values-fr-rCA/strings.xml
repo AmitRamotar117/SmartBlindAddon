@@ -40,4 +40,21 @@
     <string name="minimal_mode">Mode minimal</string>
     <string name="dark_mode">Mode sombre</string>
     <string name="enable_notifications">Activer les notifications</string>
+    <string name="dark_mode_disabled">Le mode sombre est désactivé</string>
+    <string name="dark_mode_enabled">le mode sombre est activé</string>
+    <string name="notif_enable">notifications activées</string>
+    <string name="notif_disable">notifications désactivées</string>
+    <string name="portriat_enable">mode portrait activé</string>
+    <string name="portrait_disable">mode portrait désactivé</string>
+    <string name="submit">Soumettre</string>
+    <string name="customer_service">0928171771</string>
+    <string name="name">Nom</string>
+    <string name="email">E-mail</string>
+    <string name="phone">Téléphoner</string>
+    <string name="comment">Commentaire</string>
+    <string name="delete">Effacer</string>
+    <string name="add">AJOUTER</string>
+    <string name="blind_location">Emplacement aveugle</string>
+    <string name="blind_key">Clé aveugle</string>
+    <string name="blind_height">Hauteur aveugle</string>
 </resources>

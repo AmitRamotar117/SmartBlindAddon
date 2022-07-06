@@ -61,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),R.string.large,Toast.LENGTH_SHORT).show();
                         break;
                 }
-                //data.commit();
+
             }
         });
 
@@ -120,17 +120,17 @@ public class SettingsActivity extends AppCompatActivity {
     private void currentSettings() {
         SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
         RadioButton l,m,s;
-        l = (RadioButton) findViewById(R.id.large_text);
-        m = (RadioButton) findViewById(R.id.medium_text);
+        l = findViewById(R.id.large_text);
+        m = findViewById(R.id.medium_text);
         s = findViewById(R.id.small_text);
-        Boolean p = sharedPreferences.getBoolean("portrait",false);
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean p = sharedPreferences.getBoolean("portrait",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
-        if(p == true){portrait.setChecked(true);}
-        if(d == true){dark.setChecked(true);}
-        if(n == true){notification.setChecked(true);}
+        if(p){portrait.setChecked(true);}
+        if(d){dark.setChecked(true);}
+        if(n){notification.setChecked(true);}
 
         //this will select the appropriate radio the user saves
         if (t.equals("large")){l.setChecked(true);}
@@ -150,11 +150,6 @@ public class SettingsActivity extends AppCompatActivity {
     public void onBackPressed(){
         new AlertDialog.Builder(this).setTitle(R.string.app_name)
                 .setMessage(R.string.leave_app).setIcon(R.drawable.ic_exit)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                }).setNegativeButton(R.string.no,null).show();
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no,null).show();
     }
 }

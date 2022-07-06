@@ -51,5 +51,10 @@
     <string name="email">Email</string>
     <string name="phone">Phone</string>
     <string name="comment">Comment</string>
+    <string name="delete">Delete</string>
+    <string name="add">ADD</string>
+    <string name="blind_location">Blind Location</string>
+    <string name="blind_key">Blind Key</string>
+    <string name="blind_height">Blind Height</string>
 
 </resources>

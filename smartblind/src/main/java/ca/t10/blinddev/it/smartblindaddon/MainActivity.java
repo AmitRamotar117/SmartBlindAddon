@@ -104,18 +104,13 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed(){
         new AlertDialog.Builder(this).setTitle(R.string.app_name)
                 .setMessage(R.string.leave_app).setIcon(R.drawable.ic_exit)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                }).setNegativeButton(R.string.no,null).show();
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no,null).show();
     }
 
     public void checkOrientation(){
         SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-        Boolean portrait = sharedPreferences.getBoolean("portrait",false);
-        if(portrait == true){
+        boolean portrait = sharedPreferences.getBoolean("portrait",false);
+        if(portrait){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }

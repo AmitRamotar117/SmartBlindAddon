@@ -25,7 +25,7 @@ import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
-
+    View root;
     private FragmentHomeBinding binding;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
@@ -37,21 +37,18 @@ public class HomeFragment extends Fragment {
                 new ViewModelProvider(this).get(HomeViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        // these are test cased for the blinds that will be appear in the hompage
+        root = binding.getRoot();
+        // these are test cased for the blinds that will be appear in the homepage
         testcase.add(new HomeBlinds("Amit"));
         testcase.add(new HomeBlinds("punit"));
 
 
-        // this is code that is used to populate the recycleview for the blinds
+        // this is code that is used to populate the recyclerview for the blinds
         recyclerView = (RecyclerView) root.findViewById(R.id.home_recycler_view);
         homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
         recyclerView.setAdapter(homeRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-
-
-
+        applySettings();
         return root;
     }
 
@@ -59,6 +56,14 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+    public void applySettings(){
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
+        Boolean d = sharedPreferences.getBoolean("dark",false);
+        Boolean n = sharedPreferences.getBoolean("note",false);
+        if(d){root.setBackgroundColor(getResources().getColor(R.color.dark_grey));}
+        if(n){//function for notification
+             }
     }
 
 }

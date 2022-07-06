@@ -27,11 +27,11 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("saved",MODE_PRIVATE);
         SharedPreferences.Editor data = sharedPreferences.edit();
 
-        TextView username = (TextView) findViewById(R.id.username_txt);
-        TextView password = (TextView) findViewById(R.id.password_txt);
+        TextView username = findViewById(R.id.username_txt);
+        TextView password = findViewById(R.id.password_txt);
         View googleSignInOptions = findViewById(R.id.google_signin);
 
-        Button loginBtn = (Button) findViewById(R.id.login_btn);
+        Button loginBtn = findViewById(R.id.login_btn);
         /*
         googleSignInOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,12 +48,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin"))
                 {
-                    Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFULL", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_LONG).show();
                     startMainActivity();
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this, "LOGIN UNSUCCESSFULL", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "LOGIN UNSUCCESSFUL", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -69,12 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onBackPressed(){
         new AlertDialog.Builder(this).setTitle(R.string.app_name)
                 .setMessage(R.string.leave_app).setIcon(R.drawable.ic_exit)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                }).setNegativeButton(R.string.no,null).show();
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no,null).show();
     }
 
 

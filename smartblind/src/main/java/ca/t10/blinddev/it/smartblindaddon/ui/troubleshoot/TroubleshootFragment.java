@@ -29,12 +29,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentTroubleshootBinding;
 
 public class TroubleshootFragment extends Fragment {
     TextView instruct;
-    View root;
+    private View root;
     private FragmentTroubleshootBinding binding;
     private Button downloadBtn;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -72,12 +73,17 @@ public class TroubleshootFragment extends Fragment {
     public void applySettings(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
         if(d){enableDarkMode();}
-        if(n){//function for notification
+        if(n){
+            BlindNotifications bl = new BlindNotifications(root.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from troubleshooting fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
              }
 
         if (t.equals("large")){setTextSize(20);}

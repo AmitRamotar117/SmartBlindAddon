@@ -56,5 +56,6 @@
     <string name="blind_location">Blind Location</string>
     <string name="blind_key">Blind Key</string>
     <string name="blind_height">Blind Height</string>
+    <string name="new_user">New User</string>
 
 </resources>

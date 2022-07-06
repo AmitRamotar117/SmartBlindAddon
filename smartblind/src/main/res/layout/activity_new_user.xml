@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_500"
     tools:context=".NewUserActivity">
 
     <EditText
@@ -13,8 +14,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="175dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Name"
+        android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,8 +27,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="263dp"
         android:ems="10"
-        android:inputType="textEmailAddress"
         android:hint="Enter Email"
+        android:inputType="textEmailAddress"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,8 +40,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="352dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint="Enter Password"
+        android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,4 +55,14 @@
         android:text="Submit New User"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/new_user_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_action_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

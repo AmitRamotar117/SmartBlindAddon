@@ -17,10 +17,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
 public class ManageFragment extends Fragment {
-    View root;
+    private View root;
     private ManageViewModel mViewModel;
     Button delete,add,submit;
     Spinner selectblind;
@@ -60,7 +61,12 @@ public class ManageFragment extends Fragment {
         String t = sharedPreferences.getString("size","");
 
         if(d){enableDarkMode();}
-        if(n){//function for notification
+        if(n){
+            BlindNotifications bl = new BlindNotifications(root.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from manage fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
         }
 
         if (t.equals("large")){setTextSize(20);}

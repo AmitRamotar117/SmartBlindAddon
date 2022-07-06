@@ -103,9 +103,8 @@ public class TroubleshootFragment extends Fragment {
         //add code for spinner when implemented
     }
     public void downloadFile() {
-        Toast.makeText(getActivity(), "Trying Download File", Toast. LENGTH_SHORT);
         try {
-            URL url = new URL("https://github.com/AmitPunit3930/SmartBlindAddon/edit/master/README.md");
+            URL url = new URL("https://github.com/AmitPunit3930/SmartBlindAddon/blob/master/README.md");
             URLConnection conexion = url.openConnection();
             conexion.connect();
             int lenghtOfFile = conexion.getContentLength();
@@ -132,7 +131,8 @@ public class TroubleshootFragment extends Fragment {
             fos.close();
         } catch (Exception e) {
             Log.e("ERROR DOWNLOADING", "Unable to download" + e.getMessage());
-            Toast.makeText(getActivity(), "Error: File is not Downloading", Toast. LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "error " + e.toString(), Toast.LENGTH_LONG)
+                    .show();
         }
     }
 }

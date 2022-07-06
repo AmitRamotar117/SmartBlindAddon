@@ -11,38 +11,51 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button loginBtn;
     ImageView google_img;
+    TextView name,mail;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
 
         TextView username = findViewById(R.id.username_txt);
         TextView password = findViewById(R.id.password_txt);
-
+        name = findViewById(R.id.displayName);
+        mail = findViewById(R.id.displayMail);
         google_img = (ImageView) findViewById(R.id.google_signin);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
-        gsc= GoogleSignIn.getClient(this, gso);
+        gsc = GoogleSignIn.getClient(this, gso);
 
         // if sign in with google is pressed
+
+        google_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignIn();
+            }
+        });
+
 
 
         /*
@@ -51,22 +64,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //https://firebase.google.com/docs/auth/android/google-signin
                 //use this to implement the authentication
-                Toast.makeText(LoginActivity.this, "LOGIN google SUCCESSFULL", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "LOGIN google SUCCESSFUL", Toast.LENGTH_LONG).show();
             }
         });
          */
         loginBtn = findViewById(R.id.login_btn);
-         //if login btn is pressed
+        //if login btn is pressed
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin"))
-                {
+                if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
                     Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_LONG).show();
                     startMainActivity();
-                }
-                else
-                {
+                } else {
                     Toast.makeText(LoginActivity.this, "LOGIN UNSUCCESSFUL", Toast.LENGTH_LONG).show();
                 }
             }
@@ -74,18 +84,39 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-    public void startMainActivity()
-    {
-        Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+
+    public void SignIn() {
+        Intent intent = gsc.getSignInIntent();
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode==100){
+            Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                task.getResult(ApiException.class);
+                startMainActivity();
+            } catch (ApiException e) {
+                Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public void startMainActivity() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         new AlertDialog.Builder(this).setTitle(R.string.app_name)
                 .setMessage(R.string.leave_app).setIcon(R.drawable.ic_exit)
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no,null).show();
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no, null).show();
+
+
     }
-
-
 }

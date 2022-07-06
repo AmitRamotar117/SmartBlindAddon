@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
         sharedPreferences = getSharedPreferences("saved",MODE_PRIVATE);
@@ -29,8 +29,9 @@ public class LoginActivity extends AppCompatActivity {
 
         TextView username = findViewById(R.id.username_txt);
         TextView password = findViewById(R.id.password_txt);
-        View googleSignInOptions = findViewById(R.id.google_signin);
-
+        //View googleSignInOptions = findViewById(R.id.google_signin);
+        Button newuser = findViewById(R.id.new_user_btn);
+        ImageButton back = findViewById(R.id.new_user_back);
         Button loginBtn = findViewById(R.id.login_btn);
         /*
         googleSignInOptions.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +59,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        newuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (LoginActivity.this, NewUserActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backtoapp = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(backtoapp);
+                finish();
+            }
+        });
+
+
+
     }
-    public void startMainActivity()
-    {
+    public void startMainActivity() {
         Intent intent = new Intent (LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

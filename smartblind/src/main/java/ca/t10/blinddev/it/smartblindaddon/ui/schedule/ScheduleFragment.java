@@ -19,12 +19,13 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
 public class ScheduleFragment extends Fragment {
 
     private ScheduleViewModel mViewModel;
-    View view;
+    private View view;
     Spinner blist;
     Button submit,date,time;
     Switch opt;
@@ -67,7 +68,12 @@ public class ScheduleFragment extends Fragment {
         String t = sharedPreferences.getString("size","");
 
         if(d){enableDarkMode();}
-        if(n){//function for notification
+        if(n){
+            BlindNotifications bl = new BlindNotifications(view.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from schedule fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
         }
 
         if (t.equals("large")){setTextSize(20);}

@@ -37,6 +37,7 @@ import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 
@@ -44,7 +45,7 @@ import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 public class ContactFragment extends Fragment {
 
     private ListView listView;
-    View root;
+    private View root;
     private FragmentContactBinding binding;
     private Button permissionBtn;
     public static final int REQUEST_CALLS = 1;
@@ -211,7 +212,12 @@ public class ContactFragment extends Fragment {
         String t = sharedPreferences.getString("size","");
 
         if(d){enableDarkMode();}
-        if(n){//function for notification
+        if(n){
+            BlindNotifications bl = new BlindNotifications(root.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from contact fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
         }
 
         if (t.equals("large")){setTextSize(20);}
@@ -225,16 +231,18 @@ public class ContactFragment extends Fragment {
     }
     private void enableDarkMode() {
         root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
+
         nameText.setHintTextColor(getResources().getColor(R.color.white));
         nameText.setTextColor(getResources().getColor(R.color.white));
+
         emailText.setHintTextColor(getResources().getColor(R.color.white));
         emailText.setTextColor(getResources().getColor(R.color.white));
+
         phoneText.setHintTextColor(getResources().getColor(R.color.white));
         phoneText.setTextColor(getResources().getColor(R.color.white));
+
         feedBack.setHintTextColor(getResources().getColor(R.color.white));
         feedBack.setTextColor(getResources().getColor(R.color.white));
-
-
     }
 
     @Override

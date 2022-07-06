@@ -81,7 +81,7 @@ public class ContactFragment extends Fragment {
         arrayList.add("gazaboy1001@gmail.com");
         arrayList.add("vypere1994@gmail.com");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(),R.layout.list_view , arrayList);
         listView.setAdapter(arrayAdapter);
 
 
@@ -101,9 +101,9 @@ public class ContactFragment extends Fragment {
             }
         });
 
-        final TextView textView = binding.textSlideshow;
+        /*final TextView textView = binding.textSlideshow;
         contactViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
+*/
 
         applySettings();
         return root;

@@ -1,10 +1,14 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Amit Punit n01203930
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +20,8 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -29,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,19 +111,20 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed(){
         new AlertDialog.Builder(this).setTitle(R.string.app_name)
                 .setMessage(R.string.leave_app).setIcon(R.drawable.ic_exit)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        finish();
-                    }
-                }).setNegativeButton(R.string.no,null).show();
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no,null).show();
     }
 
     public void checkOrientation(){
         SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-        Boolean portrait = sharedPreferences.getBoolean("portrait",false);
-        if(portrait == true){
+        boolean portrait = sharedPreferences.getBoolean("portrait",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
+        String notemessage = null;
+        if(portrait){
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
+
+
+
+
 }

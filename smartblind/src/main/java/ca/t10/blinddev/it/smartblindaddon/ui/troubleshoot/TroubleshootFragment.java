@@ -29,11 +29,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentTroubleshootBinding;
 
 public class TroubleshootFragment extends Fragment {
     TextView instruct;
+    private View root;
     private FragmentTroubleshootBinding binding;
     private Button downloadBtn;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -42,7 +44,7 @@ public class TroubleshootFragment extends Fragment {
                 new ViewModelProvider(this).get(TroubleshootViewModel.class);
 
         binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+         root = binding.getRoot();
 
         instruct = root.findViewById(R.id.troubleshoot_instruct);
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
@@ -71,19 +73,31 @@ public class TroubleshootFragment extends Fragment {
     public void applySettings(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
-        if(d == true){//function for dark mode
-             }
-        if(n == true){//function for notification
+        if(d){enableDarkMode();}
+        if(n){
+            BlindNotifications bl = new BlindNotifications(root.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from troubleshooting fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
              }
 
         if (t.equals("large")){setTextSize(20);}
         if (t.equals("medium")){setTextSize(17);}
         if (t.equals("small")){setTextSize(13);}
     }
+
+    private void enableDarkMode() {
+        TextView title = root.findViewById(R.id.troubleshoot_title);
+        title.setTextColor(getResources().getColor(R.color.white));
+        root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
+        instruct.setTextColor(getResources().getColor(R.color.white));
+    }
+
     public void setTextSize(int size){
         instruct.setTextSize(size);
         //TODO
@@ -101,7 +115,7 @@ public class TroubleshootFragment extends Fragment {
                 testDirectory.mkdir();
             }
             FileOutputStream fos = new FileOutputStream(testDirectory + "/products.txt");
-            byte data[] = new byte[1024];
+            byte[] data = new byte[1024];
             long total = 0;
             int count = 0;
             while ((count = is.read(data)) != -1) {

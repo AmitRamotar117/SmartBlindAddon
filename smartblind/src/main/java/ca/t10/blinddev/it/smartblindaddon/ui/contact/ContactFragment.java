@@ -37,6 +37,7 @@ import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 
@@ -44,7 +45,7 @@ import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 public class ContactFragment extends Fragment {
 
     private ListView listView;
-
+    private View root;
     private FragmentContactBinding binding;
     private Button permissionBtn;
     public static final int REQUEST_CALLS = 1;
@@ -61,7 +62,7 @@ public class ContactFragment extends Fragment {
                 new ViewModelProvider(this).get(ContactViewModel.class);
 
         binding = FragmentContactBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        root = binding.getRoot();
         mEditText = root.findViewById(R.id.editText);
         feedBack = root.findViewById(R.id.feedbackText);
         nameText = root.findViewById(R.id.nameText);
@@ -81,7 +82,7 @@ public class ContactFragment extends Fragment {
         arrayList.add("gazaboy1001@gmail.com");
         arrayList.add("vypere1994@gmail.com");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(),R.layout.list_view , arrayList);
         listView.setAdapter(arrayAdapter);
 
 
@@ -101,9 +102,9 @@ public class ContactFragment extends Fragment {
             }
         });
 
-        final TextView textView = binding.textSlideshow;
+        /*final TextView textView = binding.textSlideshow;
         contactViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
+*/
 
         applySettings();
         return root;
@@ -114,14 +115,12 @@ public class ContactFragment extends Fragment {
                 .make(getActivity().findViewById(android.R.id.content), "Enter Phone Number", Snackbar.LENGTH_LONG);
         snackbar.show();
     }
-
     private void denied(){
         Snackbar snackbar = Snackbar
                 .make(getActivity().findViewById(android.R.id.content), "Access Denied", Snackbar.LENGTH_LONG);
         snackbar.show();
 
     }
-
     private void makePhoneCall(){
         String number = mEditText.getText().toString();
         if (number.trim().length() >0){
@@ -136,11 +135,8 @@ public class ContactFragment extends Fragment {
           phoneNumber();
         }
     }
-
-
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
    if (requestCode == REQUEST_CALLS){
        if (grantResults.length>0&& grantResults[0]== PackageManager.PERMISSION_GRANTED){
            makePhoneCall();
@@ -150,8 +146,7 @@ public class ContactFragment extends Fragment {
    }
     }
 //creates a rating star dialog
-    public void ShowDialog()
-    {
+    public void ShowDialog() {
         final AlertDialog.Builder popDialog = new AlertDialog.Builder(getActivity());
 
         LinearLayout linearLayout = new LinearLayout(getActivity());
@@ -172,7 +167,7 @@ public class ContactFragment extends Fragment {
         popDialog.setIcon(android.R.drawable.btn_star_big_on);
         popDialog.setTitle("Add Rating: ");
 
-        //add linearLayout to dailog
+        //add linearLayout to dialog
         popDialog.setView(linearLayout);
 
 
@@ -212,13 +207,17 @@ public class ContactFragment extends Fragment {
     public void applySettings(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
-        if(d == true){//function for dark mode
-        }
-        if(n == true){//function for notification
+        if(d){enableDarkMode();}
+        if(n){
+            BlindNotifications bl = new BlindNotifications(root.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from contact fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
         }
 
         if (t.equals("large")){setTextSize(20);}
@@ -229,6 +228,21 @@ public class ContactFragment extends Fragment {
         //listView.setTextSize(size);
         permissionBtn.setTextSize(size);
         submitBtn.setTextSize(size);
+    }
+    private void enableDarkMode() {
+        root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
+
+        nameText.setHintTextColor(getResources().getColor(R.color.white));
+        nameText.setTextColor(getResources().getColor(R.color.white));
+
+        emailText.setHintTextColor(getResources().getColor(R.color.white));
+        emailText.setTextColor(getResources().getColor(R.color.white));
+
+        phoneText.setHintTextColor(getResources().getColor(R.color.white));
+        phoneText.setTextColor(getResources().getColor(R.color.white));
+
+        feedBack.setHintTextColor(getResources().getColor(R.color.white));
+        feedBack.setTextColor(getResources().getColor(R.color.white));
     }
 
     @Override

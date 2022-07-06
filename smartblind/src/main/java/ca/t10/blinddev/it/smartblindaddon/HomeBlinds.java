@@ -12,8 +12,9 @@ public class HomeBlinds {
     public void setString(String string) {
         this.string = string;
     }
-
+    // this will house data on the specific blind.
     public HomeBlinds(String test) {
+
         this.string =test;
     }
 }

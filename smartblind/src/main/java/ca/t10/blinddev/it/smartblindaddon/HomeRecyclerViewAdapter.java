@@ -41,12 +41,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public void applySettings(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
 
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
-        if(d){//function for dark mode
-        }
+        if(d){enableDarkMode();}
         if(n){//function for notification
         }
 
@@ -60,7 +59,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         temp.setTextSize(size);
         open.setTextSize(size);
         close.setTextSize(size);
-
+    }
+    private void enableDarkMode() {
+        loc.setTextColor(context.getResources().getColor(R.color.white));
+        light.setTextColor(context.getResources().getColor(R.color.white));
+        temp.setTextColor(context.getResources().getColor(R.color.white));
     }
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {

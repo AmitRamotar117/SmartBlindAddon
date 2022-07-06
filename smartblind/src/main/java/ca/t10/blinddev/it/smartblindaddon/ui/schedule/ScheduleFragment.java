@@ -14,19 +14,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
 public class ScheduleFragment extends Fragment {
 
     private ScheduleViewModel mViewModel;
-
+    private View view;
     Spinner blist;
     Button submit,date,time;
     Switch opt;
+    EditText indate,intime;
 
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
@@ -35,10 +38,11 @@ public class ScheduleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_schedule, container, false);
+        view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         opt = view.findViewById(R.id.schedule_op);
-
+        indate = view.findViewById(R.id.in_date);
+        intime = view.findViewById(R.id.in_time);
         blist = view.findViewById(R.id.schedule_blinds);
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
@@ -59,13 +63,17 @@ public class ScheduleFragment extends Fragment {
     public void applySettings(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
-        if(d == true){//function for dark mode
-        }
-        if(n == true){//function for notification
+        if(d){enableDarkMode();}
+        if(n){
+            BlindNotifications bl = new BlindNotifications(view.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from schedule fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
         }
 
         if (t.equals("large")){setTextSize(20);}
@@ -77,7 +85,12 @@ public class ScheduleFragment extends Fragment {
     submit.setTextSize(size);
     date.setTextSize(size);
     time.setTextSize(size);
-
+    }
+    private void enableDarkMode() {
+        view.setBackgroundColor(getResources().getColor(R.color.dark_grey));
+        opt.setTextColor(getResources().getColor(R.color.white));
+        intime.setHintTextColor(getResources().getColor(R.color.white));
+        indate.setHintTextColor(getResources().getColor(R.color.white));
     }
 
 }

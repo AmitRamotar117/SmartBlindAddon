@@ -14,15 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
 public class ManageFragment extends Fragment {
-
+    private View root;
     private ManageViewModel mViewModel;
     Button delete,add,submit;
     Spinner selectblind;
+    EditText loc,bkey,height;
 
     public static ManageFragment newInstance() {
         return new ManageFragment();
@@ -31,11 +34,14 @@ public class ManageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_manage, container, false);
+        root = inflater.inflate(R.layout.fragment_manage, container, false);
         delete = root.findViewById(R.id.manage_delete_btn);
         add = root.findViewById(R.id.manage_add_btn);
         submit = root.findViewById(R.id.manage_submit_btn);
         selectblind = root.findViewById(R.id.manage_delete_select);
+        loc = root.findViewById(R.id.manage_add_loc);
+        bkey = root.findViewById(R.id.manage_add_bkey);
+        height = root.findViewById(R.id.manage_add_height);
 
         applySettings();
         return root;
@@ -50,13 +56,17 @@ public class ManageFragment extends Fragment {
     public void applySettings(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         String t = sharedPreferences.getString("size","");
 
-        if(d == true){//function for dark mode
-        }
-        if(n == true){//function for notification
+        if(d){enableDarkMode();}
+        if(n){
+            BlindNotifications bl = new BlindNotifications(root.getContext());
+            //this method will allow developer to create message for notification
+            bl.enableNotifications("this is from manage fragment");
+            //this function will launch the notification.
+            bl.pushNotification();
         }
 
         if (t.equals("large")){setTextSize(20);}
@@ -69,6 +79,12 @@ public class ManageFragment extends Fragment {
         submit.setTextSize(size);
         //TODO
         //add code for spinner when implemented
+    }
+    private void enableDarkMode() {
+        root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
+        loc.setHintTextColor(getResources().getColor(R.color.white));
+        bkey.setHintTextColor(getResources().getColor(R.color.white));
+        height.setHintTextColor(getResources().getColor(R.color.white));
     }
 
 }

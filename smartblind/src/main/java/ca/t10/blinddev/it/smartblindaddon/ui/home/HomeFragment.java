@@ -1,9 +1,12 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.home;
 //Amit Punit n01203930
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,14 +41,16 @@ public class HomeFragment extends Fragment {
         // these are test cased for the blinds that will be appear in the hompage
         testcase.add(new HomeBlinds("Amit"));
         testcase.add(new HomeBlinds("punit"));
-        testcase.add(new HomeBlinds("test 4"));
-        testcase.add(new HomeBlinds("test 6"));
+
 
         // this is code that is used to populate the recycleview for the blinds
         recyclerView = (RecyclerView) root.findViewById(R.id.home_recycler_view);
-        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase);
+        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
         recyclerView.setAdapter(homeRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
 
         return root;
     }
@@ -55,4 +60,5 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

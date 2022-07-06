@@ -3,26 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/home_rec_text"
+        android:id="@+id/home_rec_loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="16dp"
+        android:text="Location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/home_rec_button"
+    <TextView
+        android:id="@+id/home_rec_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_toEndOf="@+id/home_rec_text"
-        android:text="Button"
-        app:layout_constraintStart_toEndOf="@+id/home_rec_text"
-        tools:layout_editor_absoluteY="0dp" />
+        android:text="Light"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_rec_loc" />
+
+    <TextView
+        android:id="@+id/home_rec_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_rec_light" />
+
+    <Button
+        android:id="@+id/home_rec_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_rec_close" />
+
+    <Button
+        android:id="@+id/home_rec_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

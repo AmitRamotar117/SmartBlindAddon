@@ -57,7 +57,7 @@ public class TroubleshootFragment extends Fragment {
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadFile();
+                downloadFile.start();
             }
         });
         applySettings();
@@ -102,37 +102,45 @@ public class TroubleshootFragment extends Fragment {
         //TODO
         //add code for spinner when implemented
     }
-    public void downloadFile() {
-        try {
-            URL url = new URL("https://github.com/AmitPunit3930/SmartBlindAddon/blob/master/README.md");
-            URLConnection conexion = url.openConnection();
-            conexion.connect();
-            int lenghtOfFile = conexion.getContentLength();
-            InputStream is = url.openStream();
-            File testDirectory = new File(Environment.getExternalStorageDirectory() + "/Download");
-            if (!testDirectory.exists()) {
-                testDirectory.mkdir();
-            }
-            FileOutputStream fos = new FileOutputStream(testDirectory + "/products.txt");
-            byte[] data = new byte[1024];
-            long total = 0;
-            int count = 0;
-            while ((count = is.read(data)) != -1) {
-                total += count;
-                int progress_temp = (int) total * 100 / lenghtOfFile;
+    Thread downloadFile = new Thread(new Runnable(){
+        @Override
+        public void run() {
+            try {
+                    URL url = new URL("https://filesamples.com/samples/document/txt/sample3.txt");
+                    URLConnection conexion = url.openConnection();
+                    conexion.connect();
+                    int lenghtOfFile = conexion.getContentLength();
+                    InputStream is = url.openStream();
+                    File testDirectory = new File(Environment.getExternalStorageDirectory() + "/Download");
+                    if (!testDirectory.exists()) {
+                        testDirectory.mkdir();
+                    }
+                    FileOutputStream fos = new FileOutputStream(testDirectory + "/Troubleshoot.txt");
+                    byte[] data = new byte[1024];
+                    long total = 0;
+                    int count = 0;
+                    while ((count = is.read(data)) != -1) {
+                        total += count;
+                        int progress_temp = (int) total * 100 / lenghtOfFile;
         /*publishProgress("" + progress_temp); //only for asynctask
         if (progress_temp % 10 == 0 && progress != progress_temp) {
             progress = progress_temp;
         }*/
-                fos.write(data, 0, count);
-            }
-            Toast.makeText(getActivity(), "File is Downloading", Toast. LENGTH_SHORT).show();
-            is.close();
-            fos.close();
-        } catch (Exception e) {
-            Log.e("ERROR DOWNLOADING", "Unable to download" + e.getMessage());
-            Toast.makeText(getActivity(), "error " + e.toString(), Toast.LENGTH_LONG)
-                    .show();
+                        fos.write(data, 0, count);
+                    }
+                    //Toast.makeText(getActivity(), "File is Downloading", Toast.LENGTH_SHORT).show();
+                    is.close();
+                    fos.close();
+                } catch(
+                Exception e)
+
+                {
+                    Log.e("ERROR DOWNLOADING", "Unable to download" + e.getMessage());
+                    /*
+                    Toast.makeText(getActivity(), "error " + e.toString(), Toast.LENGTH_LONG)
+                            .show();
+                     */
+                }
         }
-    }
+    });
 }

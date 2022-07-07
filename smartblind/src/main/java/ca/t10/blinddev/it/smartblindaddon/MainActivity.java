@@ -85,7 +85,14 @@ public class MainActivity extends AppCompatActivity {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
+        if (account!= null)
+        {
+            String Name = account.getDisplayName();
+            String Mail = account.getEmail();
 
+            displayName.setText(Name);
+            displayMail.setText(Mail);
+        }
 
 
 

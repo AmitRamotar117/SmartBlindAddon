@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -52,14 +53,15 @@ public class ContactFragment extends Fragment {
     private EditText mEditText;
     private Firebase Ref;
     private EditText feedBack,nameText,emailText,phoneText;
+    private String[]emails;
 
     private Button submitBtn;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        ContactViewModel contactViewModel =
-                new ViewModelProvider(this).get(ContactViewModel.class);
+       // ContactViewModel contactViewModel =
+               // new ViewModelProvider(this).get(ContactViewModel.class);
 
         binding = FragmentContactBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -69,20 +71,19 @@ public class ContactFragment extends Fragment {
         emailText = root.findViewById(R.id.emailText);
         phoneText = root.findViewById(R.id.phoneText);
         submitBtn = root.findViewById(R.id.submitButton);
+        Resources res = getResources();
+        emails = res.getStringArray(R.array.emails);
+
+
 
 
         permissionBtn = root.findViewById(R.id.dialerButton);
         listView = root.findViewById(R.id.devsList);
-        ArrayList<String> arrayList =  new ArrayList<>();
+        //ArrayList<String> arrayList =  new ArrayList<>();
 
-        arrayList.add("Slide down");
-        arrayList.add("Developer's Contact");
-        arrayList.add("chrisjanellemutuc@gmail.com");
-        arrayList.add("amitpunit117@gmail.com");
-        arrayList.add("gazaboy1001@gmail.com");
-        arrayList.add("vypere1994@gmail.com");
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(),R.layout.list_view , arrayList);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(),R.layout.list_view , emails);
         listView.setAdapter(arrayAdapter);
 
 

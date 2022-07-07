@@ -56,6 +56,16 @@
     <string name="blind_location">Blind Location</string>
     <string name="blind_key">Blind Key</string>
     <string name="blind_height">Blind Height</string>
-    <string name="new_user">New User</string>
+ <!--<string name="new_user">New User</string>-->
+
+
+<string-array name="emails">
+    <item>Developer's Contact</item>
+    <item>chrisjanellemutuc@gmail.com</item>
+    <item>amitpunit117@gmail.com</item>
+    <item>gazaboy1001@gmail.com</item>
+    <item>vypere1994@gmail.com</item>
+</string-array>
+
 
 </resources>

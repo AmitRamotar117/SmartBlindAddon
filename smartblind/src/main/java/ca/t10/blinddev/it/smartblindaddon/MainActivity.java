@@ -20,9 +20,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.core.app.NotificationCompat;
@@ -124,13 +127,23 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.menu_logout:
-                Toast.makeText(this,"Logout pressed",Toast.LENGTH_SHORT).show();
+                SignOut();
                 break;
             default:
                 onSupportNavigateUp();// this to retain functionality of the navigation bar
                 break;
         }
         return true;
+    }
+
+    private void SignOut() {
+        gsc.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                finish();
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+            }
+        });
     }
 
     @Override

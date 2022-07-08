@@ -68,11 +68,23 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         HomeBlinds x = testblinds.get(position);
-        holder.loc.setText(x.getString());
+        String location = x.getLocation();
+        //String temp = temperatureData();  this method will be in this class
+        holder.loc.setText(x.getLocation());
+
+        //when open button is pressed status value on firebase = open
         holder.open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Test", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Open " + location, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //when close button is pressed status value on firebase = close
+        holder.close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Close" + location, Toast.LENGTH_SHORT).show();
             }
         });
 

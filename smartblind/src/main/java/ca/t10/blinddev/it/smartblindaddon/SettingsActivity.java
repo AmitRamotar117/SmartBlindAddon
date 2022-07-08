@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
                     data.putBoolean("portrait",false);
                     Toast.makeText(getApplicationContext(), R.string.portrait_disable,Toast.LENGTH_SHORT).show();
                 }
-                //data.commit();
+
             }
         });
 

@@ -3,18 +3,17 @@ package ca.t10.blinddev.it.smartblindaddon;
 // recyclerview on the homepage
 // this will need to be filled with the relevant information.
 public class HomeBlinds {
-    private String string;
+    String location;
+    String blindkey;
+    String userKey;
 
-    public String getString() {
-        return string;
-    }
-
-    public void setString(String string) {
-        this.string = string;
-    }
     // this will house data on the specific blind.
     public HomeBlinds(String test) {
-
-        this.string =test;
+        this.location =test;
+    }
+    public String getBlindkey(){return blindkey;}
+    public String getUserKey(){return userKey;}
+    public String getLocation() {
+        return location;
     }
 }

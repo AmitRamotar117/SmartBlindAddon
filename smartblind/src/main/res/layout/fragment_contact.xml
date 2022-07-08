@@ -7,13 +7,11 @@
     android:background="@color/blue"
     tools:context=".ui.contact.ContactFragment">
 
-
-
     <Button
-        android:id="@+id/dialerButton"
+        android:id="@+id/contactDialerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/open_dialer"
+        android:text="@string/contact_open_dialer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -22,7 +20,7 @@
         app:layout_constraintVertical_bias="0.948" />
 
     <ListView
-        android:id="@+id/devsList"
+        android:id="@+id/contactDevsList"
         android:layout_width="376dp"
         android:layout_height="96dp"
         android:divider="@null"
@@ -36,7 +34,7 @@
         app:layout_constraintVertical_bias="0.047" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/contactEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -52,7 +50,7 @@
         app:layout_constraintVertical_bias="0.846" />
 
     <EditText
-        android:id="@+id/feedbackText"
+        android:id="@+id/contactFeedbackText"
         android:layout_width="210dp"
         android:layout_height="105dp"
         android:ems="10"
@@ -67,7 +65,7 @@
         app:layout_constraintVertical_bias="0.615" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/contactSubmitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"
@@ -79,7 +77,7 @@
         app:layout_constraintVertical_bias="0.749" />
 
     <EditText
-        android:id="@+id/emailText"
+        android:id="@+id/contactEmailText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -93,7 +91,7 @@
         app:layout_constraintVertical_bias="0.361" />
 
     <EditText
-        android:id="@+id/phoneText"
+        android:id="@+id/contactPhoneText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -107,7 +105,7 @@
         app:layout_constraintVertical_bias="0.465" />
 
     <EditText
-        android:id="@+id/nameText"
+        android:id="@+id/contactNameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

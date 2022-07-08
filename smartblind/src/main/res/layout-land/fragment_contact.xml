@@ -10,10 +10,10 @@
 
 
     <Button
-        android:id="@+id/dialerButton"
+        android:id="@+id/contactDialerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/open_dialer"
+        android:text="@string/contact_open_dialer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.172"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.92" />
 
     <ListView
-        android:id="@+id/devsList"
+        android:id="@+id/contactDevsList"
         android:layout_width="313dp"
         android:layout_height="225dp"
         android:divider="@null"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.231" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/contactEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:editable="false"
@@ -51,7 +51,7 @@
         app:layout_constraintVertical_bias="0.789" />
 
     <EditText
-        android:id="@+id/feedbackText"
+        android:id="@+id/contactFeedbackText"
         android:layout_width="245dp"
         android:layout_height="95dp"
         android:ems="10"
@@ -66,7 +66,7 @@
         app:layout_constraintVertical_bias="0.702" />
 
     <EditText
-        android:id="@+id/nameText"
+        android:id="@+id/contactNameText"
         android:layout_width="266dp"
         android:layout_height="43dp"
         android:ems="10"
@@ -81,7 +81,7 @@
         app:layout_constraintVertical_bias="0.163" />
 
     <EditText
-        android:id="@+id/emailText"
+        android:id="@+id/contactEmailText"
         android:layout_width="268dp"
         android:layout_height="43dp"
         android:ems="10"
@@ -95,7 +95,7 @@
         app:layout_constraintVertical_bias="0.323" />
 
     <EditText
-        android:id="@+id/phoneText"
+        android:id="@+id/contactPhoneText"
         android:layout_width="271dp"
         android:layout_height="42dp"
         android:ems="10"
@@ -109,7 +109,7 @@
         app:layout_constraintVertical_bias="0.466" />
 
     <Button
-        android:id="@+id/submitButton"
+        android:id="@+id/contactSubmitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"

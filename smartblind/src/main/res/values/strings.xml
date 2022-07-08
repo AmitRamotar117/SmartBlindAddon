@@ -15,7 +15,7 @@
     <string name="menu_manage_blinds">Manage Blinds</string>
     <string name="menu_schedule_blind">Schedule Blinds</string>
     <string name="settings">Settings</string>
-    <string name="open_dialer">Call Customer Service</string>
+    <string name="contact_open_dialer">Call Customer Service</string>
     <string name="enable">Enable</string>
     <string name="permission_storage_title">Read Storage permission</string>
     <string name="prompt1">Please enable access to storage.</string>
@@ -56,10 +56,10 @@
     <string name="blind_location">Blind Location</string>
     <string name="blind_key">Blind Key</string>
     <string name="blind_height">Blind Height</string>
- <!--<string name="new_user">New User</string>-->
+    <string name="new_user">New User</string>
 
 
-<string-array name="emails">
+<string-array name="contact_emails">
     <item>Developer\'s Contact</item>
     <item>chrisjanellemutuc@gmail.com</item>
     <item>amitpunit117@gmail.com</item>

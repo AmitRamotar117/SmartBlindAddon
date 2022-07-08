@@ -65,20 +65,20 @@ public class ContactFragment extends Fragment {
 
         binding = FragmentContactBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        mEditText = root.findViewById(R.id.editText);
-        feedBack = root.findViewById(R.id.feedbackText);
-        nameText = root.findViewById(R.id.nameText);
-        emailText = root.findViewById(R.id.emailText);
-        phoneText = root.findViewById(R.id.phoneText);
-        submitBtn = root.findViewById(R.id.submitButton);
+        mEditText = root.findViewById(R.id.contactEditText);
+        feedBack = root.findViewById(R.id.contactFeedbackText);
+        nameText = root.findViewById(R.id.contactNameText);
+        emailText = root.findViewById(R.id.contactEmailText);
+        phoneText = root.findViewById(R.id.contactPhoneText);
+        submitBtn = root.findViewById(R.id.contactSubmitButton);
         Resources res = getResources();
-        emails = res.getStringArray(R.array.emails);
+        emails = res.getStringArray(R.array.contact_emails);
 
 
 
 
-        permissionBtn = root.findViewById(R.id.dialerButton);
-        listView = root.findViewById(R.id.devsList);
+        permissionBtn = root.findViewById(R.id.contactDialerButton);
+        listView = root.findViewById(R.id.contactDevsList);
         //ArrayList<String> arrayList =  new ArrayList<>();
 
 

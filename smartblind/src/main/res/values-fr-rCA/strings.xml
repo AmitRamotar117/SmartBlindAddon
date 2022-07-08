@@ -16,7 +16,7 @@
     <string name="menu_manage_blinds">Gérer les stores</string>
     <string name="menu_schedule_blind">Planifier en aveugle</string>
     <string name="settings">Paramètres</string>
-    <string name="open_dialer">Autoriser le stockage</string>
+    <string name="contact_open_dialer">Autoriser le stockage</string>
     <string name="enable">Activer</string>
     <string name="permission_storage_title">Lire l\'autorisation de stockage</string>
     <string name="prompt1">Veuillez activer l\'accès au stockage.</string>

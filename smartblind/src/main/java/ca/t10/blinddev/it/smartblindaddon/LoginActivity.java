@@ -112,9 +112,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this).setTitle(R.string.app_name)
-                .setMessage(R.string.leave_app).setIcon(R.drawable.ic_exit)
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish()).setNegativeButton(R.string.no, null).show();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
 
 
     }

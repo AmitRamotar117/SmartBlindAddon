@@ -12,6 +12,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,13 +33,17 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
+import ca.t10.blinddev.it.smartblindaddon.Contact;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentContactBinding;
 
@@ -51,9 +56,11 @@ public class ContactFragment extends Fragment {
     private Button permissionBtn;
     public static final int REQUEST_CALLS = 1;
     private EditText mEditText;
-    private Firebase Ref;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference dRef;
     private EditText feedBack,nameText,emailText,phoneText;
     private String[]emails;
+    private Contact contactInfo;
 
     private Button submitBtn;
 
@@ -73,7 +80,10 @@ public class ContactFragment extends Fragment {
         submitBtn = root.findViewById(R.id.contactSubmitButton);
         Resources res = getResources();
         emails = res.getStringArray(R.array.contact_emails);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        dRef =firebaseDatabase.getReferenceFromUrl("https://smartblindaddon-default-rtdb.firebaseio.com/Issue/User");
 
+        contactInfo = new Contact();
 
 
 
@@ -87,13 +97,27 @@ public class ContactFragment extends Fragment {
         listView.setAdapter(arrayAdapter);
 
 
+
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Firebase mFirebaseRef = new Firebase("https://smartblindaddon-default-rtdb.firebaseio.com/Issue/User");
 
+             String comment = feedBack.getText().toString();
+             String name = nameText.getText().toString();
+             String email = emailText.getText().toString();
+             String phone = phoneText.getText().toString();
 
-                ShowDialog();
+                if (TextUtils.isEmpty(name) && TextUtils.isEmpty(phone) && TextUtils.isEmpty(comment)&& TextUtils.isEmpty(email)) {
+                    // if the text fields are empty
+                    // then show the below message.
+                    Toast.makeText(getActivity(), "Please add some data.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // else call the method to add
+                    // data to our database.
+                    addDatatoFirebase(name, phone, email, comment);
+                }
+
+               ShowDialog();
             }
         });
         permissionBtn.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +127,40 @@ public class ContactFragment extends Fragment {
             }
         });
 
-        /*final TextView textView = binding.textSlideshow;
-        contactViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-*/
+
 
         applySettings();
         return root;
+    }
+    private void addDatatoFirebase(String name, String phone, String email, String comment) {
+
+      contactInfo.setEmail(email);
+      contactInfo.setComment(comment);
+      contactInfo.setName(name);
+      contactInfo.setPhone(phone);
+
+
+        // we are use add value event listener method
+        // which is called with database reference.
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // inside the method of on Data change we are setting
+                // our object class to our database reference.
+                // data base reference will sends data to firebase.
+               dRef.setValue(contactInfo);
+
+                // after adding this data we are showing toast message.
+                Toast.makeText(getActivity(), "data added", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // if the data is not added or it is cancelled then
+                // we are displaying a failure toast message.
+                Toast.makeText(getActivity(), "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     private void phoneNumber() {
 

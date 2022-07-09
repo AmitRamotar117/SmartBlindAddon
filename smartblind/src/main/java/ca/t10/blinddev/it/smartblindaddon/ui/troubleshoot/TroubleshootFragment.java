@@ -33,6 +33,8 @@ import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentTroubleshootBinding;
 
+import static android.content.ContentValues.TAG;
+
 public class TroubleshootFragment extends Fragment {
     TextView instruct;
     private View root;
@@ -58,6 +60,7 @@ public class TroubleshootFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 downloadFile.start();
+                Toast.makeText(getActivity(), "Downloading...", Toast.LENGTH_SHORT).show();
             }
         });
         applySettings();
@@ -106,7 +109,7 @@ public class TroubleshootFragment extends Fragment {
         @Override
         public void run() {
             try {
-                    URL url = new URL("https://filesamples.com/samples/document/txt/sample3.txt");
+                    URL url = new URL("https://drive.google.com/uc?export=download&id=1pUpw6CKkKtC94LFZ4QjKqs_6bgdb63lW");
                     URLConnection conexion = url.openConnection();
                     conexion.connect();
                     int lenghtOfFile = conexion.getContentLength();
@@ -114,6 +117,7 @@ public class TroubleshootFragment extends Fragment {
                     File testDirectory = new File(Environment.getExternalStorageDirectory() + "/Download");
                     if (!testDirectory.exists()) {
                         testDirectory.mkdir();
+                        Log.e(TAG, "Directory Created.");
                     }
                     FileOutputStream fos = new FileOutputStream(testDirectory + "/Troubleshoot.txt");
                     byte[] data = new byte[1024];
@@ -127,8 +131,8 @@ public class TroubleshootFragment extends Fragment {
             progress = progress_temp;
         }*/
                         fos.write(data, 0, count);
+                        Log.e(TAG, "File Written");
                     }
-                    //Toast.makeText(getActivity(), "File is Downloading", Toast.LENGTH_SHORT).show();
                     is.close();
                     fos.close();
                 } catch(

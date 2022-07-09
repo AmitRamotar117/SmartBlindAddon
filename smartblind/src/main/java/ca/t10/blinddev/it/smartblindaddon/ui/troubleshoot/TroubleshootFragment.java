@@ -2,13 +2,16 @@ package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 //Amit Punit n01203930
 //Vyacheslav Perepelytsya n01133953
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,7 +52,7 @@ public class TroubleshootFragment extends Fragment {
 
         instruct = root.findViewById(R.id.troubleshoot_instruct);
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
-        instruct.setText("Measure height of blind in cm to calibarate the blind");
+        instruct.setText("Measure height of blind in cm to calibrate the blind");
         instruct.setTextSize(15);
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
@@ -60,7 +63,8 @@ public class TroubleshootFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 downloadFile.start();
-                Toast.makeText(getActivity(), "Downloading...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "File Downloaded to Downloads/Troubleshoot.txt", Toast.LENGTH_SHORT).show();
+                //showFile();
             }
         });
         applySettings();
@@ -147,4 +151,29 @@ public class TroubleshootFragment extends Fragment {
                 }
         }
     });
+    // Open the File after Download Pseudocode
+    /*
+    public void showFile() {
+        try {
+            File file = new File(Environment.getExternalStorageDirectory()
+                    + "/Download/" + "Troubleshoot.txt");
+            if (!file.isDirectory())
+                file.mkdir();
+            MimeTypeMap map = MimeTypeMap.getSingleton();
+            String ext = MimeTypeMap.getFileExtensionFromUrl(file.getName());
+            String type = map.getMimeTypeFromExtension(ext);
+            if (type == null)
+               type = "*COMMENTED OUT/*";
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri data = Uri.fromFile(file);
+
+            intent.setDataAndType(data, type);
+
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     */
 }

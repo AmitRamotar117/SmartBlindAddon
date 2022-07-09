@@ -43,6 +43,7 @@ public class TroubleshootFragment extends Fragment {
     private View root;
     private FragmentTroubleshootBinding binding;
     private Button downloadBtn;
+    Boolean downloadedFile = false;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         TroubleshootViewModel troubleshootViewModel =
@@ -62,8 +63,15 @@ public class TroubleshootFragment extends Fragment {
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                downloadFile.start();
-                Toast.makeText(getActivity(), "File Downloaded to Downloads/Troubleshoot.txt", Toast.LENGTH_SHORT).show();
+                if (downloadedFile == true)
+                {
+                    Toast.makeText(getActivity(), "File Already Downloaded to Downloads/Troubleshoot.txt", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    downloadedFile = true;
+                    downloadFile.start();
+                    Toast.makeText(getActivity(), "File Downloading to Downloads/Troubleshoot.txt", Toast.LENGTH_SHORT).show();
+                }
                 //showFile();
             }
         });

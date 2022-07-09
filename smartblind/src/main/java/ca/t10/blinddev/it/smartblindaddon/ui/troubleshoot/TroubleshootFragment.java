@@ -12,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +59,15 @@ public class TroubleshootFragment extends Fragment {
         instruct.setTextSize(15);
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
+        String[] arraySpinner = new String[] {
+                "1", "2", "3", "4", "5", "6", "7"
+        };
+        Spinner troubleshootSpinner = root.findViewById(R.id.troubleshoot_options);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        troubleshootSpinner.setAdapter(adapter);
+
         //get troubleshooting file from button
         downloadBtn = root.findViewById(R.id.troubleshoot_download);
 
@@ -65,12 +76,12 @@ public class TroubleshootFragment extends Fragment {
             public void onClick(View view) {
                 if (downloadedFile == true)
                 {
-                    Toast.makeText(getActivity(), "File Already Downloaded to Downloads/Troubleshoot.txt", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "File Already Downloaded - Please go to downloads/troubleshoot.txt to view it", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     downloadedFile = true;
                     downloadFile.start();
-                    Toast.makeText(getActivity(), "File Downloading to Downloads/Troubleshoot.txt", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "File Downloading to downloads/troubleshoot.txt", Toast.LENGTH_SHORT).show();
                 }
                 //showFile();
             }

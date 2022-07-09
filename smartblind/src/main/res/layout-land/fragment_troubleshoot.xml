@@ -22,8 +22,8 @@
 
     <Spinner
         android:id="@+id/troubleshoot_options"
-        android:layout_width="320dp"
-        android:layout_height="36dp"
+        android:layout_width="507dp"
+        android:layout_height="35dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"

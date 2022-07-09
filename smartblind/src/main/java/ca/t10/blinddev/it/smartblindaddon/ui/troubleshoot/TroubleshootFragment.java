@@ -55,12 +55,16 @@ public class TroubleshootFragment extends Fragment {
 
         instruct = root.findViewById(R.id.troubleshoot_instruct);
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
-        instruct.setText("Measure height of blind in cm to calibrate the blind");
+
+        //Set initial instruction text
+        instruct.setText("Please use the spinner or download the full troubleshooting document to resolve your issue");
         instruct.setTextSize(15);
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
+        //Spinner initialization code
         String[] arraySpinner = new String[] {
-                "1", "2", "3", "4", "5", "6", "7"
+                "Blinds are not visible/manageable/saved", "Login/Logout not working", "Application Crashes",
+                "Blinds do not open/close to the full extent", "Blinds do not move at all"
         };
         Spinner troubleshootSpinner = root.findViewById(R.id.troubleshoot_options);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),

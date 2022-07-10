@@ -73,7 +73,7 @@ public class TroubleshootFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         troubleshootSpinner.setAdapter(adapter);
 
-        //Spinner Selection code
+        //Spinner selection code
         troubleshootSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -120,7 +120,7 @@ public class TroubleshootFragment extends Fragment {
             }
         });
 
-        //get troubleshooting file from button
+        //Get troubleshooting file from button
         downloadBtn = root.findViewById(R.id.troubleshoot_download);
 
         downloadBtn.setOnClickListener(new View.OnClickListener() {

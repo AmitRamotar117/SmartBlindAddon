@@ -90,7 +90,7 @@ public class TroubleshootFragment extends Fragment {
                 }
                 else if(selItem.equals("Login/Logout not working"))
                 {
-                    instruct.setText("1. Please ensure you are a registered\n" +
+                    instruct.setText("1. Please ensure you are a registered user\n" +
                             "2. Make sure you are connected to the internet");
                 }
                 else if(selItem.equals("Application Crashes"))
@@ -102,8 +102,8 @@ public class TroubleshootFragment extends Fragment {
                 }
                 else if(selItem.equals("Blinds do not open/close to the full extent"))
                 {
-                    instruct.setText("1. Please ensure you are a registered\n" +
-                            "2. Make sure you are connected to the internet");
+                    instruct.setText("1. Measure the height of the blind in cm and enter it to calibrate the blind\n" +
+                            "2. Try deleting and adding the blind in question again");
                 }
                 else if(selItem.equals("Blinds do not move at all"))
                 {

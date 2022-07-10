@@ -15,10 +15,10 @@
         android:text="Download Troubleshooting Documentation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintHorizontal_bias="0.958"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466" />
+        app:layout_constraintVertical_bias="0.545" />
 
     <Spinner
         android:id="@+id/troubleshoot_options"
@@ -45,17 +45,17 @@
 
     <TextView
         android:id="@+id/troubleshoot_instruct"
-        android:layout_width="338dp"
-        android:layout_height="88dp"
+        android:layout_width="420dp"
+        android:layout_height="217dp"
         android:layout_marginTop="24dp"
         android:text="Troubleshooting Text From Spinner Options"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/troubleshoot_options"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.1" />
 
     <ImageView
         android:id="@+id/troubleshoot_image"
@@ -64,10 +64,10 @@
         android:foreground="@drawable/troubleshooting_image"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.553" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

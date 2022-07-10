@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -62,7 +63,7 @@ public class TroubleshootFragment extends Fragment {
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
         //Spinner initialization code
-        String[] arraySpinner = new String[] {
+        String[] arraySpinner = new String[] { "",
                 "Blinds are not visible/manageable/saved", "Login/Logout not working", "Application Crashes",
                 "Blinds do not open/close to the full extent", "Blinds do not move at all"
         };
@@ -71,6 +72,53 @@ public class TroubleshootFragment extends Fragment {
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         troubleshootSpinner.setAdapter(adapter);
+
+        //Spinner Selection code
+        troubleshootSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                       int arg2, long arg3) {
+                // TODO Auto-generated method stub
+
+                String selItem = troubleshootSpinner.getItemAtPosition(arg2).toString();
+
+                if(selItem.equals("Blinds are not visible/manageable/saved"))
+                {
+                    instruct.setText("1. Please ensure you are connected to the internet\n" +
+                            "2. If issue persists you can contact support in our contact us page");
+                }
+                else if(selItem.equals("Login/Logout not working"))
+                {
+                    instruct.setText("1. Please ensure you are a registered\n" +
+                            "2. Make sure you are connected to the internet");
+                }
+                else if(selItem.equals("Application Crashes"))
+                {
+                    instruct.setText("1. Please ensure that you are using a compatible version of Android and update your version if it is outdated\n" +
+                            "2. Try restarting the phone and running the app again\n" +
+                            "3. Check and your phone for malware and/or any intrusive or overarching apps, close them and clean your phone of malware before starting the application\n" +
+                            "4. If your phone is configured in a language other than English or French try running from an English or French Android configuration.\n");
+                }
+                else if(selItem.equals("Blinds do not open/close to the full extent"))
+                {
+                    instruct.setText("1. Please ensure you are a registered\n" +
+                            "2. Make sure you are connected to the internet");
+                }
+                else if(selItem.equals("Blinds do not move at all"))
+                {
+                    instruct.setText("1. Please ensure the blind is connected to the motor\n" +
+                            "2. Make sure you are connected to the internet when sending operations\n" +
+                            "3. Measure the height of the blind in cm and enter it to calibrate the blind\n" +
+                            "4. Try deleting and adding the blind in question again");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                instruct.setText("Please use the spinner or download the full troubleshooting document to find and resolve your issue");
+            }
+        });
 
         //get troubleshooting file from button
         downloadBtn = root.findViewById(R.id.troubleshoot_download);

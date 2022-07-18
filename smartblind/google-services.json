@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "377358611302",
+    "firebase_url": "https://smartblindaddon-default-rtdb.firebaseio.com",
     "project_id": "smartblindaddon",
     "storage_bucket": "smartblindaddon.appspot.com"
   },
@@ -27,7 +28,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "377358611302-uf99u5vd88g3acite5di1vh3f7gl179d.apps.googleusercontent.com",
+              "client_id": "377358611302-lfsvlmvuqe2t35pphhiki7niujgfjcb2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

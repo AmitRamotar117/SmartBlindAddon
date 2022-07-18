@@ -3,12 +3,10 @@ package ca.t10.blinddev.it.smartblindaddon.ui.home;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -16,13 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.Collections;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.HomeBlinds;
 import ca.t10.blinddev.it.smartblindaddon.HomeRecyclerViewAdapter;
-import ca.t10.blinddev.it.smartblindaddon.MainActivity;
 import ca.t10.blinddev.it.smartblindaddon.R;
 import ca.t10.blinddev.it.smartblindaddon.databinding.FragmentHomeBinding;
 
@@ -33,6 +35,8 @@ public class HomeFragment extends Fragment {
     LinearLayoutManager linearLayoutManager;
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     ArrayList<HomeBlinds> testcase = new ArrayList<>();
+    ArrayList<String> blindsowned;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -40,13 +44,21 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
+
+        blindsowned = new ArrayList<>(); // arraylist for getting users owned blinds
+        String userkey = ""; //the user id from firebase, attend from login screen
+        // this is how the app get the users owned blinds from the database
+        getBlindsOwned(userkey);// this function will have the code to connect to database
+
+        System.out.println("line 51 "+blindsowned.toString());
+
         // these are test cased for the blinds that will be appear in the homepage
         testcase.add(new HomeBlinds("Amit"));
         testcase.add(new HomeBlinds("punit"));
 
 
         // this is code that is used to populate the recyclerview for the blinds
-        recyclerView = (RecyclerView) root.findViewById(R.id.home_recycler_view);
+        recyclerView =  root.findViewById(R.id.home_recycler_view);
         homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
         recyclerView.setAdapter(homeRecyclerViewAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -63,8 +75,8 @@ public class HomeFragment extends Fragment {
     }
     public void applySettings(){
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
-        Boolean d = sharedPreferences.getBoolean("dark",false);
-        Boolean n = sharedPreferences.getBoolean("note",false);
+        boolean d = sharedPreferences.getBoolean("dark",false);
+        boolean n = sharedPreferences.getBoolean("note",false);
         if(d){root.setBackgroundColor(getResources().getColor(R.color.dark_grey));}
         if(n){
             //create class that has functions that make the blind
@@ -74,6 +86,30 @@ public class HomeFragment extends Fragment {
             //this function will launch the notification.
             bl.pushNotification();
              }
+    }
+
+    /* this function is getting the blind the the user owns from
+     the firebase realtime database but the issue is it will only
+     run the onDataChange command once when the data is changed on the database
+     */
+    public void getBlindsOwned(String userkey){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
+        ArrayList<String> ob = new ArrayList<>();
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String test = dataSnapshot.getValue().toString();
+                    System.out.println("the blinds owned " + test);
+                    blindsowned.add(test);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 }

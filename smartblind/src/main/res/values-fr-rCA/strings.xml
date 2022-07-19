@@ -57,4 +57,6 @@
     <string name="blind_location">Emplacement aveugle</string>
     <string name="blind_key">Clé aveugle</string>
     <string name="blind_height">Hauteur aveugle</string>
+    <string name="new_user">nouvel utilisateur</string>
+    <string name="register">Sinscrire</string>
 </resources>

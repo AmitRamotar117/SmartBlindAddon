@@ -73,6 +73,20 @@
         android:layout_marginBottom="217dp"
         android:text="@string/login" />
 
+    <Button
+        android:id="@+id/register_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="524dp"
+        android:layout_marginEnd="125dp"
+        android:layout_marginBottom="159dp"
+        android:text="@string/register" />
+
     <ImageView
         android:id="@+id/google_signin"
         android:layout_width="223dp"

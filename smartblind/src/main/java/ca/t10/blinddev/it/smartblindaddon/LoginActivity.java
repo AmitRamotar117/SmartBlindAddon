@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button loginBtn;
+    Button loginBtn, registerBtn;
     ImageView google_img;
     TextView name,mail;
     GoogleSignInOptions gso;
@@ -82,7 +82,18 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
+        registerBtn = findViewById(R.id.register_btn);
+        //if register btn is pressed
+        registerBtn.setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View view) {
+                startRegisterActivity();
+            }
+        });
     }
+
 
     public void SignIn() {
         Intent intent = gsc.getSignInIntent();
@@ -106,6 +117,13 @@ public class LoginActivity extends AppCompatActivity {
 
     public void startMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void startRegisterActivity()
+    {
+        Intent intent = new Intent(getApplicationContext(), NewUserActivity.class);
         startActivity(intent);
         finish();
     }

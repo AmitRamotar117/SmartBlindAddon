@@ -2,6 +2,8 @@ package ca.t10.blinddev.it.smartblindaddon.ui.schedule;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,10 +16,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Calendar;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
@@ -30,7 +41,7 @@ public class ScheduleFragment extends Fragment {
     Button submit,date,time;
     Switch opt;
     EditText indate,intime;
-
+    private int mYear, mMonth, mDay, mHour, mMinute;
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
     }
@@ -47,12 +58,62 @@ public class ScheduleFragment extends Fragment {
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
+        date.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        // Get Current Date
+                                        final Calendar c = Calendar.getInstance();
+                                        mYear = c.get(Calendar.YEAR);
+                                        mMonth = c.get(Calendar.MONTH);
+                                        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                                        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                                                new DatePickerDialog.OnDateSetListener() {
+
+                                                    @Override
+                                                    public void onDateSet(DatePicker view, int year,
+                                                                          int monthOfYear, int dayOfMonth) {
+
+                                                        indate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                                                    }
+                                                }, mYear, mMonth, mDay);
+                                        datePickerDialog.show();
+                                    }
+                                });
+                time.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        // Get Current Time
+                        final Calendar c = Calendar.getInstance();
+                        mHour = c.get(Calendar.HOUR_OF_DAY);
+                        mMinute = c.get(Calendar.MINUTE);
+
+                        // Launch Time Picker Dialog
+                        TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
+                                new TimePickerDialog.OnTimeSetListener() {
+
+                                    @Override
+                                    public void onTimeSet(TimePicker view, int hourOfDay,
+                                                          int minute) {
+
+                                        intime.setText(hourOfDay + ":" + minute);
+                                    }
+                                }, mHour, mMinute, false);
+                        timePickerDialog.show();
+                    }
+                });
+
+
+
 
         //https://www.journaldev.com/9976/android-date-time-picker-dialog
         //this is how the user will set the time and date
         applySettings();
         return view;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -92,5 +153,35 @@ public class ScheduleFragment extends Fragment {
         intime.setHintTextColor(getResources().getColor(R.color.white));
         indate.setHintTextColor(getResources().getColor(R.color.white));
     }
+
+   /* private void addDatatoFirebase(String type, String time, String date, String location) {
+
+        scheduleInfo.setEmail(email);
+        scheduleInfo.setComment(comment);
+        scheduleInfo.setName(name);
+        scheduleInfo.setPhone(phone);
+
+
+        // we are use add value event listener method
+        // which is called with database reference.
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // inside the method of on Data change we are setting
+                // our object class to our database reference.
+                // data base reference will sends data to firebase.
+                dRef.setValue(scheduleInfo);
+
+                // after adding this data we are showing toast message.
+                Toast.makeText(getActivity(), "data added", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // if the data is not added or it is cancelled then
+                // we are displaying a failure toast message.
+                Toast.makeText(getActivity(), "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
 }

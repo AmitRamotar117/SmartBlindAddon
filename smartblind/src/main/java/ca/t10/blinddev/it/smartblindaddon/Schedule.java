@@ -1,7 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon;
 
 public class Schedule {
-    private String  type;
+    private String  operation;
     private String date;
     private String time;
     private String location;
@@ -10,12 +10,12 @@ public Schedule(){
 
 }
 
-    public String getType() {
-        return type;
+    public String getOperation() {
+        return operation;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setOperation(String operation) {
+        this.operation = operation;
     }
 
     public String getDate() {

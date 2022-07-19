@@ -58,9 +58,11 @@
     <string name="blind_height">Blind Height</string>
     <string name="new_user">New User</string>
     <string name="register">Register</string>
+    <string name="schedule_submit">Submit</string>
+    <string name="schedule_select_time">SELECT TIME</string>
 
 
-<string-array name="contact_emails">
+    <string-array name="contact_emails">
     <item>Developer\'s Contact</item>
     <item>chrisjanellemutuc@gmail.com</item>
     <item>amitpunit117@gmail.com</item>

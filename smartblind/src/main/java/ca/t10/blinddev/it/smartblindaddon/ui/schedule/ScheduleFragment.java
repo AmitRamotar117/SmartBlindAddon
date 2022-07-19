@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +27,15 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
+import ca.t10.blinddev.it.smartblindaddon.Schedule;
 
 public class ScheduleFragment extends Fragment {
 
@@ -40,6 +44,9 @@ public class ScheduleFragment extends Fragment {
     Spinner blist;
     Button submit,date,time;
     Switch opt;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference dRef;
+    private Schedule scheduleInfo;
     EditText indate,intime;
     private int mYear, mMonth, mDay, mHour, mMinute;
     public static ScheduleFragment newInstance() {
@@ -58,6 +65,9 @@ public class ScheduleFragment extends Fragment {
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        dRef =firebaseDatabase.getReferenceFromUrl("https://smartblindaddon-default-rtdb.firebaseio.com/0001/Schedule");
+        scheduleInfo = new Schedule();
         date.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -102,6 +112,24 @@ public class ScheduleFragment extends Fragment {
                                     }
                                 }, mHour, mMinute, false);
                         timePickerDialog.show();
+                    }
+                });
+                submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String time = intime.getText().toString();
+                        String date = indate.getText().toString();
+                        String operation = opt.getText().toString();
+                        String location = blist.getSelectedItem().toString();
+                        if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
+                            // if the text fields are empty
+                            // then show the below message.
+                            Toast.makeText(getActivity(), "Please add some data.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // else call the method to add
+                            // data to our database.
+                            addDatatoFirebase(operation, time, date);
+                        }
                     }
                 });
 
@@ -154,34 +182,35 @@ public class ScheduleFragment extends Fragment {
         indate.setHintTextColor(getResources().getColor(R.color.white));
     }
 
-   /* private void addDatatoFirebase(String type, String time, String date, String location) {
+   private void addDatatoFirebase(String type, String time, String date) {
 
-        scheduleInfo.setEmail(email);
-        scheduleInfo.setComment(comment);
-        scheduleInfo.setName(name);
-        scheduleInfo.setPhone(phone);
+       scheduleInfo.setDate(date);
+       scheduleInfo.setOperation(type);
+       scheduleInfo.setTime(time);
+       // scheduleInfo.setPhone(phone);
 
 
-        // we are use add value event listener method
-        // which is called with database reference.
-        dRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
-                dRef.setValue(scheduleInfo);
+       // we are use add value event listener method
+       // which is called with database reference.
+       dRef.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               // inside the method of on Data change we are setting
+               // our object class to our database reference.
+               // data base reference will sends data to firebase.
+               dRef.setValue(scheduleInfo);
 
-                // after adding this data we are showing toast message.
-                Toast.makeText(getActivity(), "data added", Toast.LENGTH_SHORT).show();
-            }
+               // after adding this data we are showing toast message.
+               Toast.makeText(getActivity(), "data added", Toast.LENGTH_SHORT).show();
+           }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // if the data is not added or it is cancelled then
-                // we are displaying a failure toast message.
-                Toast.makeText(getActivity(), "Fail to add data " + error, Toast.LENGTH_SHORT).show();
-            }
-        });*/
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+               // if the data is not added or it is cancelled then
+               // we are displaying a failure toast message.
+               Toast.makeText(getActivity(), "Fail to add data " + error, Toast.LENGTH_SHORT).show();
+           }
+       });
+   }
 
 }

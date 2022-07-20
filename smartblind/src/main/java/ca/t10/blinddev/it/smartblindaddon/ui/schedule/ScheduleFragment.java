@@ -127,7 +127,7 @@ public class ScheduleFragment extends Fragment {
                         }
 
                         //String location = blist.getSelectedItem().toString();
-                        String location = "Living room";
+                        String location = "Living room ";
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
                             // if the text fields are empty
                             // then show the below message.

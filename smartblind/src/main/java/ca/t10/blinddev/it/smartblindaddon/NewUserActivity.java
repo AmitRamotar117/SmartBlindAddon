@@ -46,6 +46,12 @@ public class NewUserActivity extends AppCompatActivity {
 
 
         applySettings();
+        sub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registerUser();
+            }
+        });
     }
 
     public void applySettings(){
@@ -94,6 +100,19 @@ public class NewUserActivity extends AppCompatActivity {
         String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+
+        if (name.isEmpty())
+        {
+            editTextName.setError("Full name is required!");
+        }
+        if (email.isEmpty())
+        {
+            editTextEmail.setError("Email address is required!");
+        }
+        if (password.isEmpty())
+        {
+            editTextPassword.setError("Password is required");
+        }
     }
 
     @Override

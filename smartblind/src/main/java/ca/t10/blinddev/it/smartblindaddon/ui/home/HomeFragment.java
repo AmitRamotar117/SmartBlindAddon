@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
     DatabaseReference ref;
 
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
 
         // these are test cased for the blinds that will be appear in the homepage
         for(String key : blindsowned){
+
             testcase.add(new HomeBlinds("test", key));
         }
         //testcase.add(new HomeBlinds("Amit","0001"));
@@ -117,5 +119,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+
 
 }

@@ -13,6 +13,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder> {
@@ -20,9 +26,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     static Context context;
     TextView loc,light,temp;
     Button open,close;
+    String location;
     public HomeRecyclerViewAdapter(ArrayList<HomeBlinds> test,Context context){
     this.testblinds = test;
     this.context = context;
+
     }
 
 
@@ -38,6 +46,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         applySettings();
         return new HomeViewHolder(view);
     }
+
     public void applySettings(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
 
@@ -68,6 +77,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         HomeBlinds x = testblinds.get(position);
         String location = x.getLocation();
+        String bkey = x.blindkey;
         holder.loc.setText("Location: "+String.valueOf(x.getLocation()));
 
         holder.temp.setText("Temperature: "+String.valueOf(x.getTemperature()));
@@ -93,6 +103,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         });
 
     }
+
 
 
     @Override

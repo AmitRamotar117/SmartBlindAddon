@@ -126,7 +126,7 @@ public class TroubleshootFragment extends Fragment {
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (downloadedFile == true)
+                if (downloadedFile)
                 {
                     Toast.makeText(getActivity(), "File Already Downloaded - Please go to downloads/troubleshoot.txt to view it", Toast.LENGTH_SHORT).show();
                 }

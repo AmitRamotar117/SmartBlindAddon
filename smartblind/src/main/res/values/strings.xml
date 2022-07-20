@@ -60,6 +60,8 @@
     <string name="register">Register</string>
     <string name="schedule_submit">Submit</string>
     <string name="schedule_select_time">SELECT TIME</string>
+    <string name="open">\"Open \"</string>
+    <string name="closing">\"Closing \"</string>
 
 
     <string-array name="contact_emails">

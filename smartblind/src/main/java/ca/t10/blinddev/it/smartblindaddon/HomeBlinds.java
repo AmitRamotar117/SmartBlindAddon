@@ -19,7 +19,6 @@ public class HomeBlinds {
 
     // this will house data on the specific blind.
     public HomeBlinds(String test,String blindkey) {
-
         this.blindkey = blindkey;
         ref = FirebaseDatabase.getInstance().getReference(blindkey);
     }
@@ -27,13 +26,11 @@ public class HomeBlinds {
         ref.child("Location").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String l = snapshot.getValue().toString();
+                String l = String.valueOf(snapshot.getValue());
                 location = l;
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         return location;

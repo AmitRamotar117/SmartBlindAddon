@@ -79,7 +79,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onClick(View view) {
                 x.openBlinds();
-                Toast.makeText(view.getContext(),R.string.open  + location, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(),view.getContext().getString(R.string.open)  + location, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -88,7 +88,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onClick(View view) {
                 x.closeBlinds();
-                Toast.makeText(view.getContext(), R.string.closing + location, Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), view.getContext().getString(R.string.closing) + location, Toast.LENGTH_SHORT).show();
             }
         });
 

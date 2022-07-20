@@ -14,18 +14,24 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.ktx.Firebase;
+
 public class NewUserActivity extends AppCompatActivity {
+    private FirebaseAuth mAuth;
     View view;
-    EditText name,email,password;
+    EditText editTextName,editTextEmail,editTextPassword;
     Button sub;
     ImageButton back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
-        name = findViewById(R.id.new_user_name);
-        email = findViewById(R.id.new_user_email);
-        password = findViewById(R.id.new_user_password);
+        editTextName = findViewById(R.id.new_user_name);
+        editTextEmail = findViewById(R.id.new_user_email);
+        editTextPassword = findViewById(R.id.new_user_password);
         sub = findViewById(R.id.new_user_submit);
         back = findViewById(R.id.new_user_back);
 
@@ -65,14 +71,14 @@ public class NewUserActivity extends AppCompatActivity {
 
     private void enableDarkMode() {
         view.setBackgroundColor(getResources().getColor(R.color.dark_grey));
-        name.setTextColor(getResources().getColor(R.color.white));
-        name.setHintTextColor(getResources().getColor(R.color.white));
+        editTextName.setTextColor(getResources().getColor(R.color.white));
+        editTextName.setHintTextColor(getResources().getColor(R.color.white));
 
-        email.setTextColor(getResources().getColor(R.color.white));
-        email.setHintTextColor(getResources().getColor(R.color.white));
+        editTextEmail.setTextColor(getResources().getColor(R.color.white));
+        editTextEmail.setHintTextColor(getResources().getColor(R.color.white));
 
-        password.setTextColor(getResources().getColor(R.color.white));
-        password.setHintTextColor(getResources().getColor(R.color.white));
+        editTextPassword.setTextColor(getResources().getColor(R.color.white));
+        editTextPassword.setHintTextColor(getResources().getColor(R.color.white));
 
 
     }
@@ -81,6 +87,13 @@ public class NewUserActivity extends AppCompatActivity {
         sub.setTextSize(size);
         //TODO
         //add code for spinner when implemented
+    }
+
+    private void registerUser()
+    {
+        String name = editTextName.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
     }
 
     @Override

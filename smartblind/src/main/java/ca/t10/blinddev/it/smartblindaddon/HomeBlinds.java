@@ -23,6 +23,7 @@ public class HomeBlinds {
         ref = FirebaseDatabase.getInstance().getReference(blindkey);
     }
     public String getLocation() {
+
         ref.child("Location").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

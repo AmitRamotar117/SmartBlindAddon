@@ -49,13 +49,17 @@ public class HomeFragment extends Fragment {
         //blindsowned = new ArrayList<>(); // arraylist for getting users owned blinds
         String userkey = ""; //the user id from firebase, attend from login screen
         // this is how the app get the users owned blinds from the database
-        getBlindsOwned(userkey);// this function will have the code to connect to database
+        //getBlindsOwned(userkey);// this function will have the code to connect to database
+        blindsowned.add("0001");
+        blindsowned.add("0002");
 
-        System.out.println("line 51 "+blindsowned.toString());
 
         // these are test cased for the blinds that will be appear in the homepage
-        testcase.add(new HomeBlinds("Amit","0001"));
-        testcase.add(new HomeBlinds("punit","0002"));
+        for(String key : blindsowned){
+            testcase.add(new HomeBlinds("test", key));
+        }
+        //testcase.add(new HomeBlinds("Amit","0001"));
+        //testcase.add(new HomeBlinds("punit","0002"));
 
 
         // this is code that is used to populate the recyclerview for the blinds
@@ -103,6 +107,7 @@ public class HomeFragment extends Fragment {
                     String test = dataSnapshot.getValue().toString();
                     System.out.println("the blinds owned " + test);
                     blindsowned.add(test);
+                    System.out.println(blindsowned);
                 }
             }
 

@@ -146,6 +146,10 @@ public class NewUserActivity extends AppCompatActivity {
                                 }
                             });
                 }
+                else
+                {
+                    Toast.makeText(NewUserActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

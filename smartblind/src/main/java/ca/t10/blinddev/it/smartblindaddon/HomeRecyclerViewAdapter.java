@@ -42,12 +42,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
 
         boolean d = sharedPreferences.getBoolean("dark",false);
-        boolean n = sharedPreferences.getBoolean("note",false);
+
         String t = sharedPreferences.getString("size","");
 
         if(d){enableDarkMode();}
-        if(n){//function for notification
-        }
+
 
         if (t.equals("large")){setTextSize(20);}
         if (t.equals("medium")){setTextSize(17);}
@@ -69,14 +68,18 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         HomeBlinds x = testblinds.get(position);
         String location = x.getLocation();
-        //String temp = temperatureData();  this method will be in this class
-        holder.loc.setText(x.getLocation());
+        holder.loc.setText("Location: "+String.valueOf(x.getLocation()));
+
+        holder.temp.setText("Temperature: "+String.valueOf(x.getTemperature()));
+
+        holder.light.setText("Light: "+String.valueOf(x.getLight()));
 
         //when open button is pressed status value on firebase = open
         holder.open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Open " + location, Toast.LENGTH_SHORT).show();
+                x.openBlinds();
+                Toast.makeText(view.getContext(),R.string.open  + location, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -84,7 +87,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         holder.close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Close" + location, Toast.LENGTH_SHORT).show();
+                x.closeBlinds();
+                Toast.makeText(view.getContext(), R.string.closing + location, Toast.LENGTH_SHORT).show();
             }
         });
 

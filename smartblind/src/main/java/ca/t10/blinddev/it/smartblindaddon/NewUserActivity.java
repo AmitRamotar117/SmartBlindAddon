@@ -1,5 +1,6 @@
 package ca.t10.blinddev.it.smartblindaddon;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,8 +14,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.ktx.Firebase;
 
 public class NewUserActivity extends AppCompatActivity {
@@ -103,16 +109,45 @@ public class NewUserActivity extends AppCompatActivity {
 
         if (name.isEmpty())
         {
-            editTextName.setError("Full name is required!");
+            editTextName.setError(getString(R.string.name_error));
+            editTextName.requestFocus();
         }
         if (email.isEmpty())
         {
-            editTextEmail.setError("Email address is required!");
+            editTextEmail.setError(getString(R.string.email_error));
+            editTextEmail.requestFocus();
         }
         if (password.isEmpty())
         {
-            editTextPassword.setError("Password is required");
+            editTextPassword.setError(getString(R.string.password_error));
+            editTextPassword.requestFocus();
         }
+
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful())
+                {
+                    User user = new User(name, email);
+
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful())
+                                    {
+                                        Toast.makeText(NewUserActivity.this, "user has been registered successfully!", Toast.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(NewUserActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
+            }
+        });
     }
 
     @Override

@@ -119,8 +119,15 @@ public class ScheduleFragment extends Fragment {
                     public void onClick(View view) {
                         String time = intime.getText().toString();
                         String date = indate.getText().toString();
-                        String operation = opt.getText().toString();
-                        String location = blist.getSelectedItem().toString();
+                        String operation;
+                        if(opt.isChecked()){
+                            operation = "Open";
+                        }else{
+                            operation = "Close";
+                        }
+
+                        //String location = blist.getSelectedItem().toString();
+                        String location = "Living room";
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
                             // if the text fields are empty
                             // then show the below message.
@@ -128,7 +135,7 @@ public class ScheduleFragment extends Fragment {
                         } else {
                             // else call the method to add
                             // data to our database.
-                            addDatatoFirebase(operation, time, date);
+                            addDatatoFirebase(operation, time, date,location);
                         }
                     }
                 });
@@ -182,12 +189,12 @@ public class ScheduleFragment extends Fragment {
         indate.setHintTextColor(getResources().getColor(R.color.white));
     }
 
-   private void addDatatoFirebase(String type, String time, String date) {
+   private void addDatatoFirebase(String type, String time, String date,String location) {
 
        scheduleInfo.setDate(date);
        scheduleInfo.setOperation(type);
        scheduleInfo.setTime(time);
-       // scheduleInfo.setPhone(phone);
+       scheduleInfo.setLocation(location);
 
 
        // we are use add value event listener method

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -28,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
    private TextView name,mail;
    private GoogleSignInOptions gso;
    private GoogleSignInClient gsc;
-   private EditText editTextEmail = findViewById(R.id.email_txt);
-   private EditText editTextPassword = findViewById(R.id.password_txt);
+   private EditText editTextEmail, editTextPassword;
+
 
     private FirebaseAuth mAuth;
 
@@ -46,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
 
         gsc = GoogleSignIn.getClient(this, gso);
+        mAuth = FirebaseAuth.getInstance();
 
         // if sign in with google is pressed
 
@@ -135,6 +139,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void userLogin()
     {
+        editTextEmail = findViewById(R.id.email_txt);
+        editTextPassword = findViewById(R.id.password_txt);
+
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
@@ -142,12 +149,30 @@ public class LoginActivity extends AppCompatActivity {
         {
             editTextEmail.setError("Email is required!");
             editTextEmail.requestFocus();
+            return;
         }
         if (password.isEmpty())
         {
             editTextPassword.setError("Password is required!");
             editTextPassword.requestFocus();
+            return;
         }
+
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful())
+                {
+                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_LONG).show();
+                    startMainActivity();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
     }
 
     @Override

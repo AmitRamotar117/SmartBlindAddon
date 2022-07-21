@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     private View root;
     private FragmentHomeBinding binding;
     RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager;
+
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     ArrayList<HomeBlinds> testcase = new ArrayList<>();
     ArrayList<String> blindsowned = new ArrayList<>();

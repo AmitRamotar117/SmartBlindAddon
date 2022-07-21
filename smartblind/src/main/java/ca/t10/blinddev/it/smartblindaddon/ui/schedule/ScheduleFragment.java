@@ -6,6 +6,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -31,7 +33,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
@@ -48,6 +52,7 @@ public class ScheduleFragment extends Fragment {
     private DatabaseReference dRef;
     private Schedule scheduleInfo;
     EditText indate,intime;
+    private String[] location;
     private int mYear, mMonth, mDay, mHour, mMinute;
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
@@ -61,10 +66,19 @@ public class ScheduleFragment extends Fragment {
         opt = view.findViewById(R.id.schedule_op);
         indate = view.findViewById(R.id.in_date);
         intime = view.findViewById(R.id.in_time);
-        blist = view.findViewById(R.id.schedule_blinds);
+
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
+        Resources res = getResources();
+        location = res.getStringArray(R.array.schedule_spinner);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = view.findViewById(R.id.schedule_blinds);;
+        sItems.setAdapter(adapter);
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         dRef =firebaseDatabase.getReferenceFromUrl("https://smartblindaddon-default-rtdb.firebaseio.com/0001/Schedule");
         scheduleInfo = new Schedule();
@@ -126,8 +140,9 @@ public class ScheduleFragment extends Fragment {
                             operation = "Close";
                         }
 
-                        //String location = blist.getSelectedItem().toString();
-                        String location = "Living room ";
+
+                        String location = String.valueOf(sItems.getSelectedItem());
+                       // String location = "Living room ";
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
                             // if the text fields are empty
                             // then show the below message.

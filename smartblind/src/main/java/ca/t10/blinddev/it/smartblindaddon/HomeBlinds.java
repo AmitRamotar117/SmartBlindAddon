@@ -17,48 +17,17 @@ import java.util.ArrayList;
 
 public class HomeBlinds {
     DatabaseReference ref;
-    String temp,light,blindkey,location;
+    String blindkey;
 
 
     // this will house data on the specific blind.
-    public HomeBlinds(String test,String blindkey) {
-        //this.location = test;// this need to be changed
+    public HomeBlinds(String blindkey) {
         this.blindkey = blindkey;
         ref = FirebaseDatabase.getInstance().getReference(blindkey);
     }
 
 
-//    public String getTemperature(){
-//        ref.child("Temperature").addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//            temp = snapshot.getValue(String.class);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                Log.w("Temp error",error.toException());
-//            }
-//        });
-//
-//        return temp;
-//    }
-    public String getLight(){
-        ref.child("Light").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String li  = snapshot.getValue(String.class);
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.w("Temp error",error.toException());
-            }
-        });
-
-        return light;
-    }
 
     public void openBlinds(){
         ref.child("Status").setValue("open");

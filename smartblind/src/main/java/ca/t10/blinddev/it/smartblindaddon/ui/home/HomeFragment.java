@@ -46,20 +46,14 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-        // this is code that is used to populate the recyclerview for the blinds
-//        recyclerView =  root.findViewById(R.id.home_recycler_view);
-//        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
-//        recyclerView.setAdapter(homeRecyclerViewAdapter);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        applySettings();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String test = dataSnapshot.getValue().toString();
-                    testcase.add(new HomeBlinds("test", test));
+                    String blinds = dataSnapshot.getValue().toString();
+                    testcase.add(new HomeBlinds(blinds));
                     recyclerView =  root.findViewById(R.id.home_recycler_view);
                     homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
                     recyclerView.setAdapter(homeRecyclerViewAdapter);
@@ -69,7 +63,6 @@ public class HomeFragment extends Fragment {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         return root;

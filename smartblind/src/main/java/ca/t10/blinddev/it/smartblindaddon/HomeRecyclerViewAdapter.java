@@ -3,6 +3,7 @@ package ca.t10.blinddev.it.smartblindaddon;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,13 +77,53 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         HomeBlinds x = testblinds.get(position);
-        String location = x.getLocation();
         String bkey = x.blindkey;
-        holder.loc.setText("Location: "+String.valueOf(x.getLocation()));
 
-        holder.temp.setText("Temperature: "+String.valueOf(x.getTemperature()));
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(bkey);
 
-        holder.light.setText("Light: "+String.valueOf(x.getLight()));
+        ref.child("Location").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String lo = snapshot.getValue(String.class);
+                holder.loc.setText("Location: "+String.valueOf(lo));
+                location = lo;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("Temp error",error.toException());
+            }
+        });
+
+        ref.child("Temperature").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String t = snapshot.getValue(String.class);
+                holder.temp.setText("Temperature: "+String.valueOf(t));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("Temp error",error.toException());
+            }
+        });
+
+        ref.child("Light").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String li  = snapshot.getValue(String.class);
+                holder.light.setText("Light: "+String.valueOf(li));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("Temp error",error.toException());
+            }
+        });
+
+
+
+
 
         //when open button is pressed status value on firebase = open
         holder.open.setOnClickListener(new View.OnClickListener() {

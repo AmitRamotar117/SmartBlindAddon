@@ -1,18 +1,16 @@
 package ca.t10.blinddev.it.smartblindaddon;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,21 +19,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button loginBtn, registerBtn;
-    ImageView google_img;
-    TextView name,mail;
-    GoogleSignInOptions gso;
-    GoogleSignInClient gsc;
+   private Button loginBtn, registerBtn;
+   private ImageView google_img;
+   private TextView name,mail;
+   private GoogleSignInOptions gso;
+   private GoogleSignInClient gsc;
+   private EditText editTextEmail = findViewById(R.id.email_txt);
+   private EditText editTextPassword = findViewById(R.id.password_txt);
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
-        TextView username = findViewById(R.id.username_txt);
-        TextView password = findViewById(R.id.password_txt);
         name = findViewById(R.id.displayName);
         mail = findViewById(R.id.displayMail);
         google_img = (ImageView) findViewById(R.id.google_signin);
@@ -72,12 +73,16 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
+                userLogin();
+                /*
+                if (editTextEmail.getText().toString().equals("admin") && editTextPassword.getText().toString().equals("admin")) {
                     Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_LONG).show();
                     startMainActivity();
                 } else {
                     Toast.makeText(LoginActivity.this, "LOGIN UNSUCCESSFUL", Toast.LENGTH_LONG).show();
                 }
+                */
+
             }
 
         });
@@ -126,6 +131,23 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), NewUserActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void userLogin()
+    {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
+
+        if(email.isEmpty())
+        {
+            editTextEmail.setError("Email is required!");
+            editTextEmail.requestFocus();
+        }
+        if (password.isEmpty())
+        {
+            editTextPassword.setError("Password is required!");
+            editTextPassword.requestFocus();
+        }
     }
 
     @Override

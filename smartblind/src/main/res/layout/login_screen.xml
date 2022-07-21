@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -13,15 +14,15 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="572dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="45dp"
         android:gravity="center"
         android:text="@string/sign_in"
-        android:textStyle="bold"
         android:textColor="@color/ic_home_icon_background"
-        android:textSize="34sp" />
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/login_btn"
@@ -31,11 +32,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="466dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="217dp"
-        android:text="@string/login" />
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="327dp"
+        android:text="@string/login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/register_btn"
@@ -45,11 +46,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="131dp"
-        android:layout_marginTop="524dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="159dp"
-        android:text="@string/register" />
+        android:layout_marginStart="194dp"
+        android:layout_marginTop="327dp"
+        android:text="@string/register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/google_signin"
@@ -59,10 +60,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="570dp"
-        android:layout_marginEnd="79dp"
-        android:layout_marginBottom="57dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="408dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/google_signin" />
 
     <EditText
@@ -73,13 +74,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="198dp"
-        android:layout_marginEnd="81dp"
-        android:layout_marginBottom="459dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="119dp"
         android:ems="10"
         android:hint="@string/email"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/password_txt"
@@ -89,12 +90,12 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="318dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="342dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="230dp"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

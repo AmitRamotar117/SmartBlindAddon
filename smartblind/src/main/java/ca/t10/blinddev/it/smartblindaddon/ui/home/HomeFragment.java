@@ -46,34 +46,34 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
-        //blindsowned = new ArrayList<>(); // arraylist for getting users owned blinds
-        String userkey = ""; //the user id from firebase, attend from login screen
-        // this is how the app get the users owned blinds from the database
-        //getBlindsOwned(userkey);// this function will have the code to connect to database
-        blindsowned.add("0001");
-        blindsowned.add("0002");
-
-
-        // these are test cased for the blinds that will be appear in the homepage
-        for(String key : blindsowned){
-
-            testcase.add(new HomeBlinds("test", key));
-        }
-        //testcase.add(new HomeBlinds("Amit","0001"));
-        //testcase.add(new HomeBlinds("punit","0002"));
-
-
         // this is code that is used to populate the recyclerview for the blinds
-        recyclerView =  root.findViewById(R.id.home_recycler_view);
-        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
-        recyclerView.setAdapter(homeRecyclerViewAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        applySettings();
+//        recyclerView =  root.findViewById(R.id.home_recycler_view);
+//        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
+//        recyclerView.setAdapter(homeRecyclerViewAdapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        applySettings();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String test = dataSnapshot.getValue().toString();
+                    testcase.add(new HomeBlinds("test", test));
+                    recyclerView =  root.findViewById(R.id.home_recycler_view);
+                    homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
+                    recyclerView.setAdapter(homeRecyclerViewAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    applySettings();
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return root;
     }
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -94,32 +94,4 @@ public class HomeFragment extends Fragment {
             bl.pushNotification();
              }
     }
-
-    /* this function is getting the blind the the user owns from
-     the firebase realtime database but the issue is it will only
-     run the onDataChange command once when the data is changed on the database
-     */
-    public void getBlindsOwned(String userkey){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
-        ArrayList<String> ob = new ArrayList<>();
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    String test = dataSnapshot.getValue().toString();
-                    System.out.println("the blinds owned " + test);
-                    blindsowned.add(test);
-                    System.out.println(blindsowned);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-
 }

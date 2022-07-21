@@ -63,8 +63,8 @@
     <string name="name_error">Full name is required!</string>
     <string name="email_error">Email address is required!</string>
     <string name="password_error">Password is required!</string>
-    <string name="open">\"Open \"</string>
-    <string name="closing">\"Closing \"</string>
+    <string name="open">Open: </string>
+    <string name="closing">Closing: </string>
 
     <string-array name="contact_emails">
     <item>Developer\'s Contact</item>

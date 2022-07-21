@@ -122,6 +122,11 @@ public class NewUserActivity extends AppCompatActivity {
             editTextPassword.setError(getString(R.string.password_error));
             editTextPassword.requestFocus();
         }
+        if (password.length() < 6)
+        {
+            editTextPassword.setError("Min Password length is 6 characters!");
+            editTextPassword.requestFocus();
+        }
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

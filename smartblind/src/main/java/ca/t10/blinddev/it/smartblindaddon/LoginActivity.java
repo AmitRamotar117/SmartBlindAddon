@@ -158,6 +158,12 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
+        if (password.length() < 6)
+        {
+            editTextPassword.setError("Min Password length is 6 characters!");
+            editTextPassword.requestFocus();
+        }
+
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -138,6 +138,7 @@ public class NewUserActivity extends AppCompatActivity {
                                     if (task.isSuccessful())
                                     {
                                         Toast.makeText(NewUserActivity.this, "user has been registered successfully!", Toast.LENGTH_LONG).show();
+                                        startLoginActivity();
                                     }
                                     else
                                     {
@@ -152,6 +153,13 @@ public class NewUserActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void startLoginActivity()
+    {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

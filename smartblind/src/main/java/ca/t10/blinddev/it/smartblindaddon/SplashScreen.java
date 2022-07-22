@@ -18,7 +18,7 @@ public class SplashScreen extends AppCompatActivity {
         new Thread() {
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(1000);
                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
                     finish();
                 } catch (InterruptedException e) {

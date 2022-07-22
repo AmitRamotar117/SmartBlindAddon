@@ -54,6 +54,7 @@ public class HomeFragment extends Fragment {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     String blinds = dataSnapshot.getValue().toString();
                     testcase.add(new HomeBlinds(blinds));
+                    blindsowned.add(blinds);
                     recyclerView =  root.findViewById(R.id.home_recycler_view);
                     homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
                     recyclerView.setAdapter(homeRecyclerViewAdapter);
@@ -65,6 +66,11 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
+       SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        SharedPreferences.Editor data = sharedPreferences.edit();
+        //data.putStringSet("blinds_owned",blindsowned);
+
         return root;
     }
     @Override

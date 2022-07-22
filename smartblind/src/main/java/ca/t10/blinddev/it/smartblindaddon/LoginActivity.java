@@ -1,5 +1,5 @@
 package ca.t10.blinddev.it.smartblindaddon;
-
+//Chris Mutuc N01314607
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

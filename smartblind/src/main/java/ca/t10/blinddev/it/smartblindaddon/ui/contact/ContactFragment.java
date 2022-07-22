@@ -1,5 +1,6 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.contact;
 //Amit Punit n01203930
+//Chris Mutuc N01314607
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;

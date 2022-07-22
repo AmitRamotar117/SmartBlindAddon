@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
 
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     ArrayList<HomeBlinds> testcase = new ArrayList<>();
-    Set<String> blindsowned = new HashSet<String>();
+    Set<String> blindsowned = new HashSet<>();
 
 
 
@@ -49,6 +49,11 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         applySettings();
+
+       // SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+       // String userID = sharedPreferences.getString("userID","");
+
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -62,6 +67,9 @@ public class HomeFragment extends Fragment {
                     recyclerView.setAdapter(homeRecyclerViewAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 }
+
+                // this code will save the users owned blind keys so they can be used by other functions
+                //like the manage blinds and schedule blinds
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
                 SharedPreferences.Editor data = sharedPreferences.edit();
                 data.putStringSet("blinds_owned",blindsowned);
@@ -71,9 +79,6 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-
         return root;
     }
     @Override

@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
@@ -62,6 +63,12 @@ public class ScheduleFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        // here is how to get user owned blinds keys from shared preferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        //data is in here
+        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
+        System.out.println("sche"+ set.toString());
 
         opt = view.findViewById(R.id.schedule_op);
         indate = view.findViewById(R.id.in_date);

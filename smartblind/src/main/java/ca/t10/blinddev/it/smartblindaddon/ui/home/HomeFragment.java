@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.HomeBlinds;
@@ -35,8 +37,8 @@ public class HomeFragment extends Fragment {
 
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     ArrayList<HomeBlinds> testcase = new ArrayList<>();
-    ArrayList<String> blindsowned = new ArrayList<>();
-    DatabaseReference ref;
+    Set<String> blindsowned = new HashSet<String>();
+
 
 
 
@@ -59,17 +61,18 @@ public class HomeFragment extends Fragment {
                     homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
                     recyclerView.setAdapter(homeRecyclerViewAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
                 }
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+                SharedPreferences.Editor data = sharedPreferences.edit();
+                data.putStringSet("blinds_owned",blindsowned);
+                data.commit();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
-       SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
-        SharedPreferences.Editor data = sharedPreferences.edit();
-        //data.putStringSet("blinds_owned",blindsowned);
+
 
         return root;
     }
@@ -77,6 +80,7 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         testcase.clear();
+        blindsowned.clear();
         binding = null;
     }
     public void applySettings(){

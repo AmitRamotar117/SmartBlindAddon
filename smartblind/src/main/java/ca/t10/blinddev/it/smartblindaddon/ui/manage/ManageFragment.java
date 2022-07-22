@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Set;
+
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
@@ -44,6 +46,13 @@ public class ManageFragment extends Fragment {
         height = root.findViewById(R.id.manage_add_height);
 
         applySettings();
+
+        // here is how to get user owned blinds keys from shared preferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        //data is in here
+        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
+        System.out.println("manage"+ set.toString());
+
         return root;
     }
 

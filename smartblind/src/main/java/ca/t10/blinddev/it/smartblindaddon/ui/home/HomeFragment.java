@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
+        applySettings();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,7 +59,7 @@ public class HomeFragment extends Fragment {
                     homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testcase,getContext());
                     recyclerView.setAdapter(homeRecyclerViewAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                    applySettings();
+
                 }
             }
             @Override

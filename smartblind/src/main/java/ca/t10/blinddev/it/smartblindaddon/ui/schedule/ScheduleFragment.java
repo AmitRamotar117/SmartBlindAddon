@@ -14,9 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -56,6 +58,7 @@ public class ScheduleFragment extends Fragment {
     EditText indate,intime;
     private String[] location;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    private static final String TAG = "MyActivity";
     public static ScheduleFragment newInstance() {
         return new ScheduleFragment();
     }
@@ -69,8 +72,8 @@ public class ScheduleFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
-        System.out.println("sche"+ set.toString());
-
+        Log.i(TAG,set.toString());
+        location =set.toArray(new String[0]);
 
 
         opt = view.findViewById(R.id.schedule_op);
@@ -81,7 +84,7 @@ public class ScheduleFragment extends Fragment {
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
 
-       location =set.toArray(new String[0]);
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
 
@@ -90,7 +93,8 @@ public class ScheduleFragment extends Fragment {
         sItems.setAdapter(adapter);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        dRef =firebaseDatabase.getReferenceFromUrl("https://smartblindaddon-default-rtdb.firebaseio.com/0001/Schedule");
+        dRef =firebaseDatabase.getReference();
+
         scheduleInfo = new Schedule();
         date.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -150,9 +154,26 @@ public class ScheduleFragment extends Fragment {
                             operation = "Close";
                         }
 
+                    /*  sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                if (position == 0){
+                                    dRef.child("0002").child("Schedule");
+
+                                }
+                                else if (position == 2){
+                                    dRef.child("0001").child("Schedule");
+
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+                            }
+                        });*/
 
                         String location = String.valueOf(sItems.getSelectedItem());
-                       // String location = "Living room ";
+
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
                             // if the text fields are empty
                             // then show the below message.
@@ -168,8 +189,10 @@ public class ScheduleFragment extends Fragment {
 
 
 
-        //https://www.journaldev.com/9976/android-date-time-picker-dialog
-        //this is how the user will set the time and date
+
+
+
+
         applySettings();
         return view;
     }
@@ -244,6 +267,7 @@ public class ScheduleFragment extends Fragment {
            }
        });
    }
+
 
 
 

@@ -57,6 +57,7 @@ public class ScheduleFragment extends Fragment {
     private Schedule scheduleInfo;
     EditText indate,intime;
     private String[] location;
+    String blindkey;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private static final String TAG = "MyActivity";
     public static ScheduleFragment newInstance() {
@@ -149,20 +150,20 @@ public class ScheduleFragment extends Fragment {
                         String date = indate.getText().toString();
                         String operation;
                         if(opt.isChecked()){
-                            operation = "Open";
-                        }else{
                             operation = "Close";
+                        }else{
+                            operation = "Open";
                         }
 
-                    /*  sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                      sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 if (position == 0){
-                                    dRef.child("0002").child("Schedule");
+
 
                                 }
                                 else if (position == 2){
-                                    dRef.child("0001").child("Schedule");
+
 
                                 }
                             }
@@ -170,7 +171,7 @@ public class ScheduleFragment extends Fragment {
                             @Override
                             public void onNothingSelected(AdapterView<?> parent) {
                             }
-                        });*/
+                        });
 
                         String location = String.valueOf(sItems.getSelectedItem());
 
@@ -181,17 +182,11 @@ public class ScheduleFragment extends Fragment {
                         } else {
                             // else call the method to add
                             // data to our database.
-                            addDatatoFirebase(operation, time, date,location);
+                            blindkey = "0002";
+                            addDatatoFirebase(operation, time, date,location,blindkey);
                         }
                     }
                 });
-
-
-
-
-
-
-
 
         applySettings();
         return view;
@@ -237,16 +232,16 @@ public class ScheduleFragment extends Fragment {
         indate.setHintTextColor(getResources().getColor(R.color.white));
     }
 
-   private void addDatatoFirebase(String type, String time, String date,String location) {
+   private void addDatatoFirebase(String type, String time, String date, String blindkey, String s) {
 
        scheduleInfo.setDate(date);
        scheduleInfo.setOperation(type);
        scheduleInfo.setTime(time);
-       scheduleInfo.setLocation(location);
 
-       dRef.child("blindkey").child("Schedule").child("date").setValue(date);
-       dRef.child("blindkey").child("Schedule").child("time").setValue(time);
-       dRef.child("blindkey").child("Schedule").child("operation").setValue(type);
+
+       dRef.child(blindkey).child("Schedule").child("date").setValue(date);
+       dRef.child(blindkey).child("Schedule").child("time").setValue(time);
+       dRef.child(blindkey).child("Schedule").child("operation").setValue(type);
 
 
 

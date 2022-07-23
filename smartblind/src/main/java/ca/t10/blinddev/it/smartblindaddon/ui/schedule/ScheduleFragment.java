@@ -156,14 +156,7 @@ public class ScheduleFragment extends Fragment {
                       sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                if (position == 0){
 
-
-                                }
-                                else if (position == 2){
-
-
-                                }
                             }
 
                             @Override

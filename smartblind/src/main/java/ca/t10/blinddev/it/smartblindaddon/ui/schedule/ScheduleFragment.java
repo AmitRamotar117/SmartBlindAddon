@@ -85,8 +85,6 @@ public class ScheduleFragment extends Fragment {
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
 
-
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

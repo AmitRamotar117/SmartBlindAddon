@@ -33,6 +33,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,7 +55,7 @@ public class ContactFragment extends Fragment {
     private ListView listView;
     private View root;
     private FragmentContactBinding binding;
-    private Button permissionBtn;
+
     public static final int REQUEST_CALLS = 1;
     private EditText mEditText;
     private FirebaseDatabase firebaseDatabase;
@@ -62,7 +63,7 @@ public class ContactFragment extends Fragment {
     private EditText feedBack,nameText,emailText,phoneText;
     private String[]emails;
     private Contact contactInfo;
-
+    private FloatingActionButton fab;
     private Button submitBtn;
 
 
@@ -79,6 +80,7 @@ public class ContactFragment extends Fragment {
         emailText = root.findViewById(R.id.contactEmailText);
         phoneText = root.findViewById(R.id.contactPhoneText);
         submitBtn = root.findViewById(R.id.contactSubmitButton);
+        fab = root.findViewById(R.id.fab);
         Resources res = getResources();
         emails = res.getStringArray(R.array.contact_emails);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -88,7 +90,7 @@ public class ContactFragment extends Fragment {
 
 
 
-        permissionBtn = root.findViewById(R.id.contactDialerButton);
+
         listView = root.findViewById(R.id.contactDevsList);
         //ArrayList<String> arrayList =  new ArrayList<>();
 
@@ -121,12 +123,12 @@ public class ContactFragment extends Fragment {
                ShowDialog();
             }
         });
-        permissionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                makePhoneCall();
-            }
-        });
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            makePhoneCall();
+        }
+    });
 
 
 
@@ -280,7 +282,7 @@ public class ContactFragment extends Fragment {
     }
     public void setTextSize(int size){
         //listView.setTextSize(size);
-        permissionBtn.setTextSize(size);
+
         submitBtn.setTextSize(size);
     }
     private void enableDarkMode() {

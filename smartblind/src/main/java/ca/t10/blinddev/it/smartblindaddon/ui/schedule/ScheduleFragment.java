@@ -35,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -67,8 +68,10 @@ public class ScheduleFragment extends Fragment {
         // here is how to get user owned blinds keys from shared preferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
-        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
+       Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
         System.out.println("sche"+ set.toString());
+
+
 
         opt = view.findViewById(R.id.schedule_op);
         indate = view.findViewById(R.id.in_date);
@@ -77,8 +80,8 @@ public class ScheduleFragment extends Fragment {
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
-        Resources res = getResources();
-        location = res.getStringArray(R.array.schedule_spinner);
+
+       location =set.toArray(new String[0]);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
 
@@ -241,5 +244,8 @@ public class ScheduleFragment extends Fragment {
            }
        });
    }
+
+
+
 
 }

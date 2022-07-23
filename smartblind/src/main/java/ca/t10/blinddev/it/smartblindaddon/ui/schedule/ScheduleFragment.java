@@ -244,28 +244,12 @@ public class ScheduleFragment extends Fragment {
        scheduleInfo.setTime(time);
        scheduleInfo.setLocation(location);
 
+       dRef.child("blindkey").child("Schedule").child("date").setValue(date);
+       dRef.child("blindkey").child("Schedule").child("time").setValue(time);
+       dRef.child("blindkey").child("Schedule").child("operation").setValue(type);
 
-       // we are use add value event listener method
-       // which is called with database reference.
-       dRef.addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot snapshot) {
-               // inside the method of on Data change we are setting
-               // our object class to our database reference.
-               // data base reference will sends data to firebase.
-               dRef.setValue(scheduleInfo);
 
-               // after adding this data we are showing toast message.
-               Toast.makeText(getActivity(), "data added", Toast.LENGTH_SHORT).show();
-           }
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-               // if the data is not added or it is cancelled then
-               // we are displaying a failure toast message.
-               Toast.makeText(getActivity(), "Fail to add data " + error, Toast.LENGTH_SHORT).show();
-           }
-       });
    }
 
 

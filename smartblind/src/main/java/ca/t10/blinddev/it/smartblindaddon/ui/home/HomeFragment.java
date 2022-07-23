@@ -50,6 +50,10 @@ public class HomeFragment extends Fragment {
         root = binding.getRoot();
         applySettings();
 
+        //use this to check if app is connected to internet
+        //https://stackoverflow.com/questions/5474089/how-to-check-currently-internet-connection-is-available-or-not-in-android
+
+
        // SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
        // String userID = sharedPreferences.getString("userID","");
 

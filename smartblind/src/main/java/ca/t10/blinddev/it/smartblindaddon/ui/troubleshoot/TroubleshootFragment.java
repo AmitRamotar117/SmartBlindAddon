@@ -61,11 +61,11 @@ public class TroubleshootFragment extends Fragment {
 
         //Set initial instruction text
         instruct.setText("Please use the spinner or download the full troubleshooting document to resolve your issue");
-        instruct.setTextSize(15);
+        instruct.setTextSize(20);
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
         //Spinner initialization code
-        String[] arraySpinner = new String[] { "",
+        String[] arraySpinner = new String[] { "Please select your issue...",
                 "Blinds are not visible/manageable/saved", "Login/Logout not working", "Application Crashes",
                 "Blinds do not open/close to the full extent", "Blinds do not move at all"
         };
@@ -74,7 +74,6 @@ public class TroubleshootFragment extends Fragment {
                 android.R.layout.simple_spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         troubleshootSpinner.setAdapter(adapter);
-
         //Spinner selection code
         troubleshootSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -84,6 +83,11 @@ public class TroubleshootFragment extends Fragment {
                 // TODO Auto-generated method stub
 
                 String selItem = troubleshootSpinner.getItemAtPosition(arg2).toString();
+
+                if(selItem.equals("Please select your issue..."))
+                {
+                    instruct.setText("Please use the spinner or download the full troubleshooting document to find and resolve your issue");
+                }
 
                 if(selItem.equals("Blinds are not visible/manageable/saved"))
                 {

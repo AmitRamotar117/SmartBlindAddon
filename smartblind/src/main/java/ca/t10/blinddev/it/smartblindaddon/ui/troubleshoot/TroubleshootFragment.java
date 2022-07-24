@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ public class TroubleshootFragment extends Fragment {
          root = binding.getRoot();
 
         instruct = root.findViewById(R.id.troubleshoot_instruct);
+        instruct.setMovementMethod(new ScrollingMovementMethod());
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
 
         //Set initial instruction text

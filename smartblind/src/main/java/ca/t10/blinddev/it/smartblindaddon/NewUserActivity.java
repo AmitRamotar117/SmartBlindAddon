@@ -21,6 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     View view;
@@ -120,42 +123,38 @@ public class NewUserActivity extends AppCompatActivity {
             editTextPassword.setError(getString(R.string.password_error));
             editTextPassword.requestFocus();
         }
-        if (password.length() < 8)
+        if (!isValidPassword(password))
         {
-            editTextPassword.setError("Min Password length is 8 characters!");
+            editTextPassword.setError("- at least 8 characters\n- at least 1 number\n- at least 1 special char\n- at least 1 uppercase\n- at least 1 lowercase");
             editTextPassword.requestFocus();
         }
+        else {
 
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful())
-                {
-                    User user = new User(name, email);
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        User user = new User(name, email);
 
-                    FirebaseDatabase.getInstance().getReference("Users")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful())
-                                    {
-                                        Toast.makeText(NewUserActivity.this, "user has been registered successfully!", Toast.LENGTH_LONG).show();
-                                        startLoginActivity();
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(NewUserActivity.this, "user has been registered successfully!", Toast.LENGTH_LONG).show();
+                                            startLoginActivity();
+                                        } else {
+                                            Toast.makeText(NewUserActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                                        }
                                     }
-                                    else
-                                    {
-                                        Toast.makeText(NewUserActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
+                                });
+                    } else {
+                        Toast.makeText(NewUserActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                    }
                 }
-                else
-                {
-                    Toast.makeText(NewUserActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+            });
+        }
     }
 
     public void startLoginActivity()
@@ -163,6 +162,19 @@ public class NewUserActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+    public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\\\\\\/%§\"&“|`´}{°><:.;#')(@_$\"!?*=^-]).{8,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
     }
 
     @Override

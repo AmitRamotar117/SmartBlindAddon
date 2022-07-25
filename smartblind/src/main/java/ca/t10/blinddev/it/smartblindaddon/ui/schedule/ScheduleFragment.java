@@ -56,6 +56,7 @@ public class ScheduleFragment extends Fragment {
     private DatabaseReference dRef;
     private Schedule scheduleInfo;
     EditText indate,intime;
+    TextView retrieveTV;
     private String[] location;
     String blindkey;
     private int mYear, mMonth, mDay, mHour, mMinute;
@@ -84,6 +85,7 @@ public class ScheduleFragment extends Fragment {
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
+        retrieveTV = view.findViewById(R.id.schedule_location);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
 
@@ -137,7 +139,7 @@ public class ScheduleFragment extends Fragment {
 
                                         intime.setText(hourOfDay + ":" + minute);
                                     }
-                                }, mHour, mMinute, false);
+                                }, mHour, mMinute, true);
                         timePickerDialog.show();
                     }
                 });
@@ -152,6 +154,7 @@ public class ScheduleFragment extends Fragment {
                         }else{
                             operation = "Open";
                         }
+                       // String location="";
 
                       sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -164,7 +167,8 @@ public class ScheduleFragment extends Fragment {
                             }
                         });
 
-                        String location = String.valueOf(sItems.getSelectedItem());
+                       String location = String.valueOf(sItems.getSelectedItem());
+                       // DatabaseReference ref = FirebaseDatabase.getInstance().getReference(location);
 
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
                             // if the text fields are empty
@@ -173,8 +177,9 @@ public class ScheduleFragment extends Fragment {
                         } else {
                             // else call the method to add
                             // data to our database.
-                            blindkey = "0002";
+                            //blindkey = "0002";
                             addDatatoFirebase(operation, time, date,location,blindkey);
+                           // showLocation(location);
                         }
                     }
                 });
@@ -223,7 +228,7 @@ public class ScheduleFragment extends Fragment {
         indate.setHintTextColor(getResources().getColor(R.color.white));
     }
 
-   private void addDatatoFirebase(String type, String time, String date, String blindkey, String s) {
+   private void addDatatoFirebase(String type, String time, String date, String blindkey ,String temp) {
 
        scheduleInfo.setDate(date);
        scheduleInfo.setOperation(type);
@@ -237,6 +242,33 @@ public class ScheduleFragment extends Fragment {
 
 
    }
+   /*public void showLocation(String location){
+        scheduleInfo.setLocation(location);
+       dRef.child(blindkey).child("Location").addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               // this method is call to get the realtime
+               // updates in the data.
+               // this method is called when the data is
+               // changed in our Firebase console.
+               // below line is for getting the data from
+               // snapshot of our database.
+               String value = snapshot.getValue(String.class);
+
+               // after getting the value we are setting
+               // our value to our text view in below line.
+               retrieveTV.setText(value);
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+               // calling on cancelled method when we receive
+               // any error or we are not able to get the data.
+               Toast.makeText(getActivity(), "Fail to get data.", Toast.LENGTH_SHORT).show();
+           }
+       });
+   }*/
+
 
 
 

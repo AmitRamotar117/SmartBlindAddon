@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,6 +117,11 @@ public class NewUserActivity extends AppCompatActivity {
         if (email.isEmpty())
         {
             editTextEmail.setError(getString(R.string.email_error));
+            editTextEmail.requestFocus();
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        {
+            editTextEmail.setError("Please enter valid email!");
             editTextEmail.requestFocus();
         }
         if (password.isEmpty())

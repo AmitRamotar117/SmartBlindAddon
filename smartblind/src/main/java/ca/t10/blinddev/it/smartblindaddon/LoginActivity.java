@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -161,11 +162,18 @@ public class LoginActivity extends AppCompatActivity {
             editTextPassword.requestFocus();
             return;
         }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches())
+        {
+            editTextEmail.setError("Please enter valid email!");
+            editTextEmail.requestFocus();
+            return;
+        }
 
         if (!isValidPassword(password))
         {
             editTextPassword.setError("- at least 8 characters\n- at least 1 number\n- at least 1 special char\n- at least 1 uppercase\n- at least 1 lowercase");
             editTextPassword.requestFocus();
+            return;
         }
         else {
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

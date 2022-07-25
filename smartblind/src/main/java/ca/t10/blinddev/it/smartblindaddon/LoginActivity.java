@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
    private GoogleSignInOptions gso;
    private GoogleSignInClient gsc;
    private EditText editTextEmail, editTextPassword;
+   private ProgressBar progressBar;
 
 
     private FirebaseAuth mAuth;
@@ -144,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void userLogin()
     {
+        progressBar = findViewById(R.id.progressBar);
         editTextEmail = findViewById(R.id.email_txt);
         editTextPassword = findViewById(R.id.password_txt);
 
@@ -176,6 +179,7 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
         else {
+            progressBar.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -188,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             });
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 

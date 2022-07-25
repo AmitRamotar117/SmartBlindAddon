@@ -10,7 +10,4 @@ public class HomeViewModel extends ViewModel {
 
     }
 
-    public void getText() {
-
-    }
 }

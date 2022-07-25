@@ -6,7 +6,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,16 +28,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
@@ -90,7 +83,7 @@ public class ScheduleFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = view.findViewById(R.id.schedule_blinds);;
+        Spinner sItems = view.findViewById(R.id.schedule_blinds);
         sItems.setAdapter(adapter);
 
         firebaseDatabase = FirebaseDatabase.getInstance();

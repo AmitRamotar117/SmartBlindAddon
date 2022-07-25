@@ -1,6 +1,5 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Chris Mutuc N01314607
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -77,7 +76,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String lo = snapshot.getValue(String.class);
-                holder.loc.setText(context.getString(R.string.loc)+" "+String.valueOf(lo));
+                holder.loc.setText(context.getString(R.string.loc)+" "+ lo);
                 location = lo;
             }
 
@@ -91,7 +90,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String t = snapshot.getValue(String.class);
-                holder.temp.setText(context.getString(R.string.temp)+" "+String.valueOf(t));
+                holder.temp.setText(context.getString(R.string.temp)+" "+ t);
             }
 
             @Override
@@ -104,7 +103,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String li  = snapshot.getValue(String.class);
-                holder.light.setText(context.getString(R.string.li)+" "+String.valueOf(li));
+                holder.light.setText(context.getString(R.string.li)+" "+ li);
             }
 
             @Override

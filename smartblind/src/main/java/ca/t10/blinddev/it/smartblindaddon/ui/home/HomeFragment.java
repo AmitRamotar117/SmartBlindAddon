@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     ArrayList<HomeBlinds> testcase = new ArrayList<>();
     Set<String> blindsowned = new HashSet<>();
-    TextView error;
+    TextView error,menuemail;
 
     //testblinds@mail.com
     //password1#
@@ -56,6 +56,7 @@ public class HomeFragment extends Fragment {
         root = binding.getRoot();
         applySettings();
         error = root.findViewById(R.id.homepage_error);
+
 
         //use this to check if app is connected to internet
         boolean connected = false;
@@ -73,11 +74,12 @@ public class HomeFragment extends Fragment {
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         String userID = sharedPreferences.getString("user_key","");
-
         if(userID.equals("")){
             error.setText(R.string.no_user);
             error.setVisibility(TextView.VISIBLE);
         }
+
+
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(userID).child("Owned");
@@ -105,6 +107,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+
         return root;
     }
     @Override

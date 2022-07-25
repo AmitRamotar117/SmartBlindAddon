@@ -96,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
             displayName.setText(Name);
             displayMail.setText(Mail);
         }
-
-
-
     }
 
     @Override

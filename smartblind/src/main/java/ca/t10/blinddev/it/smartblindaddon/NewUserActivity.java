@@ -120,9 +120,9 @@ public class NewUserActivity extends AppCompatActivity {
             editTextPassword.setError(getString(R.string.password_error));
             editTextPassword.requestFocus();
         }
-        if (password.length() < 6)
+        if (password.length() < 8)
         {
-            editTextPassword.setError("Min Password length is 6 characters!");
+            editTextPassword.setError("Min Password length is 8 characters!");
             editTextPassword.requestFocus();
         }
 

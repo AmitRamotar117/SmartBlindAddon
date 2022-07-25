@@ -159,9 +159,9 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if (password.length() < 6)
+        if (password.length() < 8)
         {
-            editTextPassword.setError("Min Password length is 6 characters!");
+            editTextPassword.setError("Min Password length is 8 characters!");
             editTextPassword.requestFocus();
         }
 

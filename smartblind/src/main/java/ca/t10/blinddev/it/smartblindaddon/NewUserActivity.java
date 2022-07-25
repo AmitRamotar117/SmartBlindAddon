@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +28,7 @@ import java.util.regex.Pattern;
 
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private ProgressBar progressBar;
     View view;
     EditText editTextName,editTextEmail,editTextPassword;
     Button sub;
@@ -108,6 +110,7 @@ public class NewUserActivity extends AppCompatActivity {
         String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        progressBar = findViewById(R.id.progressBar);
 
         if (name.isEmpty())
         {
@@ -135,7 +138,7 @@ public class NewUserActivity extends AppCompatActivity {
             editTextPassword.requestFocus();
         }
         else {
-
+            progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -160,6 +163,7 @@ public class NewUserActivity extends AppCompatActivity {
                     }
                 }
             });
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 

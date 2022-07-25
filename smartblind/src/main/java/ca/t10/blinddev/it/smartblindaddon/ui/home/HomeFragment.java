@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -40,7 +41,10 @@ public class HomeFragment extends Fragment {
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     ArrayList<HomeBlinds> testcase = new ArrayList<>();
     Set<String> blindsowned = new HashSet<>();
+    TextView error;
 
+    //testblinds@mail.com
+    //password1#
 
 
 
@@ -51,6 +55,7 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         applySettings();
+        error = root.findViewById(R.id.homepage_error);
 
         //use this to check if app is connected to internet
         boolean connected = false;
@@ -60,19 +65,22 @@ public class HomeFragment extends Fragment {
             //we are connected to a network
             connected = true;
         }
-        else
+        else{
             connected = false;
-
+            error.setText(R.string.no_internet);
+            error.setVisibility(TextView.VISIBLE);
+        }
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         String userID = sharedPreferences.getString("user_key","");
 
         if(userID.equals("")){
-            // set textview to please login
+            error.setText(R.string.no_user);
+            error.setVisibility(TextView.VISIBLE);
         }
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(userID).child("Owned");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(userID).child("Owned");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -68,6 +68,9 @@
     <string name="loc">Location: </string>
     <string name="temp">Temperature: </string>
     <string name="li">Light: </string>
+    <string name="no_internet">Please connect to the internet to see blinds or see troubleshooting to guidance</string>
+    <string name="no_user">Please Login to see blinds</string>
+    <string name="no_users">Please Login to see Blinds</string>
 
 
     <string-array name="contact_emails">

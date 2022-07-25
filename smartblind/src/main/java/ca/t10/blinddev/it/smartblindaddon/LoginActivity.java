@@ -120,16 +120,6 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
-
-                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                String ukey = firebaseUser.getUid();
-                String uemail = firebaseUser.getEmail();
-                SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
-                SharedPreferences.Editor d = sharedPreferences.edit();
-                d.putString("user_key",ukey);
-                d.putString("user_email",uemail);
-                d.commit();
-
                 startMainActivity();
             } catch (ApiException e) {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
@@ -138,6 +128,15 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void startMainActivity() {
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        String ukey = firebaseUser.getUid();
+        String uemail = firebaseUser.getEmail();
+        SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+        SharedPreferences.Editor d = sharedPreferences.edit();
+        d.putString("user_key",ukey);
+        d.putString("user_email",uemail);
+        d.commit();
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         finish();

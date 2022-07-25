@@ -65,6 +65,10 @@
     <string name="password_error">Password is required!</string>
     <string name="open">Open: </string>
     <string name="closing">Closing: </string>
+    <string name="loc">Location: </string>
+    <string name="temp">Temperature: </string>
+    <string name="li">Light: </string>
+
 
     <string-array name="contact_emails">
     <item>Developer\'s Contact</item>

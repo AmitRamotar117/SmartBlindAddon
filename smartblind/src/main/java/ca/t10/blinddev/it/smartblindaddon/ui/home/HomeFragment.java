@@ -2,6 +2,8 @@ package ca.t10.blinddev.it.smartblindaddon.ui.home;
 //Amit Punit n01203930
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,14 +53,26 @@ public class HomeFragment extends Fragment {
         applySettings();
 
         //use this to check if app is connected to internet
-        //https://stackoverflow.com/questions/5474089/how-to-check-currently-internet-connection-is-available-or-not-in-android
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) root.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
 
 
-       // SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
-       // String userID = sharedPreferences.getString("userID","");
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        String userID = sharedPreferences.getString("user_key","");
+
+        if(userID.equals("")){
+            // set textview to please login
+        }
 
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Admin").child("Owned");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child(userID).child("Owned");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -1,6 +1,8 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Chris Mutuc N01314607
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -117,6 +120,16 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
+
+                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                String ukey = firebaseUser.getUid();
+                String uemail = firebaseUser.getEmail();
+                SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+                SharedPreferences.Editor d = sharedPreferences.edit();
+                d.putString("user_key",ukey);
+                d.putString("user_email",uemail);
+                d.commit();
+
                 startMainActivity();
             } catch (ApiException e) {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();

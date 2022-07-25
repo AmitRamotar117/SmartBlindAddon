@@ -28,13 +28,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     TextView loc,light,temp;
     Button open,close;
     String location;
+
     public HomeRecyclerViewAdapter(ArrayList<HomeBlinds> test,Context context){
     this.testblinds = test;
     this.context = context;
-
     }
-
-
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,17 +45,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         applySettings();
         return new HomeViewHolder(view);
     }
-
     public void applySettings(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
-
         boolean d = sharedPreferences.getBoolean("dark",false);
-
         String t = sharedPreferences.getString("size","");
-
         if(d){enableDarkMode();}
-
-
         if (t.equals("large")){setTextSize(20);}
         if (t.equals("medium")){setTextSize(17);}
         if (t.equals("small")){setTextSize(13);}
@@ -85,7 +77,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String lo = snapshot.getValue(String.class);
-                holder.loc.setText("Location: "+String.valueOf(lo));
+                holder.loc.setText(context.getString(R.string.loc)+" "+String.valueOf(lo));
                 location = lo;
             }
 
@@ -99,7 +91,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String t = snapshot.getValue(String.class);
-                holder.temp.setText("Temperature: "+String.valueOf(t));
+                holder.temp.setText(context.getString(R.string.temp)+" "+String.valueOf(t));
             }
 
             @Override
@@ -112,7 +104,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String li  = snapshot.getValue(String.class);
-                holder.light.setText("Light: "+String.valueOf(li));
+                holder.light.setText(context.getString(R.string.li)+" "+String.valueOf(li));
             }
 
             @Override
@@ -144,9 +136,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         });
 
     }
-
-
-
     @Override
     public int getItemCount() {
         return this.testblinds.size();
@@ -163,8 +152,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             temp = itemView.findViewById(R.id.home_rec_temp);
             close = itemView.findViewById(R.id.home_rec_close);
         }
-
-
     }
 
 }

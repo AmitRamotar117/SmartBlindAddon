@@ -144,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
             }
         });
+        SharedPreferences sharedPreferences = getSharedPreferences("saved", Context.MODE_PRIVATE);
+        SharedPreferences.Editor d = sharedPreferences.edit();
+        d.putString("user_key","");
+        d.putString("user_email","");
+        d.commit();
     }
 
     @Override

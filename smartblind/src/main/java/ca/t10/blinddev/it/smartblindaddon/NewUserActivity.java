@@ -30,7 +30,7 @@ public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     View view;
-    EditText editTextName,editTextEmail,editTextPassword;
+    EditText editTextName,editTextEmail,editTextPassword,editTextConfirm;
     Button sub;
     ImageButton back;
     @Override
@@ -42,6 +42,7 @@ public class NewUserActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.new_user_name);
         editTextEmail = findViewById(R.id.new_user_email);
         editTextPassword = findViewById(R.id.new_user_password);
+        editTextConfirm = findViewById(R.id.new_user_confirm);
         sub = findViewById(R.id.new_user_submit);
         back = findViewById(R.id.new_user_back);
 
@@ -110,6 +111,7 @@ public class NewUserActivity extends AppCompatActivity {
         String name = editTextName.getText().toString().trim();
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
+        String confirm = editTextConfirm.getText().toString().trim();
         progressBar = findViewById(R.id.progressBar);
 
         if (name.isEmpty())
@@ -136,6 +138,12 @@ public class NewUserActivity extends AppCompatActivity {
         {
             editTextPassword.setError("- at least 8 characters\n- at least 1 number\n- at least 1 special char\n- at least 1 uppercase\n- at least 1 lowercase");
             editTextPassword.requestFocus();
+        }
+
+        if (!password.equals(confirm))
+        {
+            editTextConfirm.setError("Password does not match");
+            editTextConfirm.requestFocus();
         }
         else {
             progressBar.setVisibility(View.VISIBLE);

@@ -47,6 +47,14 @@ public class ManageFragment extends Fragment {
 
         applySettings();
 
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loc.getText().clear();
+                bkey.getText().clear();
+                height.getText().clear();
+            }
+        });
         // here is how to get user owned blinds keys from shared preferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here

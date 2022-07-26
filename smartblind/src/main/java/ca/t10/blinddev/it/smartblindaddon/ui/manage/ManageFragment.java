@@ -70,6 +70,8 @@ public class ManageFragment extends Fragment {
                 selectblind.setVisibility(View.GONE);
                 delete.setBackgroundColor(Color.GRAY);
                 add.setBackgroundColor(Color.GREEN);
+                delete.setActivated(false);
+                add.setActivated(true);
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +83,19 @@ public class ManageFragment extends Fragment {
                 selectblind.setVisibility(View.VISIBLE);
                 delete.setBackgroundColor(Color.GREEN);
                 add.setBackgroundColor(Color.GRAY);
+                delete.setActivated(true);
+                add.setActivated(false);
+            }
+        });
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (delete.isActivated()){
+                    //code here
+                }
+                else if (add.isActivated()){
+                    //code here
+                }
             }
         });
         // here is how to get user owned blinds keys from shared preferences

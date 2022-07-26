@@ -53,6 +53,7 @@ public class ManageFragment extends Fragment {
                 loc.getText().clear();
                 bkey.getText().clear();
                 height.getText().clear();
+                selectblind.setVisibility(View.GONE);
             }
         });
         // here is how to get user owned blinds keys from shared preferences

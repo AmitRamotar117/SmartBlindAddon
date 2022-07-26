@@ -62,6 +62,15 @@ public class ManageFragment extends Fragment {
                 selectblind.setVisibility(View.GONE);
             }
         });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loc.setVisibility(View.INVISIBLE);
+                bkey.setVisibility(View.INVISIBLE);
+                height.setVisibility(View.INVISIBLE);
+                selectblind.setVisibility(View.VISIBLE);
+            }
+        });
         // here is how to get user owned blinds keys from shared preferences
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here

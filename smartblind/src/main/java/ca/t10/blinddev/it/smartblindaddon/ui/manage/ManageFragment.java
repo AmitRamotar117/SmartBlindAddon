@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -48,6 +49,8 @@ public class ManageFragment extends Fragment {
         bkey.setVisibility(View.INVISIBLE);
         height.setVisibility(View.INVISIBLE);
         selectblind.setVisibility(View.GONE);
+        delete.setBackgroundColor(Color.GRAY);
+        add.setBackgroundColor(Color.GRAY);
         applySettings();
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +63,8 @@ public class ManageFragment extends Fragment {
                 bkey.getText().clear();
                 height.getText().clear();
                 selectblind.setVisibility(View.GONE);
+                delete.setBackgroundColor(Color.GRAY);
+                add.setBackgroundColor(Color.WHITE);
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +74,8 @@ public class ManageFragment extends Fragment {
                 bkey.setVisibility(View.INVISIBLE);
                 height.setVisibility(View.INVISIBLE);
                 selectblind.setVisibility(View.VISIBLE);
+                delete.setBackgroundColor(Color.WHITE);
+                add.setBackgroundColor(Color.GRAY);
             }
         });
         // here is how to get user owned blinds keys from shared preferences

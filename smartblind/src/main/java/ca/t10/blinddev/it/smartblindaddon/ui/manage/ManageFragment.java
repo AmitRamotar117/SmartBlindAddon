@@ -1,5 +1,5 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.manage;
-
+//Vyacheslav Perepelytsya n01133953
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -11,9 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -22,6 +24,8 @@ import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
 import ca.t10.blinddev.it.smartblindaddon.R;
+
+import static android.content.ContentValues.TAG;
 
 public class ManageFragment extends Fragment {
     private View root;
@@ -45,6 +49,7 @@ public class ManageFragment extends Fragment {
         loc = root.findViewById(R.id.manage_add_loc);
         bkey = root.findViewById(R.id.manage_add_bkey);
         height = root.findViewById(R.id.manage_add_height);
+        String[] blindinstance;
         loc.setVisibility(View.INVISIBLE);
         bkey.setVisibility(View.INVISIBLE);
         height.setVisibility(View.INVISIBLE);
@@ -82,6 +87,13 @@ public class ManageFragment extends Fragment {
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
         Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
+        Log.i(TAG,set.toString());
+        blindinstance = set.toArray(new String[0]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, blindinstance);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = root.findViewById(R.id.manage_delete_select);
+        sItems.setAdapter(adapter);
         System.out.println("manage"+ set.toString());
 
         return root;

@@ -64,7 +64,7 @@ public class ManageFragment extends Fragment {
                 height.getText().clear();
                 selectblind.setVisibility(View.GONE);
                 delete.setBackgroundColor(Color.GRAY);
-                add.setBackgroundColor(Color.WHITE);
+                add.setBackgroundColor(Color.GREEN);
             }
         });
         delete.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +74,7 @@ public class ManageFragment extends Fragment {
                 bkey.setVisibility(View.INVISIBLE);
                 height.setVisibility(View.INVISIBLE);
                 selectblind.setVisibility(View.VISIBLE);
-                delete.setBackgroundColor(Color.WHITE);
+                delete.setBackgroundColor(Color.GREEN);
                 add.setBackgroundColor(Color.GRAY);
             }
         });

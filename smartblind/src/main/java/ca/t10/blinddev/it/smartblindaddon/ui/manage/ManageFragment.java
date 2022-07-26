@@ -44,12 +44,18 @@ public class ManageFragment extends Fragment {
         loc = root.findViewById(R.id.manage_add_loc);
         bkey = root.findViewById(R.id.manage_add_bkey);
         height = root.findViewById(R.id.manage_add_height);
-
+        loc.setVisibility(View.INVISIBLE);
+        bkey.setVisibility(View.INVISIBLE);
+        height.setVisibility(View.INVISIBLE);
+        selectblind.setVisibility(View.GONE);
         applySettings();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loc.setVisibility(View.VISIBLE);
+                bkey.setVisibility(View.VISIBLE);
+                height.setVisibility(View.VISIBLE);
                 loc.getText().clear();
                 bkey.getText().clear();
                 height.getText().clear();

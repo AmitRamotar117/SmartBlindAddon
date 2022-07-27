@@ -28,8 +28,11 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.Set;
@@ -147,7 +150,7 @@ public class ScheduleFragment extends Fragment {
                         }else{
                             operation = "Open";
                         }
-                       // String location="";
+
 
                       sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -161,7 +164,8 @@ public class ScheduleFragment extends Fragment {
                         });
 
                        String location = String.valueOf(sItems.getSelectedItem());
-                       // DatabaseReference ref = FirebaseDatabase.getInstance().getReference(location);
+                      // String location = "";
+
 
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
                             // if the text fields are empty
@@ -172,7 +176,8 @@ public class ScheduleFragment extends Fragment {
                             // data to our database.
                             //blindkey = "0002";
                             addDatatoFirebase(operation, time, date,location,blindkey);
-                           // showLocation(location);
+                           // getDataFromFirebase();
+
                         }
                     }
                 });
@@ -235,35 +240,26 @@ public class ScheduleFragment extends Fragment {
 
 
    }
-   /*public void showLocation(String location){
-        scheduleInfo.setLocation(location);
-       dRef.child(blindkey).child("Location").addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot snapshot) {
-               // this method is call to get the realtime
-               // updates in the data.
-               // this method is called when the data is
-               // changed in our Firebase console.
-               // below line is for getting the data from
-               // snapshot of our database.
-               String value = snapshot.getValue(String.class);
 
-               // after getting the value we are setting
-               // our value to our text view in below line.
-               retrieveTV.setText(value);
-           }
-
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-               // calling on cancelled method when we receive
-               // any error or we are not able to get the data.
-               Toast.makeText(getActivity(), "Fail to get data.", Toast.LENGTH_SHORT).show();
-           }
-       });
-   }*/
+/*private void getDataFromFirebase(){
 
 
 
+    dRef.child(blindkey).child("Location").addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                String lo = singleSnapshot.getValue(String.class);
+                retrieveTV.setText("Location:" + " "+ lo);
+
+            }
+        }
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e(TAG, "onCancelled", databaseError.toException());
+        }
+    });
+}*/
 
 
 

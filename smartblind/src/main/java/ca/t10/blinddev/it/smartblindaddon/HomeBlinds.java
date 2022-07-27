@@ -3,6 +3,8 @@ package ca.t10.blinddev.it.smartblindaddon;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 // recyclerview on the homepage
+//Chris Mutuc n01314607
+
 
 public class HomeBlinds {
     DatabaseReference ref;

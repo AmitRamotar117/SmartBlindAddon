@@ -1,5 +1,6 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.manage;
 //Vyacheslav Perepelytsya n01133953
+//Chris Mutuc n01314607
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;

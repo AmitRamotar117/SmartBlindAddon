@@ -176,7 +176,7 @@ public class ScheduleFragment extends Fragment {
                             // data to our database.
                             //blindkey = "0002";
                             addDatatoFirebase(operation, time, date,location,blindkey);
-                            getDataFromFirebase();
+                           // getDataFromFirebase();
 
                         }
                     }
@@ -241,7 +241,7 @@ public class ScheduleFragment extends Fragment {
 
    }
 
-private void getDataFromFirebase(){
+/*private void getDataFromFirebase(){
 
 
 
@@ -259,7 +259,7 @@ private void getDataFromFirebase(){
             Log.e(TAG, "onCancelled", databaseError.toException());
         }
     });
-}
+}*/
 
 
 

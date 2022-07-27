@@ -1,6 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 //Amit Punit n01203930
 //Vyacheslav Perepelytsya n01133953
+//Chris Mutuc n01314607
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;

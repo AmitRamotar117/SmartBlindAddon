@@ -1,5 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.home;
 //Amit Punit n01203930
+//Chris Mutuc n01314607
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;

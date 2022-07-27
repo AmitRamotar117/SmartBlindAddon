@@ -1,6 +1,6 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Chris Mutuc n01314607
-
+//Amit Punit n01203930
 public class User {
     public String name, email;
 

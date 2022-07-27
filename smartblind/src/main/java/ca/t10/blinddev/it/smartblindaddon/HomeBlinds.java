@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 // recyclerview on the homepage
 //Chris Mutuc n01314607
+//Amit Punit n01203930
 
 
 public class HomeBlinds {
@@ -19,7 +20,8 @@ public class HomeBlinds {
 
 
 
-
+    //when this method is called it will set the status node of the blind to open which is then read
+    // by the device
     public void openBlinds(){
         ref.child("Status").setValue("open");
     }

@@ -1,5 +1,6 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Chris Mutuc N01314607
+//Amit Punit n01203930
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.HomeViewHolder> {
     ArrayList<HomeBlinds> testblinds;
-    static Context context;
+    Context context;
     TextView loc,light,temp;
     Button open,close;
     String location;

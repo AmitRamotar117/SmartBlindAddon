@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 //Chris Mutuc n01314607
+// Amit Punit n01203930
 public class SettingsActivity extends AppCompatActivity {
     Switch portrait, notification,dark;
     RadioGroup textsize;

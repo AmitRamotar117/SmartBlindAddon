@@ -1,5 +1,5 @@
 //Chris Mutuc N01314607
-
+//Amit Punit n01203930
 package ca.t10.blinddev.it.smartblindaddon;
 
 public class Schedule {

@@ -48,7 +48,7 @@
         android:layout_marginTop="206dp"
         android:layout_toEndOf="@+id/in_date"
         android:layout_toRightOf="@+id/in_date"
-        android:text="SELECT DATE"
+        android:text="@string/schedule_select_date"
         app:layout_constraintStart_toEndOf="@+id/in_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

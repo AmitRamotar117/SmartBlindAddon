@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,13 +30,15 @@ import java.util.regex.Pattern;
 public class NewUserActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
-    View view;
+    Context view;
     EditText editTextName,editTextEmail,editTextPassword,editTextConfirm;
     Button sub;
     ImageButton back;
+    RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
+        view = getApplication().getApplicationContext();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
@@ -74,7 +77,7 @@ public class NewUserActivity extends AppCompatActivity {
 
         if(d){enableDarkMode();}
         if(n){
-            BlindNotifications bl = new BlindNotifications(view.getContext());
+            BlindNotifications bl = new BlindNotifications(getApplicationContext());
             //this method will allow developer to create message for notification
             bl.enableNotifications("this is from new user fragment");
             //this function will launch the notification.
@@ -87,7 +90,6 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     private void enableDarkMode() {
-        view.setBackgroundColor(getResources().getColor(R.color.dark_grey));
         editTextName.setTextColor(getResources().getColor(R.color.white));
         editTextName.setHintTextColor(getResources().getColor(R.color.white));
 
@@ -96,14 +98,10 @@ public class NewUserActivity extends AppCompatActivity {
 
         editTextPassword.setTextColor(getResources().getColor(R.color.white));
         editTextPassword.setHintTextColor(getResources().getColor(R.color.white));
-
-
     }
 
     public void setTextSize(int size){
         sub.setTextSize(size);
-        //TODO
-        //add code for spinner when implemented
     }
 
     private void registerUser()

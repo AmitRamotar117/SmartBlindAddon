@@ -71,6 +71,12 @@
     <string name="no_internet">Please connect to the internet to see blinds or see troubleshooting to guidance</string>
     <string name="no_user">Please Login to see blinds</string>
     <string name="no_users">Please Login to see Blinds</string>
+    <string name="schedule_select_date">SELECT DATE</string>
+    <string name="new_user_name">Name</string>
+    <string name="new_user_enter_email">Enter Email</string>
+    <string name="new_user_enter_password">Enter Password</string>
+    <string name="new_user_confirm_password">Confirm Password</string>
+    <string name="new_user_submit_new_user">Submit New User</string>
 
 
     <string-array name="contact_emails">

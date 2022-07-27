@@ -1,4 +1,5 @@
 package ca.t10.blinddev.it.smartblindaddon;
+//Chris Mutuc n01314607
 
 import androidx.appcompat.app.AppCompatActivity;
 

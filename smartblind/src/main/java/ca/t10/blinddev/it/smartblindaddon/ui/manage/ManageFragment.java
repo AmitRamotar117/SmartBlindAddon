@@ -84,6 +84,20 @@ public class ManageFragment extends Fragment {
 
         blindInfo = new BlindInfo();
 
+        // here is how to get user owned blinds keys from shared preferences
+        //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        //data is in here
+        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
+        Log.i(TAG,set.toString());
+        blindinstance = set.toArray(new String[0]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, blindinstance);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner sItems = root.findViewById(R.id.manage_delete_select);
+
+        sItems.setAdapter(adapter);
+        System.out.println("manage"+ set.toString());
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,6 +132,9 @@ public class ManageFragment extends Fragment {
             public void onClick(View view) {
                 if (delete.isActivated()){
                     //code here
+                    addRefToUser.child(selectBlind.getSelectedItem().toString()).setValue("deleted");
+                    //refresh the spinner
+                    sItems.setAdapter(adapter);
                 }
                 else if (add.isActivated()) {
                     //code here
@@ -139,6 +156,7 @@ public class ManageFragment extends Fragment {
                     }
                 }
             }
+
             private void addDatatoFirebase(String location, String blindKey, String blindHeight) {
                 // below 3 lines of code are used to set data in our object class.
                 blindInfo.setLocation(location);
@@ -164,19 +182,6 @@ public class ManageFragment extends Fragment {
                 addToBlind.child("Temperature").setValue(String.valueOf(Math.floor(Math.random() * 100)));
             }
         });
-        // here is how to get user owned blinds keys from shared preferences
-        //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
-        //data is in here
-        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
-        Log.i(TAG,set.toString());
-        blindinstance = set.toArray(new String[0]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, blindinstance);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner sItems = root.findViewById(R.id.manage_delete_select);
-
-        sItems.setAdapter(adapter);
-        System.out.println("manage"+ set.toString());
 
         return root;
     }

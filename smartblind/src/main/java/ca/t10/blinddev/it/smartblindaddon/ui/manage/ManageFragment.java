@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
 import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindInfo;
@@ -139,19 +140,28 @@ public class ManageFragment extends Fragment {
                 }
             }
             private void addDatatoFirebase(String location, String blindKey, String blindHeight) {
-                // below 3 lines of code is used to set
-                // data in our object class.
+                // below 3 lines of code are used to set data in our object class.
                 blindInfo.setLocation(location);
                 blindInfo.setKey(blindKey);
                 blindInfo.setHeight(blindHeight);
 
+                //read values user entered
                 addRefToUser.child(blindKey).setValue(blindKey);
                 addToBlind.setValue(blindKey);
-                addToBlind.child("location").setValue(location);
-                addToBlind.child("height").setValue(blindHeight);
+                addToBlind.child("Location").setValue(location);
+                addToBlind.child("Height").setValue(blindHeight);
 
-                // we are use add value event listener method
-                // which is called with database reference.
+                //create random values
+                // to be used from device later
+                String [] arr = {"close", "open"};
+                Random random = new Random();
+
+                // randomly selects an index from the arr
+                int select = random.nextInt(arr.length);
+
+                addToBlind.child("Status").setValue(arr[select]);
+                addToBlind.child("Light").setValue(String.valueOf(Math.floor(Math.random() * 100)));
+                addToBlind.child("Temperature").setValue(String.valueOf(Math.floor(Math.random() * 100)));
             }
         });
         // here is how to get user owned blinds keys from shared preferences

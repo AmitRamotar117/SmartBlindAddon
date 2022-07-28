@@ -62,7 +62,7 @@ public class ManageFragment extends Fragment {
         loc = root.findViewById(R.id.manage_add_loc);
         bkey = root.findViewById(R.id.manage_add_bkey);
         height = root.findViewById(R.id.manage_add_height);
-        String[] blindinstance;
+        String[] blindInstance;
         loc.setVisibility(View.INVISIBLE);
         bkey.setVisibility(View.INVISIBLE);
         height.setVisibility(View.INVISIBLE);
@@ -84,19 +84,21 @@ public class ManageFragment extends Fragment {
 
         blindInfo = new BlindInfo();
 
+
         // here is how to get user owned blinds keys from shared preferences
         //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
-        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
-        Log.i(TAG,set.toString());
-        blindinstance = set.toArray(new String[0]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, blindinstance);
+        Set<String> set = sharedPreferences.getStringSet("blinds_owned", null);
+        Log.i(TAG, set.toString());
+        blindInstance = set.toArray(new String[0]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, blindInstance);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = root.findViewById(R.id.manage_delete_select);
 
         sItems.setAdapter(adapter);
-        System.out.println("manage"+ set.toString());
+        System.out.println("manage" + set.toString());
+
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,9 +134,7 @@ public class ManageFragment extends Fragment {
             public void onClick(View view) {
                 if (delete.isActivated()){
                     //code here
-                    addRefToUser.child(selectBlind.getSelectedItem().toString()).setValue("deleted");
-                    //refresh the spinner
-                    sItems.setAdapter(adapter);
+                    addRefToUser.child(selectBlind.getSelectedItem().toString()).removeValue();
                 }
                 else if (add.isActivated()) {
                     //code here

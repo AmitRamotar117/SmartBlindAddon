@@ -2,11 +2,13 @@ package ca.t10.blinddev.it.smartblindaddon.ui.manage;
 //Vyacheslav Perepelytsya n01133953
 //Chris Mutuc n01314607
 //Amit Punit n01203930
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -129,12 +131,15 @@ public class ManageFragment extends Fragment {
                 add.setActivated(false);
             }
         });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (delete.isActivated()){
                     //code here
                     addRefToUser.child(selectBlind.getSelectedItem().toString()).removeValue();
+                    refreshFragment();
+                    Toast.makeText(getActivity(), "Blind Successfully Deleted!", Toast.LENGTH_SHORT).show();
                 }
                 else if (add.isActivated()) {
                     //code here
@@ -153,6 +158,8 @@ public class ManageFragment extends Fragment {
                     } else {
                         // else call the method to add data to firebase
                         addDatatoFirebase(location, blindKey, blindHeight);
+                        refreshFragment();
+                        Toast.makeText(getActivity(), "Blind Successfully added!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -180,12 +187,16 @@ public class ManageFragment extends Fragment {
                 addToBlind.child("Status").setValue(arr[select]);
                 addToBlind.child("Light").setValue(String.valueOf(Math.floor(Math.random() * 100)));
                 addToBlind.child("Temperature").setValue(String.valueOf(Math.floor(Math.random() * 100)));
+
             }
         });
 
         return root;
     }
 
+    private void refreshFragment(){
+        //to be done
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

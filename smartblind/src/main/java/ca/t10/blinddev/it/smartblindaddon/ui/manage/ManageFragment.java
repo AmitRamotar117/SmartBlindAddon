@@ -75,15 +75,11 @@ public class ManageFragment extends Fragment {
         String userID = sharedPreferences.getString("user_key","");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        dRef = firebaseDatabase.getReference();
+        //dRef = firebaseDatabase.getReference();
 
         //this is to add blinds to user profile
         // .child(blindkey)..setValue(blindkey); use this to add blinds to user profile
         addRefToUser = firebaseDatabase.getReference("Users").child(userID).child("Owned");
-
-        //this reference is for saving data to the blind itself
-        // .child("Height").setValue(blind height)
-        addToBlind = firebaseDatabase.getReference("blind key goes here");
 
         blindInfo = new BlindInfo();
 
@@ -129,6 +125,10 @@ public class ManageFragment extends Fragment {
                     String blindKey = bkey.getText().toString();
                     String blindHeight = height.getText().toString();
 
+                    //this reference is for saving data to the blind itself
+                    // .child("Height").setValue(blind height)
+                    addToBlind = firebaseDatabase.getReference(blindKey);
+
                     if (TextUtils.isEmpty(location) || TextUtils.isEmpty(blindKey) || TextUtils.isEmpty(blindHeight)) {
                         // if no data show message to fill data
                         Toast.makeText(getActivity(), "Please fill in blind data.", Toast.LENGTH_SHORT).show();
@@ -145,9 +145,10 @@ public class ManageFragment extends Fragment {
                 blindInfo.setKey(blindKey);
                 blindInfo.setHeight(blindHeight);
 
-                dRef.setValue(blindKey);
-                dRef.child(blindKey).child("location").setValue(location);
-                dRef.child(blindKey).child("height").setValue(blindHeight);
+                addRefToUser.child(blindKey).setValue(blindKey);
+                addToBlind.setValue(blindKey);
+                addToBlind.child("location").setValue(location);
+                addToBlind.child("height").setValue(blindHeight);
 
                 // we are use add value event listener method
                 // which is called with database reference.

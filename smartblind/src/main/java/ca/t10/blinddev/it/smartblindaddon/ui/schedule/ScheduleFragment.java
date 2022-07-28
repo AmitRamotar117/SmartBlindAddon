@@ -182,7 +182,7 @@ public class ScheduleFragment extends Fragment {
                                 retrieveTV.setText("Location:" + " " + lo);
                                 temp = lo;
 
-                                Toast.makeText(getActivity(),lo+"test",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
                             }
 
                             @Override

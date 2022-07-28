@@ -163,7 +163,7 @@ public class ScheduleFragment extends Fragment {
 
 
 
-                               // retrieveTV.setText(location);
+
 
 
                             }

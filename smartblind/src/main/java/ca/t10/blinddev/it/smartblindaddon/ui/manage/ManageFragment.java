@@ -29,8 +29,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Set;
 
+import ca.t10.blinddev.it.smartblindaddon.BlindInfo;
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
-import ca.t10.blinddev.it.smartblindaddon.MainActivity;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
 import static android.content.ContentValues.TAG;
@@ -38,8 +38,11 @@ import static android.content.ContentValues.TAG;
 public class ManageFragment extends Fragment {
     private View root;
     private ManageViewModel mViewModel;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference dRef;
+    BlindInfo blindInfo;
     Button delete,add,submit;
-    Spinner selectblind;
+    Spinner selectBlind;
     EditText loc,bkey,height;
 
     public static ManageFragment newInstance() {
@@ -49,11 +52,12 @@ public class ManageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         root = inflater.inflate(R.layout.fragment_manage, container, false);
         delete = root.findViewById(R.id.manage_delete_btn);
         add = root.findViewById(R.id.manage_add_btn);
         submit = root.findViewById(R.id.manage_submit_btn);
-        selectblind = root.findViewById(R.id.manage_delete_select);
+        selectBlind = root.findViewById(R.id.manage_delete_select);
         loc = root.findViewById(R.id.manage_add_loc);
         bkey = root.findViewById(R.id.manage_add_bkey);
         height = root.findViewById(R.id.manage_add_height);
@@ -61,10 +65,16 @@ public class ManageFragment extends Fragment {
         loc.setVisibility(View.INVISIBLE);
         bkey.setVisibility(View.INVISIBLE);
         height.setVisibility(View.INVISIBLE);
-        selectblind.setVisibility(View.GONE);
+        selectBlind.setVisibility(View.GONE);
         delete.setBackgroundColor(Color.GRAY);
         add.setBackgroundColor(Color.GRAY);
+
         applySettings();
+
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        dRef = firebaseDatabase.getReference();
+        blindInfo = new BlindInfo();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +85,7 @@ public class ManageFragment extends Fragment {
                 loc.getText().clear();
                 bkey.getText().clear();
                 height.getText().clear();
-                selectblind.setVisibility(View.GONE);
+                selectBlind.setVisibility(View.GONE);
                 delete.setBackgroundColor(Color.GRAY);
                 add.setBackgroundColor(Color.GREEN);
                 delete.setActivated(false);
@@ -88,7 +98,7 @@ public class ManageFragment extends Fragment {
                 loc.setVisibility(View.INVISIBLE);
                 bkey.setVisibility(View.INVISIBLE);
                 height.setVisibility(View.INVISIBLE);
-                selectblind.setVisibility(View.VISIBLE);
+                selectBlind.setVisibility(View.VISIBLE);
                 delete.setBackgroundColor(Color.GREEN);
                 add.setBackgroundColor(Color.GRAY);
                 delete.setActivated(true);
@@ -105,17 +115,31 @@ public class ManageFragment extends Fragment {
                     //code here
                     // getting text
                     String location = loc.getText().toString();
-                    String blindkey = bkey.getText().toString();
-                    String blindheight = height.getText().toString();
+                    String blindKey = bkey.getText().toString();
+                    String blindHeight = height.getText().toString();
 
-                    if (TextUtils.isEmpty(location) || TextUtils.isEmpty(blindkey) || TextUtils.isEmpty(blindheight)) {
+                    if (TextUtils.isEmpty(location) || TextUtils.isEmpty(blindKey) || TextUtils.isEmpty(blindHeight)) {
                         // if no data show message to fill data
                         Toast.makeText(getActivity(), "Please fill in blind data.", Toast.LENGTH_SHORT).show();
                     } else {
                         // else call the method to add data to firebase
-                        //addDatatoFirebase(loc, bkey, height);
+                        addDatatoFirebase(location, blindKey, blindHeight);
                     }
                 }
+            }
+            private void addDatatoFirebase(String location, String blindKey, String blindHeight) {
+                // below 3 lines of code is used to set
+                // data in our object class.
+                blindInfo.setLocation(location);
+                blindInfo.setKey(blindKey);
+                blindInfo.setHeight(blindHeight);
+
+                dRef.setValue(blindKey);
+                dRef.child(blindKey).child("location").setValue(location);
+                dRef.child(blindKey).child("height").setValue(blindHeight);
+
+                // we are use add value event listener method
+                // which is called with database reference.
             }
         });
         // here is how to get user owned blinds keys from shared preferences
@@ -128,6 +152,7 @@ public class ManageFragment extends Fragment {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = root.findViewById(R.id.manage_delete_select);
+
         sItems.setAdapter(adapter);
         System.out.println("manage"+ set.toString());
 

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
+import ca.t10.blinddev.it.smartblindaddon.MainActivity;
 import ca.t10.blinddev.it.smartblindaddon.R;
 
 import static android.content.ContentValues.TAG;
@@ -95,8 +101,20 @@ public class ManageFragment extends Fragment {
                 if (delete.isActivated()){
                     //code here
                 }
-                else if (add.isActivated()){
+                else if (add.isActivated()) {
                     //code here
+                    // getting text
+                    String location = loc.getText().toString();
+                    String blindkey = bkey.getText().toString();
+                    String blindheight = height.getText().toString();
+
+                    if (TextUtils.isEmpty(location) || TextUtils.isEmpty(blindkey) || TextUtils.isEmpty(blindheight)) {
+                        // if no data show message to fill data
+                        Toast.makeText(getActivity(), "Please fill in blind data.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // else call the method to add data to firebase
+                        //addDatatoFirebase(loc, bkey, height);
+                    }
                 }
             }
         });
@@ -115,6 +133,7 @@ public class ManageFragment extends Fragment {
 
         return root;
     }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -155,5 +174,4 @@ public class ManageFragment extends Fragment {
         bkey.setHintTextColor(getResources().getColor(R.color.white));
         height.setHintTextColor(getResources().getColor(R.color.white));
     }
-
 }

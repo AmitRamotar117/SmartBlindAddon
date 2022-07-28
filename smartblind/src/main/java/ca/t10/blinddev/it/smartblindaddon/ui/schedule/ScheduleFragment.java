@@ -175,29 +175,21 @@ public class ScheduleFragment extends Fragment {
 
                         String blindkey = String.valueOf(sItems.getSelectedItem());
                         dRef =firebaseDatabase.getReference(blindkey);
-                        dRef.child("Location").addListenerForSingleValueEvent(new ValueEventListener() {
+                        dRef.child("Location").addValueEventListener(new ValueEventListener() {
                             @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                                    String lo = singleSnapshot.getValue(String.class);
-                                    retrieveTV.setText("Location:" + " "+ lo);
-                                    temp = lo;
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String lo = snapshot.getValue(String.class);
+                                retrieveTV.setText("Location:" + " " + lo);
+                                temp = lo;
 
-                                    Toast.makeText(getActivity(),lo+"test",Toast.LENGTH_SHORT).show();
-
-                                }
+                                Toast.makeText(getActivity(),lo+"test",Toast.LENGTH_SHORT).show();
                             }
+
                             @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                Log.e(TAG, "onCancelled", databaseError.toException());
-                                retrieveTV.setText("Empty");
+                            public void onCancelled(@NonNull DatabaseError error) {
+
                             }
                         });
-
-
-
-
-
 
 
                         if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)) {

@@ -46,7 +46,7 @@ public class ScheduleFragment extends Fragment {
 
     private ScheduleViewModel mViewModel;
     private View view;
-    Spinner blist;
+
     Button submit,date,time;
     Switch opt;
     private FirebaseDatabase firebaseDatabase;
@@ -54,8 +54,9 @@ public class ScheduleFragment extends Fragment {
     private Schedule scheduleInfo;
     EditText indate,intime;
     TextView retrieveTV;
-    private String[] location;
-    String blindkey;
+
+    private String[] locationKey;
+    String temp;
     private int mYear, mMonth, mDay, mHour, mMinute;
     private static final String TAG = "MyActivity";
     public static ScheduleFragment newInstance() {
@@ -72,7 +73,7 @@ public class ScheduleFragment extends Fragment {
         //data is in here
        Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
         Log.i(TAG,set.toString());
-        location =set.toArray(new String[0]);
+        locationKey =set.toArray(new String[0]);
 
 
         opt = view.findViewById(R.id.schedule_op);
@@ -82,16 +83,17 @@ public class ScheduleFragment extends Fragment {
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
-        retrieveTV = view.findViewById(R.id.schedule_location);
+        retrieveTV = view.findViewById(R.id.schedule_location_tv);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, location);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, locationKey);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = view.findViewById(R.id.schedule_blinds);
         sItems.setAdapter(adapter);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        dRef =firebaseDatabase.getReference();
+
 
         scheduleInfo = new Schedule();
         date.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +158,13 @@ public class ScheduleFragment extends Fragment {
                       sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                String blindkey = String.valueOf(sItems.getSelectedItem());
+                                dRef =firebaseDatabase.getReference(blindkey);
+
+
+
+                               // retrieveTV.setText(location);
+
 
                             }
 
@@ -164,20 +173,43 @@ public class ScheduleFragment extends Fragment {
                             }
                         });
 
-                       String location = String.valueOf(sItems.getSelectedItem());
-                      // String location = "";
+                        String blindkey = String.valueOf(sItems.getSelectedItem());
+                        dRef =firebaseDatabase.getReference(blindkey);
+                        dRef.child("Location").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                                    String lo = singleSnapshot.getValue(String.class);
+                                    retrieveTV.setText("Location:" + " "+ lo);
+                                    temp = lo;
+
+                                    Toast.makeText(getActivity(),lo+"test",Toast.LENGTH_SHORT).show();
+
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                Log.e(TAG, "onCancelled", databaseError.toException());
+                                retrieveTV.setText("Empty");
+                            }
+                        });
 
 
-                        if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)&& TextUtils.isEmpty(location)) {
+
+
+
+
+
+                        if (TextUtils.isEmpty(time) && TextUtils.isEmpty(date) && TextUtils.isEmpty(operation)) {
                             // if the text fields are empty
                             // then show the below message.
                             Toast.makeText(getActivity(), "Please add some data.", Toast.LENGTH_SHORT).show();
                         } else {
                             // else call the method to add
                             // data to our database.
-                            //blindkey = "0002";
-                            addDatatoFirebase(operation, time, date,location,blindkey);
-                           // getDataFromFirebase();
+
+                            addDatatoFirebase(operation, time, date,blindkey);
+                          // getDataFromFirebase();
 
                         }
                     }
@@ -227,40 +259,24 @@ public class ScheduleFragment extends Fragment {
         indate.setHintTextColor(getResources().getColor(R.color.white));
     }
 
-   private void addDatatoFirebase(String type, String time, String date, String blindkey ,String temp) {
+   private void addDatatoFirebase(String type, String time, String date, String blindkey ) {
 
        scheduleInfo.setDate(date);
        scheduleInfo.setOperation(type);
        scheduleInfo.setTime(time);
 
 
-       dRef.child(blindkey).child("Schedule").child("date").setValue(date);
-       dRef.child(blindkey).child("Schedule").child("time").setValue(time);
-       dRef.child(blindkey).child("Schedule").child("operation").setValue(type);
+       dRef.child("Schedule").child("date").setValue(date);
+       dRef.child("Schedule").child("time").setValue(time);
+       dRef.child("Schedule").child("operation").setValue(type);
+
 
 
 
    }
 
-/*private void getDataFromFirebase(){
 
 
-
-    dRef.child(blindkey).child("Location").addListenerForSingleValueEvent(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                String lo = singleSnapshot.getValue(String.class);
-                retrieveTV.setText("Location:" + " "+ lo);
-
-            }
-        }
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            Log.e(TAG, "onCancelled", databaseError.toException());
-        }
-    });
-}*/
 
 
 

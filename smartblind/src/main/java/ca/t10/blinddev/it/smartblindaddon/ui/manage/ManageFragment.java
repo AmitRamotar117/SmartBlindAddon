@@ -39,7 +39,7 @@ public class ManageFragment extends Fragment {
     private View root;
     private ManageViewModel mViewModel;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference dRef;
+    DatabaseReference dRef,addRefToUser,addToBlind;
     BlindInfo blindInfo;
     Button delete,add,submit;
     Spinner selectBlind;
@@ -71,9 +71,20 @@ public class ManageFragment extends Fragment {
 
         applySettings();
 
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        String userID = sharedPreferences.getString("user_key","");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         dRef = firebaseDatabase.getReference();
+
+        //this is to add blinds to user profile
+        // .child(blindkey)..setValue(blindkey); use this to add blinds to user profile
+        addRefToUser = firebaseDatabase.getReference("Users").child(userID).child("Owned");
+
+        //this reference is for saving data to the blind itself
+        // .child("Height").setValue(blind height)
+        addToBlind = firebaseDatabase.getReference("blind key goes here");
+
         blindInfo = new BlindInfo();
 
         add.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +154,7 @@ public class ManageFragment extends Fragment {
             }
         });
         // here is how to get user owned blinds keys from shared preferences
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
+        //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
         Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
         Log.i(TAG,set.toString());

@@ -5,6 +5,7 @@ import com.google.firebase.database.FirebaseDatabase;
 // recyclerview on the homepage
 //Chris Mutuc n01314607
 //Amit Punit n01203930
+//Andrew Fraser N01309442
 
 
 public class HomeBlinds {

@@ -1,6 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Chris Mutuc n01314607
 //Amit Punit n01203930
+//Andrew Fraser N01309442
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

@@ -1,6 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon;
 //Amit Punit n01203930
 //Chris Mutuc N01314607
+//Andrew Fraser N01309442
 
 import android.app.Notification;
 import android.app.NotificationChannel;

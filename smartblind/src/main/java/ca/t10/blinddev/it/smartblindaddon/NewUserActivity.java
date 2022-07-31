@@ -112,7 +112,7 @@ public class NewUserActivity extends AppCompatActivity {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
         String confirm = editTextConfirm.getText().toString().trim();
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar1);
 
         if (name.isEmpty())
         {

@@ -59,4 +59,23 @@
     <string name="blind_height">Hauteur aveugle</string>
     <string name="new_user">nouvel utilisateur</string>
     <string name="register">Sinscrire</string>
+    <string name="schedule_submit">Soumettre</string>
+    <string name="schedule_select_time">SÉLECTIONNER L HEURE</string>
+    <string name="name_error">Le nom complet est requis!</string>
+    <string name="email_error">Adresse e-mail est nécessaire!</string>
+    <string name="password_error">Mot de passe requis!</string>
+    <string name="open">Ouverte: </string>
+    <string name="closing">Fermeture: </string>
+    <string name="loc">Emplacement: </string>
+    <string name="temp">Température: </string>
+    <string name="li">Lumière: </string>
+    <string name="no_internet">Veuillez vous connecter à Internet pour voir les stores ou voir le dépannage pour obtenir des conseils</string>
+    <string name="no_user">Veuillez vous connecter pour voir les stores</string>
+    <string name="no_users">Veuillez vous connecter pour voir Stores</string>
+    <string name="schedule_select_date">SÉLECTIONNER UNE DATE</string>
+    <string name="new_user_name">Nom</string>
+    <string name="new_user_enter_email">Entrez l e-mail</string>
+    <string name="new_user_enter_password">Entrer le mot de passe</string>
+    <string name="new_user_confirm_password">Confirmez le mot de passe</string>
+    <string name="new_user_submit_new_user">Soumettre un nouvel utilisateur</string>
 </resources>

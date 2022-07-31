@@ -142,6 +142,37 @@ public class ScheduleFragment extends Fragment {
                         timePickerDialog.show();
                     }
                 });
+        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String blindkey = String.valueOf(sItems.getSelectedItem());
+                dRef =firebaseDatabase.getReference(blindkey);
+
+                dRef.child("Location").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String lo = snapshot.getValue(String.class);
+                        retrieveTV.setText("Location:" + " " + lo);
+                        temp = lo;
+
+                        Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
                 submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -155,23 +186,7 @@ public class ScheduleFragment extends Fragment {
                         }
 
 
-                      sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                String blindkey = String.valueOf(sItems.getSelectedItem());
-                                dRef =firebaseDatabase.getReference(blindkey);
 
-
-
-
-
-
-                            }
-
-                            @Override
-                            public void onNothingSelected(AdapterView<?> parent) {
-                            }
-                        });
 
                         String blindkey = String.valueOf(sItems.getSelectedItem());
                         dRef =firebaseDatabase.getReference(blindkey);

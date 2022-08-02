@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
 
 
 
-
+        testcase.clear();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(userID).child("Owned");
         ref.addValueEventListener(new ValueEventListener() {
             @Override

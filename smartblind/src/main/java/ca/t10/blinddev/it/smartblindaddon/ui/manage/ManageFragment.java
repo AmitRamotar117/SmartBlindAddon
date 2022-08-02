@@ -81,14 +81,13 @@ public class ManageFragment extends Fragment {
         //dRef = firebaseDatabase.getReference();
 
         //this is to add blinds to user profile
-        // .child(blindkey)..setValue(blindkey); use this to add blinds to user profile
+        // .child(blind key).setValue(blind key); use this to add blinds to user profile
         addRefToUser = firebaseDatabase.getReference("Users").child(userID).child("Owned");
 
         blindInfo = new BlindInfo();
 
 
         // here is how to get user owned blinds keys from shared preferences
-        //SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
         Set<String> set = sharedPreferences.getStringSet("blinds_owned", null);
         Log.i(TAG, set.toString());

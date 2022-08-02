@@ -92,14 +92,14 @@ public class NewUserActivity extends AppCompatActivity {
     }
 
     private void enableDarkMode() {
-        editTextName.setTextColor(getResources().getColor(R.color.white));
-        editTextName.setHintTextColor(getResources().getColor(R.color.white));
+        editTextName.setTextColor(getResources().getColor(R.color.white,null));
+        editTextName.setHintTextColor(getResources().getColor(R.color.white,null));
 
-        editTextEmail.setTextColor(getResources().getColor(R.color.white));
-        editTextEmail.setHintTextColor(getResources().getColor(R.color.white));
+        editTextEmail.setTextColor(getResources().getColor(R.color.white,null));
+        editTextEmail.setHintTextColor(getResources().getColor(R.color.white,null));
 
-        editTextPassword.setTextColor(getResources().getColor(R.color.white));
-        editTextPassword.setHintTextColor(getResources().getColor(R.color.white));
+        editTextPassword.setTextColor(getResources().getColor(R.color.white,null));
+        editTextPassword.setHintTextColor(getResources().getColor(R.color.white,null));
     }
 
     public void setTextSize(int size){

@@ -276,19 +276,19 @@ public class ContactFragment extends Fragment {
         submitBtn.setTextSize(size);
     }
     private void enableDarkMode() {
-        root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
+        root.setBackgroundColor(getResources().getColor(R.color.dark_grey,null));
 
-        nameText.setHintTextColor(getResources().getColor(R.color.white));
-        nameText.setTextColor(getResources().getColor(R.color.white));
+        nameText.setHintTextColor(getResources().getColor(R.color.white,null));
+        nameText.setTextColor(getResources().getColor(R.color.white,null));
 
-        emailText.setHintTextColor(getResources().getColor(R.color.white));
-        emailText.setTextColor(getResources().getColor(R.color.white));
+        emailText.setHintTextColor(getResources().getColor(R.color.white,null));
+        emailText.setTextColor(getResources().getColor(R.color.white,null));
 
-        phoneText.setHintTextColor(getResources().getColor(R.color.white));
-        phoneText.setTextColor(getResources().getColor(R.color.white));
+        phoneText.setHintTextColor(getResources().getColor(R.color.white,null));
+        phoneText.setTextColor(getResources().getColor(R.color.white,null));
 
-        feedBack.setHintTextColor(getResources().getColor(R.color.white));
-        feedBack.setTextColor(getResources().getColor(R.color.white));
+        feedBack.setHintTextColor(getResources().getColor(R.color.white,null));
+        feedBack.setTextColor(getResources().getColor(R.color.white,null));
     }
 
     @Override

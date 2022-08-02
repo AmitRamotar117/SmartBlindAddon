@@ -260,10 +260,11 @@ public class ScheduleFragment extends Fragment {
     time.setTextSize(size);
     }
     private void enableDarkMode() {
-        view.setBackgroundColor(getResources().getColor(R.color.dark_grey));
-        opt.setTextColor(getResources().getColor(R.color.white));
-        intime.setHintTextColor(getResources().getColor(R.color.white));
-        indate.setHintTextColor(getResources().getColor(R.color.white));
+        view.setBackgroundColor(getResources().getColor(R.color.dark_grey,null));
+        opt.setTextColor(getResources().getColor(R.color.white,null));
+        retrieveTV.setTextColor(getResources().getColor(R.color.white,null));
+        intime.setHintTextColor(getResources().getColor(R.color.white,null));
+        indate.setHintTextColor(getResources().getColor(R.color.white,null));
     }
 
    private void addDatatoFirebase(String type, String time, String date, String blindkey ) {

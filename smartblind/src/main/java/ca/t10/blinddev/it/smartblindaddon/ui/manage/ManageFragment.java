@@ -20,14 +20,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 import java.util.Set;
@@ -47,6 +52,7 @@ public class ManageFragment extends Fragment {
     Button delete,add,submit;
     Spinner selectBlind;
     EditText loc,bkey,height;
+    TextView retrieveTV;
 
     public static ManageFragment newInstance() {
         return new ManageFragment();
@@ -64,6 +70,8 @@ public class ManageFragment extends Fragment {
         loc = root.findViewById(R.id.manage_add_loc);
         bkey = root.findViewById(R.id.manage_add_bkey);
         height = root.findViewById(R.id.manage_add_height);
+        retrieveTV = root.findViewById(R.id.mange_blind_loc);
+
         String[] blindInstance;
         loc.setVisibility(View.INVISIBLE);
         bkey.setVisibility(View.INVISIBLE);
@@ -78,7 +86,7 @@ public class ManageFragment extends Fragment {
         String userID = sharedPreferences.getString("user_key","");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        //dRef = firebaseDatabase.getReference();
+        dRef = firebaseDatabase.getReference();
 
         //this is to add blinds to user profile
         // .child(blind key).setValue(blind key); use this to add blinds to user profile
@@ -124,6 +132,7 @@ public class ManageFragment extends Fragment {
                 bkey.setVisibility(View.INVISIBLE);
                 height.setVisibility(View.INVISIBLE);
                 selectBlind.setVisibility(View.VISIBLE);
+                retrieveTV.setVisibility(View.VISIBLE);
                 delete.setBackgroundColor(Color.GREEN);
                 add.setBackgroundColor(Color.GRAY);
                 delete.setActivated(true);
@@ -190,6 +199,33 @@ public class ManageFragment extends Fragment {
             }
         });
 
+        // this will display the location of the blind on the screen
+        sItems.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String k = sItems.getSelectedItem().toString();
+
+                dRef.child(k).child("Location").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String lo = snapshot.getValue(String.class);
+                        retrieveTV.setText("Location:" + " " + lo);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
         return root;
     }
 
@@ -231,9 +267,10 @@ public class ManageFragment extends Fragment {
         //add code for spinner when implemented
     }
     private void enableDarkMode() {
-        root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
-        loc.setHintTextColor(getResources().getColor(R.color.white));
-        bkey.setHintTextColor(getResources().getColor(R.color.white));
-        height.setHintTextColor(getResources().getColor(R.color.white));
+        root.setBackgroundColor(getResources().getColor(R.color.dark_grey,null));
+        loc.setHintTextColor(getResources().getColor(R.color.white,null));
+        bkey.setHintTextColor(getResources().getColor(R.color.white,null));
+        height.setHintTextColor(getResources().getColor(R.color.white,null));
+        retrieveTV.setTextColor(getResources().getColor(R.color.white,null));
     }
 }

@@ -121,6 +121,7 @@ public class ManageFragment extends Fragment {
                 selectBlind.setVisibility(View.GONE);
                 delete.setBackgroundColor(Color.GRAY);
                 add.setBackgroundColor(Color.GREEN);
+                retrieveTV.setVisibility(View.INVISIBLE);
                 delete.setActivated(false);
                 add.setActivated(true);
             }

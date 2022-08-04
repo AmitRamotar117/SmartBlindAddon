@@ -32,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -70,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SignIn();
+
             }
         });
 
@@ -80,14 +82,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 userLogin();
-                /*
-                if (editTextEmail.getText().toString().equals("admin") && editTextPassword.getText().toString().equals("admin")) {
-                    Toast.makeText(LoginActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_LONG).show();
-                    startMainActivity();
-                } else {
-                    Toast.makeText(LoginActivity.this, "LOGIN UNSUCCESSFUL", Toast.LENGTH_LONG).show();
-                }
-                */
 
             }
 
@@ -109,6 +103,33 @@ public class LoginActivity extends AppCompatActivity {
     public void SignIn() {
         Intent intent = gsc.getSignInIntent();
         startActivityForResult(intent, 100);
+
+        /*GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        mAuth.createUserWithEmailAndPassword(account.getEmail(), account.getDisplayName()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            String googleName = account.getDisplayName();
+            String googleEmail = account.getEmail();
+            User user = new User(googleName, googleEmail);
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseDatabase.getInstance().getReference("Users")
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "user has been registered successfully!", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Failed to register!", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                } else {
+                    Toast.makeText(LoginActivity.this, "User is already registered", Toast.LENGTH_LONG).show();
+                }
+            }
+        });*/
+
     }
 
     @Override
@@ -119,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task=GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 task.getResult(ApiException.class);
-
                 startMainActivity();
             } catch (ApiException e) {
                 Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();

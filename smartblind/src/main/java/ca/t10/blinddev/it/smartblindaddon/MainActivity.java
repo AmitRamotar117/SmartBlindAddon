@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -19,6 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -39,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     TextView displayName, displayMail;
     GoogleSignInOptions gso;
     GoogleSignInClient gsc;
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -57,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_contact,R.id.nav_manage,R.id.nav_schedule)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_contact, R.id.nav_manage, R.id.nav_schedule)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -79,15 +84,17 @@ public class MainActivity extends AppCompatActivity {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
-        if (account!= null)
-        {
+        if (account != null) {
             String Name = account.getDisplayName();
             String Mail = account.getEmail();
 
             displayName.setText(Name);
             displayMail.setText(Mail);
-        }
+
     }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

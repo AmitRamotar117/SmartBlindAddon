@@ -145,7 +145,7 @@ public class NewUserActivity extends AppCompatActivity {
             editTextConfirm.setError("Password does not match");
             editTextConfirm.requestFocus();
         }
-        else {
+        else if(isValidPassword(password) && !email.isEmpty()){
             progressBar.setVisibility(View.VISIBLE);
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override

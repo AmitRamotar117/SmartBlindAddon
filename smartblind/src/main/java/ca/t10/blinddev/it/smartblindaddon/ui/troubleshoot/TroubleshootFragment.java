@@ -3,7 +3,9 @@ package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 //Vyacheslav Perepelytsya n01133953
 //Chris Mutuc n01314607
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -127,14 +130,15 @@ public class TroubleshootFragment extends Fragment {
             public void onClick(View view) {
                 if (downloadedFile)
                 {
-                    Toast.makeText(getActivity(), "File Already Downloaded - Please go to downloads/troubleshoot.txt to view it", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "File Downloaded - Please open downloads/troubleshoot.txt to view it", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     downloadedFile = true;
                     downloadFile.start();
                     Toast.makeText(getActivity(), "File Downloading to downloads/troubleshoot.txt", Toast.LENGTH_SHORT).show();
+
                 }
-                //showFile();
+                showFile();
             }
         });
         applySettings();
@@ -222,28 +226,31 @@ public class TroubleshootFragment extends Fragment {
         }
     });
     // Open the File after Download Pseudocode
-    /*
+
     public void showFile() {
         try {
-            File file = new File(Environment.getExternalStorageDirectory()
-                    + "/Download/" + "Troubleshoot.txt");
+            File file = new File(Environment.getDataDirectory()
+                    + "/Download" + "/Troubleshoot.txt");
             if (!file.isDirectory())
                 file.mkdir();
             MimeTypeMap map = MimeTypeMap.getSingleton();
             String ext = MimeTypeMap.getFileExtensionFromUrl(file.getName());
             String type = map.getMimeTypeFromExtension(ext);
             if (type == null)
-               type = "*COMMENTED OUT/*";
+               type = "*/*";
 
-            Intent intent = new Intent(Intent.ACTION_VIEW);
             Uri data = Uri.fromFile(file);
 
-            intent.setDataAndType(data, type);
-
+            // Open file with user selected app
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setData(data);
+            intent.setType("*/*");
             startActivity(intent);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-     */
 }

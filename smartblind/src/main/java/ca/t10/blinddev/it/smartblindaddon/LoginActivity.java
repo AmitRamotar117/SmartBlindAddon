@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!isValidPassword(password))
         {
-            editTextPassword.setError("- at least 8 characters\n- at least 1 number\n- at least 1 special char\n- at least 1 uppercase\n- at least 1 lowercase");
+            editTextPassword.setError("- at least 8 characters\n- at least 1 number\n- at least 1 special char\n- at least 1 uppercase\n- at least 1 lowercase\n- can't contain '+' or '~'");
             editTextPassword.requestFocus();
             return;
         }

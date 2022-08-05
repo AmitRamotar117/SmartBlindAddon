@@ -55,6 +55,8 @@ public class TroubleshootFragment extends Fragment {
         instruct.setMovementMethod(new ScrollingMovementMethod());
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
 
+        applySettings();
+
         //Set initial instruction text
         instruct.setText("Please use the spinner or download the full troubleshooting document to resolve your issue");
         instruct.setTextSize(20);
@@ -141,7 +143,7 @@ public class TroubleshootFragment extends Fragment {
                 showFile();
             }
         });
-        applySettings();
+
         return root;
     }
 
@@ -172,8 +174,6 @@ public class TroubleshootFragment extends Fragment {
     }
 
     private void enableDarkMode() {
-        TextView title = root.findViewById(R.id.troubleshoot_title);
-        title.setTextColor(getResources().getColor(R.color.white));
         root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
         instruct.setTextColor(getResources().getColor(R.color.white));
     }

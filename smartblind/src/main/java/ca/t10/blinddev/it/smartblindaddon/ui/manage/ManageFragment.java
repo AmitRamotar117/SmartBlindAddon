@@ -272,6 +272,7 @@ public class ManageFragment extends Fragment {
         delete.setTextSize(size);
         add.setTextSize(size);
         submit.setTextSize(size);
+        retrieveTV.setTextSize(size);
         //TODO
         //add code for spinner when implemented
     }

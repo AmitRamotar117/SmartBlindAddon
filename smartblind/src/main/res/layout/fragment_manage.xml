@@ -38,9 +38,10 @@
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/manage_add_height"
-        app:layout_constraintVertical_bias="0.232" />
+        app:layout_constraintVertical_bias="0.208" />
 
     <Spinner
         android:id="@+id/manage_delete_select"
@@ -91,13 +92,14 @@
         android:id="@+id/mange_blind_loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="326dp"
         android:text=""
         android:textSize="20dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/manage_submit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.858" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

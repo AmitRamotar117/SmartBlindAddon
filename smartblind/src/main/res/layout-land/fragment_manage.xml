@@ -37,17 +37,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/manage_add_height"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/manage_add_height" />
+        app:layout_constraintTop_toBottomOf="@+id/manage_add_height"
+        app:layout_constraintVertical_bias="0.483" />
 
     <Spinner
         android:id="@+id/manage_delete_select"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="540dp"
+        android:layout_height="31dp"
         android:layout_marginTop="104dp"
 
         android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/manage_add_loc"
@@ -88,13 +90,15 @@
         android:id="@+id/mange_blind_loc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="364dp"
-        android:layout_marginTop="136dp"
         android:text=""
         android:textSize="20dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/manage_submit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.757" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

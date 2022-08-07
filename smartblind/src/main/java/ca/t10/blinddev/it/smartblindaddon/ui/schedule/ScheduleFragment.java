@@ -1,6 +1,7 @@
 package ca.t10.blinddev.it.smartblindaddon.ui.schedule;
 //Chris Mutuc N01314607
 //Amit Punit n01203930
+//Vyacheslav Perepelytsya n01133953
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
@@ -53,6 +54,7 @@ public class ScheduleFragment extends Fragment {
     private DatabaseReference dRef;
     private Schedule scheduleInfo;
     EditText indate,intime;
+    TextView title;
     TextView retrieveTV;
 
     private String[] locationKey;
@@ -83,15 +85,21 @@ public class ScheduleFragment extends Fragment {
         submit = view.findViewById(R.id.schedule_submit);
         date = view.findViewById(R.id.btn_date);
         time = view.findViewById(R.id.btn_time);
+        title = view.findViewById(R.id.schedule_title);
         retrieveTV = view.findViewById(R.id.schedule_location_tv);
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, locationKey);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = view.findViewById(R.id.schedule_blinds);
-        sItems.setAdapter(adapter);
-
+        //Create spinner style based on settings
+        if (sharedPreferences.getBoolean("dark",true)){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style, locationKey);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sItems.setAdapter(adapter);
+        }
+        else{
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style_default, locationKey);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sItems.setAdapter(adapter);
+        }
         firebaseDatabase = FirebaseDatabase.getInstance();
 
 
@@ -258,10 +266,12 @@ public class ScheduleFragment extends Fragment {
     submit.setTextSize(size);
     date.setTextSize(size);
     time.setTextSize(size);
+    retrieveTV.setTextSize(size);
     }
     private void enableDarkMode() {
         view.setBackgroundColor(getResources().getColor(R.color.dark_grey,null));
         opt.setTextColor(getResources().getColor(R.color.white,null));
+        title.setTextColor(getResources().getColor(R.color.white,null));
         retrieveTV.setTextColor(getResources().getColor(R.color.white,null));
         intime.setHintTextColor(getResources().getColor(R.color.white,null));
         indate.setHintTextColor(getResources().getColor(R.color.white,null));

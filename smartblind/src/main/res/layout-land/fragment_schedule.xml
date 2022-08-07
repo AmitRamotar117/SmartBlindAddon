@@ -8,46 +8,49 @@
     tools:context=".ui.schedule.ScheduleFragment">
 
     <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="336dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/schedule"
+        android:id="@+id/schedule_title"
+        android:layout_width="126dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="388dp"
+        android:layout_marginTop="20dp"
+        android:textSize="26dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/schedule_blinds"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_width="741dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.118" />
 
     <Button
         android:id="@+id/schedule_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="320dp"
-        android:layout_marginTop="337dp"
         android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/in_time"
+        app:layout_constraintVertical_bias="0.381" />
 
     <Button
         android:id="@+id/btn_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/in_date"
-        android:layout_marginStart="432dp"
-        android:layout_marginTop="161dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_toEndOf="@+id/in_date"
         android:layout_toRightOf="@+id/in_date"
         android:text="SELECT DATE"
         app:layout_constraintStart_toEndOf="@+id/in_date"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_op" />
 
     <Button
         android:id="@+id/btn_time"
@@ -56,11 +59,11 @@
         android:layout_below="@+id/btn_date"
         android:layout_alignStart="@+id/btn_date"
         android:layout_alignLeft="@+id/btn_date"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
         android:text="SELECT TIME"
         app:layout_constraintStart_toEndOf="@+id/in_time"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_date" />
 
     <EditText
         android:id="@+id/in_time"
@@ -69,22 +72,11 @@
         android:layout_below="@+id/in_date"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="248dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/schedule_op"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="8dp"
-        android:text="Open/Close"
-        android:textOff="Close"
-        android:textOn="Open"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/schedule_blinds" />
+        app:layout_constraintTop_toBottomOf="@+id/in_date"
+        app:layout_constraintVertical_bias="0.156" />
 
     <EditText
         android:id="@+id/in_date"
@@ -93,22 +85,38 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="224dp"
-        android:layout_marginTop="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_op"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <Switch
+        android:id="@+id/schedule_op"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Open/Close"
+        android:textOff="Close"
+        android:textOn="Open"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_blinds"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/schedule_location_tv"
-        android:layout_width="169dp"
-        android:layout_height="65dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text=""
         android:textAlignment="center"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.151"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
+        app:layout_constraintTop_toBottomOf="@+id/schedule_blinds"
+        app:layout_constraintVertical_bias="0.271" />
 </androidx.constraintlayout.widget.ConstraintLayout>

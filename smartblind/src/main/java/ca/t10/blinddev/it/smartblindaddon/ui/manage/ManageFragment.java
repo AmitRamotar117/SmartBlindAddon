@@ -231,7 +231,7 @@ public class ManageFragment extends Fragment {
     }
 
     private void refreshFragment(){
-        //to be done
+        //to be done, this would be to refresh fragment right away instead of on reload
     }
 
     @Override

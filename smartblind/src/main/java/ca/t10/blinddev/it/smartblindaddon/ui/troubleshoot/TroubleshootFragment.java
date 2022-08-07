@@ -225,7 +225,7 @@ public class TroubleshootFragment extends Fragment {
                 }
         }
     });
-    // Open the File after Download Pseudocode
+    // Open the File after Download
 
     public void showFile() {
         try {
@@ -233,11 +233,17 @@ public class TroubleshootFragment extends Fragment {
                     + "/Download" + "/Troubleshoot.txt");
             if (!file.isDirectory())
                 file.mkdir();
+            /*
+
+            // This would be the more specific function to map to the file type
+            // A mime type of all types is used rn for maximizing applications for the user to choose
+            
             MimeTypeMap map = MimeTypeMap.getSingleton();
             String ext = MimeTypeMap.getFileExtensionFromUrl(file.getName());
             String type = map.getMimeTypeFromExtension(ext);
             if (type == null)
-               type = "*/*";
+               type = "*COMMENTED OUT/*";
+            */
 
             Uri data = Uri.fromFile(file);
 

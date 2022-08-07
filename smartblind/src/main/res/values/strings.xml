@@ -78,6 +78,7 @@
     <string name="new_user_confirm_password">Confirm Password</string>
     <string name="new_user_submit_new_user">Submit New User</string>
     <string name="logout">Logout</string>
+    <string name="troubleshooting">Troubleshooting</string>
 
 
     <string-array name="contact_emails">

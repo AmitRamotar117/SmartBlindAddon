@@ -44,6 +44,20 @@
         app:layout_constraintTop_toBottomOf="@+id/troubleshoot_options"
         app:layout_constraintVertical_bias="0.12" />
 
+    <TextView
+        android:id="@+id/troubleshoot_title"
+        android:layout_width="182dp"
+        android:layout_height="26dp"
+        android:text="@string/troubleshooting"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/troubleshoot_options"
+        app:layout_constraintVertical_bias="0.846" />
+
     <ImageView
         android:id="@+id/troubleshoot_image"
         android:layout_width="126dp"

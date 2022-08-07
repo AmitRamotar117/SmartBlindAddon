@@ -5,6 +5,7 @@ package ca.t10.blinddev.it.smartblindaddon.ui.troubleshoot;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,17 +41,19 @@ import static android.content.ContentValues.TAG;
 
 public class TroubleshootFragment extends Fragment {
     TextView instruct;
+    TextView title;
     private View root;
     private FragmentTroubleshootBinding binding;
     private Button downloadBtn;
     Boolean downloadedFile = false;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         TroubleshootViewModel troubleshootViewModel =
                 new ViewModelProvider(this).get(TroubleshootViewModel.class);
         binding = FragmentTroubleshootBinding.inflate(inflater, container, false);
          root = binding.getRoot();
-
+        title = root.findViewById(R.id.troubleshoot_title);
         instruct = root.findViewById(R.id.troubleshoot_instruct);
         instruct.setMovementMethod(new ScrollingMovementMethod());
         ImageView timg = root.findViewById(R.id.troubleshoot_image);
@@ -63,23 +66,35 @@ public class TroubleshootFragment extends Fragment {
         timg.setImageResource(R.drawable.blinds_mount_measuring_1024x633);
 
         //Spinner initialization code
+
         String[] arraySpinner = new String[] { "Please select your issue...",
                 "Blinds are not visible/manageable/saved", "Login/Logout not working", "Application Crashes",
                 "Blinds do not open/close to the full extent", "Blinds do not move at all"
         };
         Spinner troubleshootSpinner = root.findViewById(R.id.troubleshoot_options);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
-                android.R.layout.simple_spinner_item, arraySpinner);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        troubleshootSpinner.setAdapter(adapter);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
+        if (sharedPreferences.getBoolean("dark",true)){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+                    R.layout.spinner_style, arraySpinner);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            troubleshootSpinner.setAdapter(adapter);
+        }
+        else {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
+                    android.R.layout.simple_spinner_item, arraySpinner);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            troubleshootSpinner.setAdapter(adapter);
+        }
+
         //Spinner selection code
+
         troubleshootSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1,
                                        int arg2, long arg3) {
                 // TODO Auto-generated method stub
-
                 String selItem = troubleshootSpinner.getItemAtPosition(arg2).toString();
 
                 if(selItem.equals("Please select your issue..."))
@@ -176,6 +191,7 @@ public class TroubleshootFragment extends Fragment {
     private void enableDarkMode() {
         root.setBackgroundColor(getResources().getColor(R.color.dark_grey));
         instruct.setTextColor(getResources().getColor(R.color.white));
+        title.setTextColor(getResources().getColor(R.color.white));
     }
 
     public void setTextSize(int size){

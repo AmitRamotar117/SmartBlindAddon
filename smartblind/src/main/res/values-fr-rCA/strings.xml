@@ -79,4 +79,5 @@
     <string name="new_user_confirm_password">Confirmez le mot de passe</string>
     <string name="new_user_submit_new_user">Soumettre un nouvel utilisateur</string>
     <string name="logout">Se déconnecter</string>
+    <string name="troubleshooting">Troubleshooting</string>
 </resources>

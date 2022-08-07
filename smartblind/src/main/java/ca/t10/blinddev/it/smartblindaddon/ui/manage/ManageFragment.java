@@ -100,14 +100,22 @@ public class ManageFragment extends Fragment {
         Set<String> set = sharedPreferences.getStringSet("blinds_owned", null);
         Log.i(TAG, set.toString());
         blindInstance = set.toArray(new String[0]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, blindInstance);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner sItems = root.findViewById(R.id.manage_delete_select);
 
-        sItems.setAdapter(adapter);
-        System.out.println("manage" + set.toString());
+        //Create spinner style based on settings
 
+        if (sharedPreferences.getBoolean("dark",true)){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style, blindInstance);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sItems.setAdapter(adapter);
+        }
+        else {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style_default, blindInstance);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            sItems.setAdapter(adapter);
+        }
+        System.out.println("manage" + set.toString());
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override

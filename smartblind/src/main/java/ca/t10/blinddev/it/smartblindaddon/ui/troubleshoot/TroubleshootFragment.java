@@ -82,7 +82,7 @@ public class TroubleshootFragment extends Fragment {
         }
         else {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(),
-                    android.R.layout.simple_spinner_item, arraySpinner);
+                    R.layout.spinner_style_default, arraySpinner);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             troubleshootSpinner.setAdapter(adapter);
         }

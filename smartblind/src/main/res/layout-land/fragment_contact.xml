@@ -52,18 +52,20 @@
 
     <EditText
         android:id="@+id/contactFeedbackText"
-        android:layout_width="245dp"
-        android:layout_height="95dp"
+        android:layout_width="304dp"
+        android:layout_height="44dp"
         android:ems="10"
         android:hint="@string/comment"
         android:inputType="textLongMessage|textMultiLine"
         android:text=""
+        android:textColor="@color/white"
+        android:textColorHint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.702" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <EditText
         android:id="@+id/contactNameText"
@@ -73,6 +75,8 @@
         android:hint="@string/name"
         android:inputType="textPersonName"
         android:text=""
+        android:textColor="@color/white"
+        android:textColorHint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.924"
@@ -87,6 +91,8 @@
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textColorHint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.928"
@@ -101,6 +107,8 @@
         android:ems="10"
         android:hint="@string/phone"
         android:inputType="phone"
+        android:textColor="@color/white"
+        android:textColorHint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.934"

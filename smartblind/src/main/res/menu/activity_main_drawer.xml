@@ -26,7 +26,7 @@
             android:title="@string/menu_schedule_blind" />
         <item
             android:id="@+id/nav_monitoring"
-            android:icon="@drawable/ic_schedule"
+            android:icon="@drawable/ic_baseline_device_thermostat_24"
             android:title="@string/monitoring"/>
 
     </group>

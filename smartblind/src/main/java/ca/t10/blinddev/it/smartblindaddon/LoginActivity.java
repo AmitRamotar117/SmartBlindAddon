@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!isValidPassword(password))
         {
-            editTextPassword.setError("Wrong password!\n Please retype the password!");
+            editTextPassword.setError("Wrong password!\nPlease retype the password!");
             editTextPassword.requestFocus();
             return;
         }

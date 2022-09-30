@@ -32,6 +32,12 @@
         android:name="ca.t10.blinddev.it.smartblindaddon.ui.schedule.ScheduleFragment"
         android:label="Schedule Blinds"
         tools:layout="@layout/fragment_schedule" />
+    <fragment
+        android:id="@+id/nav_temperature"
+        android:name="ca.t10.blinddev.it.smartblindaddon.ui.temperature.TemperatureFragment"
+        android:label="Temperature Blinds"
+        tools:layout="@layout/fragment_temperature" />
+
 
 
 </navigation>

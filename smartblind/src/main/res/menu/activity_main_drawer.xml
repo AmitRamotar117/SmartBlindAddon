@@ -24,5 +24,10 @@
             android:id="@+id/nav_schedule"
             android:icon="@drawable/ic_schedule"
             android:title="@string/menu_schedule_blind" />
+        <item
+            android:id="@+id/nav_temperature"
+            android:icon="@drawable/ic_schedule"
+            android:title="@string/temperature_monitoring"/>
+
     </group>
 </menu>

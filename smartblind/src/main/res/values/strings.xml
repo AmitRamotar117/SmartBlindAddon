@@ -79,6 +79,7 @@
     <string name="new_user_submit_new_user">Submit New User</string>
     <string name="logout">Logout</string>
     <string name="troubleshooting">Troubleshooting</string>
+    <string name="temperature_monitoring">Temperature Monitoring</string>
 
 
     <string-array name="contact_emails">

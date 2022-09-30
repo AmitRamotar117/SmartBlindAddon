@@ -80,6 +80,7 @@
     <string name="logout">Logout</string>
     <string name="troubleshooting">Troubleshooting</string>
     <string name="temperature_monitoring">Temperature Monitoring</string>
+    <string name="temperature_monitoring_screen">Temperature Monitoring Screen</string>
 
 
     <string-array name="contact_emails">

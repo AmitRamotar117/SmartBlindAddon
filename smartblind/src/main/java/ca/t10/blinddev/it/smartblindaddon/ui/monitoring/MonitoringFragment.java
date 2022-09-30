@@ -1,4 +1,4 @@
-package ca.t10.blinddev.it.smartblindaddon.ui.temperature;
+package ca.t10.blinddev.it.smartblindaddon.ui.monitoring;
 //Chris Mutuc n01314607
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,24 +14,24 @@ import android.view.ViewGroup;
 
 import ca.t10.blinddev.it.smartblindaddon.R;
 
-public class TemperatureFragment extends Fragment {
+public class MonitoringFragment extends Fragment {
 
-    private TemperatureViewModel mViewModel;
+    private MonitoringViewModel mViewModel;
 
-    public static TemperatureFragment newInstance() {
-        return new TemperatureFragment();
+    public static MonitoringFragment newInstance() {
+        return new MonitoringFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_temperature, container, false);
+        return inflater.inflate(R.layout.fragment_monitoring, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(TemperatureViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(MonitoringViewModel.class);
         // TODO: Use the ViewModel
     }
 

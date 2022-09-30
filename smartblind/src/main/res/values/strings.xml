@@ -81,6 +81,7 @@
     <string name="troubleshooting">Troubleshooting</string>
     <string name="temperature_monitoring">Temperature Monitoring</string>
     <string name="temperature_monitoring_screen">Temperature Monitoring Screen</string>
+    <string name="monitoring">Monitoring</string>
 
 
     <string-array name="contact_emails">

@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
@@ -37,20 +38,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Set;
 
 import ca.t10.blinddev.it.smartblindaddon.BlindNotifications;
+import ca.t10.blinddev.it.smartblindaddon.Monitoring;
 import ca.t10.blinddev.it.smartblindaddon.R;
-
+import ca.t10.blinddev.it.smartblindaddon.Schedule;
 
 
 public class MonitoringFragment extends Fragment {
     private View view;
     private MonitoringViewModel mViewModel;
     //michael
-    private TextView lighttextView;
+    private TextView lighttextView, retrieveTV;
     private ProgressBar lightprogressBar;
     private SeekBar lightseekBar;
     Switch lightswitch;
     Button submitbutton;
     Spinner blindsspinner;
+    private Monitoring monitoringInfo;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dRef;
 
@@ -64,6 +67,7 @@ public class MonitoringFragment extends Fragment {
     private String[] locationKey;
     private static final String TAG = "MyActivity";
     public static final String SHARED_PREFS = "sharedPrefs";
+    String temp;
 
 
     public static MonitoringFragment newInstance() {
@@ -74,7 +78,7 @@ public class MonitoringFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_monitoring, container, false);
-        applySettings();
+       // applySettings();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
         Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
@@ -82,16 +86,28 @@ public class MonitoringFragment extends Fragment {
         locationKey =set.toArray(new String[0]);
 
 
+        monitoringInfo = new Monitoring();
+        retrieveTV = view.findViewById(R.id.retrieveLocation);
 
         blindsspinner = view.findViewById(R.id.blindsspinner);
         lightswitch = view.findViewById(R.id.opencloseswitch);
+
 
         submitbutton = view.findViewById(R.id.submitbutton);
 
         lighttextView =  view.findViewById(R.id.progresstextView);
         lightprogressBar = view.findViewById(R.id.lightprogressBar);
         lightseekBar = view.findViewById(R.id.lightseekBar);
-
+        if (sharedPreferences.getBoolean("dark",true)){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style, locationKey);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            blindsspinner.setAdapter(adapter);
+        }
+        else{
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style_default, locationKey);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            blindsspinner.setAdapter(adapter);
+        }
         firebaseDatabase = FirebaseDatabase.getInstance();
         lightswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -116,11 +132,11 @@ public class MonitoringFragment extends Fragment {
                 dRef.child("Location").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       /* String lo = snapshot.getValue(String.class);
+                        String lo = snapshot.getValue(String.class);
                         retrieveTV.setText("Location:" + " " + lo);
                         temp = lo;
 
-                        Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();*/
+                        Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -176,7 +192,7 @@ public class MonitoringFragment extends Fragment {
 
         return view;
     }
-    public void applySettings(){
+    /*public void applySettings(){
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
 
@@ -198,23 +214,22 @@ public class MonitoringFragment extends Fragment {
         if (t.equals("small")){setTextSize(13);}
     }
     public void setTextSize(int size){
-        /*object needs to be put in and replace the existing*/
+        /*object needs to be put in and replace the existing
        /* opt.setTextSize(size);
         submit.setTextSize(size);
         date.setTextSize(size);
         time.setTextSize(size);
-        retrieveTV.setTextSize(size);*/
+        retrieveTV.setTextSize(size);
     }
-    private void enableDarkMode() {
-        /*object needs to be put in and replace the existing*/
+   /* private void enableDarkMode() {
+        /*object needs to be put in and replace the existing
         view.setBackgroundColor(getResources().getColor(R.color.dark_grey,null));
-      /*  opt.setTextColor(getResources().getColor(R.color.white,null));
+       opt.setTextColor(getResources().getColor(R.color.white,null));
         title.setTextColor(getResources().getColor(R.color.white,null));
         retrieveTV.setTextColor(getResources().getColor(R.color.white,null));
         intime.setHintTextColor(getResources().getColor(R.color.white,null));
-        indate.setHintTextColor(getResources().getColor(R.color.white,null));*/
-    }
-
+        indate.setHintTextColor(getResources().getColor(R.color.white,null));
+    }*/
 
 
     @Override

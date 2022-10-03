@@ -83,6 +83,10 @@
     <string name="temperature_monitoring_screen">Temperature Monitoring Screen</string>
     <string name="monitoring">Monitoring</string>
     <string name="open_close">OPEN/CLOSE</string>
+    <string name="light_percentage">0%</string>
+    <string name="set_light">Set light</string>
+    <string name="monitoring_submit">Submit</string>
+    <string name="monitoring_room_temperature">Room Temperature</string>
 
 
     <string-array name="contact_emails">

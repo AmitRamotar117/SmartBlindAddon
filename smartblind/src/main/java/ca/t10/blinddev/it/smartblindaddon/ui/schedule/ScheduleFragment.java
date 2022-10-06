@@ -120,8 +120,21 @@ public class ScheduleFragment extends Fragment {
                                                     @Override
                                                     public void onDateSet(DatePicker view, int year,
                                                                           int monthOfYear, int dayOfMonth) {
+                                                        String nd = "" + dayOfMonth;
+                                                        String nm = "" + monthOfYear ;
+                                                        if ( dayOfMonth < 10 ){
+                                                            nd = "0"+ dayOfMonth;
+                                                        }
 
-                                                        indate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                                                        if ( (monthOfYear + 1) < 10){
+                                                            nm = "0"+ ( monthOfYear +1 ) ;
+                                                        }else {
+                                                            nm = ""+ ( monthOfYear + 1) ;
+                                                        }
+
+
+                                                        indate.setText(nd + "-" + nm + "-" + year);
 
                                                     }
                                                 }, mYear, mMonth, mDay);
@@ -140,13 +153,25 @@ public class ScheduleFragment extends Fragment {
                         TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(),
                                 new TimePickerDialog.OnTimeSetListener() {
 
-                                    @Override
-                                    public void onTimeSet(TimePicker view, int hourOfDay,
-                                                          int minute) {
 
-                                        intime.setText(hourOfDay + ":" + minute);
+                                    @Override
+                                    public void onTimeSet(TimePicker tView, int hourOfDay,
+                                                          int minute) {
+                                        tView.setIs24HourView(false);
+
+
+                                        String AM_PM ;
+                                        if(hourOfDay < 12) {
+                                            AM_PM = " AM";
+                                        } else {
+                                            AM_PM = " PM";
+                                        }
+
+                                        intime.setText(checkDigit(hourOfDay) + ":" + checkDigit(minute) + AM_PM);
+
                                     }
-                                }, mHour, mMinute, true);
+                                }, mHour, mMinute, false);
+
                         timePickerDialog.show();
                     }
                 });
@@ -292,6 +317,9 @@ public class ScheduleFragment extends Fragment {
 
 
    }
+    public String checkDigit(int number) {
+        return number <= 9 ? "0" + number : String.valueOf(number);
+    }
 
 
 

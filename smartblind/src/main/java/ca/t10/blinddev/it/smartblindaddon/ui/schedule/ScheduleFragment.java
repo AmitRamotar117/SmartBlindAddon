@@ -160,14 +160,9 @@ public class ScheduleFragment extends Fragment {
                                         tView.setIs24HourView(false);
 
 
-                                        String AM_PM ;
-                                        if(hourOfDay < 12) {
-                                            AM_PM = " AM";
-                                        } else {
-                                            AM_PM = " PM";
-                                        }
 
-                                        intime.setText(checkDigit(hourOfDay) + ":" + checkDigit(minute) + AM_PM);
+
+                                        intime.setText(checkDigit(hourOfDay) + ":" + checkDigit(minute));
 
                                     }
                                 }, mHour, mMinute, false);

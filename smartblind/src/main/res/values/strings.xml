@@ -87,6 +87,8 @@
     <string name="set_light">Set light</string>
     <string name="monitoring_submit">Submit</string>
     <string name="monitoring_room_temperature">Room Temperature</string>
+    <string name="maximum">Maximum:</string>
+    <string name="minimum">Minimum:</string>
 
 
     <string-array name="contact_emails">

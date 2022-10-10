@@ -48,7 +48,7 @@ public class MonitoringFragment extends Fragment {
     private View view;
     private MonitoringViewModel mViewModel;
     //michael
-    private TextView retrieveTV;
+    private TextView retrieveTV, currentTemp;
 
     Button submitbutton;
     Spinner blindsspinner;
@@ -92,7 +92,7 @@ public class MonitoringFragment extends Fragment {
         minET = view.findViewById(R.id.minET);
 
         retrieveTV = view.findViewById(R.id.retrieveLocation);
-
+        currentTemp = view.findViewById(R.id.currentTemp);
         blindsspinner = view.findViewById(R.id.blindsspinner);
 
 
@@ -132,7 +132,7 @@ public class MonitoringFragment extends Fragment {
                         retrieveTV.setText("Location:" + " " + lo);
                         temp = lo;
 
-                        Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -150,7 +150,28 @@ public class MonitoringFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+        String blindkey = String.valueOf(blindsspinner.getSelectedItem());
+        dRef =firebaseDatabase.getReference(blindkey);
+        DatabaseReference tempRef =  dRef.child("UTemp");
+        tempRef.child("temp").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                    String server_data_temp = snapshot.getValue(String.class);
+                    currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
+
+
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                throw error.toException(); // never ignore errors
+            }
+        });
 
 
         submitbutton.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +182,7 @@ public class MonitoringFragment extends Fragment {
                 String blindkey = String.valueOf(blindsspinner.getSelectedItem());
                 dRef =firebaseDatabase.getReference(blindkey);
                 DatabaseReference tempRef =  dRef.child("UTemp");
-// creating string holders
+                // creating string holders
                 String maxTemp = maxET.getText().toString();
                 String minTemp = minET.getText().toString();
                 //
@@ -170,6 +191,7 @@ public class MonitoringFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                             String server_data_temp = snapshot.getValue(String.class);
+                           // currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
                             if(maxTemp.equals(server_data_temp)){
 
                                 tempRef.child("op").setValue("close");

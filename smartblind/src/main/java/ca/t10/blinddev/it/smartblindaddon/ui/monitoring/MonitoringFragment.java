@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
@@ -54,6 +55,7 @@ public class MonitoringFragment extends Fragment {
     Button submitbutton;
     Spinner blindsspinner;
     private Monitoring monitoringInfo;
+    private EditText maxET, minET;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dRef;
 
@@ -87,6 +89,9 @@ public class MonitoringFragment extends Fragment {
 
 
         monitoringInfo = new Monitoring();
+        maxET = view.findViewById(R.id.maxET);
+        minET = view.findViewById(R.id.minET);
+
         retrieveTV = view.findViewById(R.id.retrieveLocation);
 
         blindsspinner = view.findViewById(R.id.blindsspinner);
@@ -94,6 +99,7 @@ public class MonitoringFragment extends Fragment {
 
 
         submitbutton = view.findViewById(R.id.submitbutton);
+        firebaseDatabase = FirebaseDatabase.getInstance();
 
         lighttextView =  view.findViewById(R.id.progresstextView);
         lightprogressBar = view.findViewById(R.id.lightprogressBar);
@@ -108,7 +114,16 @@ public class MonitoringFragment extends Fragment {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             blindsspinner.setAdapter(adapter);
         }
-        firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+
+
+
+
+
+
+
+
         lightswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -182,6 +197,48 @@ public class MonitoringFragment extends Fragment {
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //comparing the values from the sensors data in realtime database
+                //firebase initial setup
+                String blindkey = String.valueOf(blindsspinner.getSelectedItem());
+                dRef =firebaseDatabase.getReference(blindkey);
+                DatabaseReference tempRef =  dRef.child("UTemp");
+// creating string holders
+                String maxTemp = maxET.getText().toString();
+                String minTemp = minET.getText().toString();
+                //
+                tempRef.child("temp").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            String server_data_temp = snapshot.getValue(String.class);
+                            if(maxTemp.equals(server_data_temp)){
+
+                                tempRef.child("op").setValue("close");
+                                Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
+
+
+
+                            }
+                            else if(minTemp.equals(server_data_temp)){
+
+                                tempRef.child("op").setValue("open");
+                                Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            else{
+                                Toast.makeText(getActivity(),"Blind is set as it is and didn't hit any of the max/min value from user",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        throw error.toException(); // never ignore errors
+                    }
+                });
 
                 saveData();
             }
@@ -230,6 +287,9 @@ public class MonitoringFragment extends Fragment {
         intime.setHintTextColor(getResources().getColor(R.color.white,null));
         indate.setHintTextColor(getResources().getColor(R.color.white,null));
     }*/
+
+
+
 
 
     @Override

@@ -3,11 +3,13 @@ package ca.t10.blinddev.it.smartblindaddon;
 public class Monitoring {
     private String  operation;
     private String light;
+    private String temp;
     private String location;
 
     public Monitoring(){
 
     }
+
 
     public String getOperation() {
         return operation;
@@ -32,5 +34,13 @@ public class Monitoring {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
 }

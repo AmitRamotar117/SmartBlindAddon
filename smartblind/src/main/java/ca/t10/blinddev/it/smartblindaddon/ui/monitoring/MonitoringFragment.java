@@ -48,24 +48,23 @@ public class MonitoringFragment extends Fragment {
     private View view;
     private MonitoringViewModel mViewModel;
     //michael
-    private TextView lighttextView, retrieveTV;
-    private ProgressBar lightprogressBar;
-    private SeekBar lightseekBar;
-    Switch lightswitch;
+    private TextView retrieveTV;
+
     Button submitbutton;
     Spinner blindsspinner;
+
     private Monitoring monitoringInfo;
     private EditText maxET, minET;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dRef;
 
 
-    public static final String TEXT = "text";
-    public static final String SWITCH1 = "switch1";
-    public static final String PROGRESS1 = "progress1";
-    private String text;
-    private boolean switchOnOff;
-    private boolean progress1;
+//    public static final String TEXT = "text";
+//    public static final String SWITCH1 = "switch1";
+//    public static final String PROGRESS1 = "progress1";
+//    private String text;
+//    private boolean switchOnOff;
+//    private boolean progress1;
     private String[] locationKey;
     private static final String TAG = "MyActivity";
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -95,15 +94,13 @@ public class MonitoringFragment extends Fragment {
         retrieveTV = view.findViewById(R.id.retrieveLocation);
 
         blindsspinner = view.findViewById(R.id.blindsspinner);
-        lightswitch = view.findViewById(R.id.opencloseswitch);
+
 
 
         submitbutton = view.findViewById(R.id.submitbutton);
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        lighttextView =  view.findViewById(R.id.progresstextView);
-        lightprogressBar = view.findViewById(R.id.lightprogressBar);
-        lightseekBar = view.findViewById(R.id.lightseekBar);
+
         if (sharedPreferences.getBoolean("dark",true)){
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_style, locationKey);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -122,22 +119,6 @@ public class MonitoringFragment extends Fragment {
 
 
 
-
-
-        lightswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-                    // do something when check is selected
-
-                    Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
-
-                } else {
-                    //do something when unchecked
-                    Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
         blindsspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -171,28 +152,6 @@ public class MonitoringFragment extends Fragment {
         });
 
 
-        lightseekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-
-
-                lightprogressBar.setProgress(progress);
-
-                lighttextView.setText("" + progress + "%");
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
 
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -245,48 +204,11 @@ public class MonitoringFragment extends Fragment {
         });
 
         //loadData();
-        updateViews();
+//        updateViews();
 
         return view;
     }
-    /*public void applySettings(){
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved", Context.MODE_PRIVATE);
-
-        boolean d = sharedPreferences.getBoolean("dark",false);
-        boolean n = sharedPreferences.getBoolean("note",false);
-        String t = sharedPreferences.getString("size","");
-
-        if(d){enableDarkMode();}
-        if(n){
-            BlindNotifications bl = new BlindNotifications(view.getContext());
-            //this method will allow developer to create message for notification
-            bl.enableNotifications("this is from schedule fragment");
-            //this function will launch the notification.
-            bl.pushNotification();
-        }
-
-        if (t.equals("large")){setTextSize(20);}
-        if (t.equals("medium")){setTextSize(17);}
-        if (t.equals("small")){setTextSize(13);}
-    }
-    public void setTextSize(int size){
-        /*object needs to be put in and replace the existing
-       /* opt.setTextSize(size);
-        submit.setTextSize(size);
-        date.setTextSize(size);
-        time.setTextSize(size);
-        retrieveTV.setTextSize(size);
-    }
-   /* private void enableDarkMode() {
-        /*object needs to be put in and replace the existing
-        view.setBackgroundColor(getResources().getColor(R.color.dark_grey,null));
-       opt.setTextColor(getResources().getColor(R.color.white,null));
-        title.setTextColor(getResources().getColor(R.color.white,null));
-        retrieveTV.setTextColor(getResources().getColor(R.color.white,null));
-        intime.setHintTextColor(getResources().getColor(R.color.white,null));
-        indate.setHintTextColor(getResources().getColor(R.color.white,null));
-    }*/
 
 
 
@@ -305,8 +227,8 @@ public class MonitoringFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
 
-        editor.putString(TEXT, lighttextView.getText().toString());
-        editor.putBoolean(SWITCH1, lightswitch.isChecked());
+//        editor.putString(TEXT, lighttextView.getText().toString());
+//        editor.putBoolean(SWITCH1, lightswitch.isChecked());
 
 
         editor.apply();
@@ -314,17 +236,17 @@ public class MonitoringFragment extends Fragment {
         Toast.makeText(getActivity(), "Data is saved", Toast.LENGTH_SHORT).show();
     }
 
-    public void loadData() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        text = sharedPreferences.getString(TEXT, "");
-        switchOnOff = sharedPreferences.getBoolean(SWITCH1, false);
-    }
+//    public void loadData() {
+//        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+//        text = sharedPreferences.getString(TEXT, "");
+//        switchOnOff = sharedPreferences.getBoolean(SWITCH1, false);
+//    }
 
-    public void updateViews() {
-        lighttextView.setText(text);
-        lightswitch.setChecked(switchOnOff);
-
-    }
+//    public void updateViews() {
+//        lighttextView.setText(text);
+//        lightswitch.setChecked(switchOnOff);
+//
+//    }
 
 
 

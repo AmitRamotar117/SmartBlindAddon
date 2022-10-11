@@ -47,14 +47,14 @@ import ca.t10.blinddev.it.smartblindaddon.Schedule;
 public class MonitoringFragment extends Fragment {
     private View view;
     private MonitoringViewModel mViewModel;
-    //michael
-    private TextView retrieveTV, currentTemp;
+
+    private TextView retrieveTV, currentTemp,currentLight;
 
     Button submitbutton;
     Spinner blindsspinner;
 
     private Monitoring monitoringInfo;
-    private EditText maxET, minET;
+    private EditText maxET, minET,lightmaxET,lightminET;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference dRef;
 
@@ -68,7 +68,7 @@ public class MonitoringFragment extends Fragment {
     private String[] locationKey;
     private static final String TAG = "MyActivity";
     public static final String SHARED_PREFS = "sharedPrefs";
-    String temp;
+    String temp,light;
 
 
     public static MonitoringFragment newInstance() {
@@ -88,14 +88,18 @@ public class MonitoringFragment extends Fragment {
 
 
         monitoringInfo = new Monitoring();
+
+        lightmaxET = view.findViewById(R.id.lightmaxET);
+        lightminET = view.findViewById(R.id.lightminET);
+
+        //temperature ET
         maxET = view.findViewById(R.id.maxET);
         minET = view.findViewById(R.id.minET);
 
         retrieveTV = view.findViewById(R.id.retrieveLocation);
         currentTemp = view.findViewById(R.id.currentTemp);
+        currentLight = view.findViewById(R.id.currentLight);
         blindsspinner = view.findViewById(R.id.blindsspinner);
-
-
 
         submitbutton = view.findViewById(R.id.submitbutton);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -125,6 +129,7 @@ public class MonitoringFragment extends Fragment {
                         String lo = snapshot.getValue(String.class);
                         retrieveTV.setText("Location:" + " " + lo);
                         temp = lo;
+                        light = lo;
 
                         //Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
                     }
@@ -134,31 +139,23 @@ public class MonitoringFragment extends Fragment {
 
                     }
                 });
-
-
-
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
         String blindkey = String.valueOf(blindsspinner.getSelectedItem());
         dRef =firebaseDatabase.getReference(blindkey);
         DatabaseReference tempRef =  dRef.child("UTemp");
+
         tempRef.child("temp").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     String server_data_temp = snapshot.getValue(String.class);
                     currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
-
-
-
-
-
-
             }
 
             @Override
@@ -167,6 +164,20 @@ public class MonitoringFragment extends Fragment {
             }
         });
 
+        DatabaseReference lightRef =  dRef.child("ULight");
+        lightRef.child("light").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                String server_data_light = snapshot.getValue(String.class);
+                currentLight.setText("Current Light: \n"+server_data_light+" brightness");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                throw error.toException();
+            }
+        });
 
         submitbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,10 +187,46 @@ public class MonitoringFragment extends Fragment {
                 String blindkey = String.valueOf(blindsspinner.getSelectedItem());
                 dRef =firebaseDatabase.getReference(blindkey);
                 DatabaseReference tempRef =  dRef.child("UTemp");
+                DatabaseReference lightRef = dRef.child("ULight");
                 // creating string holders
                 String maxTemp = maxET.getText().toString();
                 String minTemp = minET.getText().toString();
-                //
+
+                String maxLight = lightmaxET.getText().toString();
+                String minLight = lightmaxET.getText().toString();
+
+                //michael light code
+                lightRef.child("light").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            String server_data_light = snapshot.getValue(String.class);
+                            if(maxLight.equals(server_data_light)){
+
+                                lightRef.child("op").setValue("close");
+                                Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if(minLight.equals(server_data_light)){
+
+                                lightRef.child("op").setValue("open");
+                                Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
+
+                            } else{
+                                Toast.makeText(getActivity(),"Blind is set as it is and didn't hit any of the max/min value from user",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        throw error.toException(); // never ignore errors
+                    }
+                });
+
+
+                //Chris temperature code
                 tempRef.child("temp").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -214,6 +261,9 @@ public class MonitoringFragment extends Fragment {
                         throw error.toException(); // never ignore errors
                     }
                 });
+
+
+
 
                 saveData();
             }

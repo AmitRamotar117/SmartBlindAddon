@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,7 @@ public class MonitoringFragment extends Fragment {
 
     private TextView retrieveTV, currentTemp,currentLight;
 
-    Button submitbutton;
+    Button submitbutton, tempButton;
     Spinner blindsspinner;
 
     private Monitoring monitoringInfo;
@@ -59,7 +60,7 @@ public class MonitoringFragment extends Fragment {
     private DatabaseReference dRef;
 
 
-//    public static final String TEXT = "text";
+    //    public static final String TEXT = "text";
 //    public static final String SWITCH1 = "switch1";
 //    public static final String PROGRESS1 = "progress1";
 //    private String text;
@@ -79,7 +80,7 @@ public class MonitoringFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_monitoring, container, false);
-       // applySettings();
+        // applySettings();
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("saved",Context.MODE_PRIVATE);
         //data is in here
         Set<String> set = sharedPreferences.getStringSet("blinds_owned",null);
@@ -95,6 +96,9 @@ public class MonitoringFragment extends Fragment {
         //temperature ET
         maxET = view.findViewById(R.id.maxET);
         minET = view.findViewById(R.id.minET);
+        tempButton = view.findViewById(R.id.tempButton);
+
+
 
         retrieveTV = view.findViewById(R.id.retrieveLocation);
         currentTemp = view.findViewById(R.id.currentTemp);
@@ -129,7 +133,7 @@ public class MonitoringFragment extends Fragment {
                         String lo = snapshot.getValue(String.class);
                         retrieveTV.setText("Location:" + " " + lo);
                         temp = lo;
-                        light = lo;
+
 
                         //Toast.makeText(getActivity(),lo+" ",Toast.LENGTH_SHORT).show();
                     }
@@ -154,8 +158,8 @@ public class MonitoringFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    String server_data_temp = snapshot.getValue(String.class);
-                    currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
+                String server_data_temp = snapshot.getValue(String.class);
+                currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
             }
 
             @Override
@@ -179,7 +183,7 @@ public class MonitoringFragment extends Fragment {
             }
         });
 
-        submitbutton.setOnClickListener(new View.OnClickListener() {
+        tempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //comparing the values from the sensors data in realtime database
@@ -187,43 +191,24 @@ public class MonitoringFragment extends Fragment {
                 String blindkey = String.valueOf(blindsspinner.getSelectedItem());
                 dRef =firebaseDatabase.getReference(blindkey);
                 DatabaseReference tempRef =  dRef.child("UTemp");
-                DatabaseReference lightRef = dRef.child("ULight");
+
                 // creating string holders
                 String maxTemp = maxET.getText().toString();
                 String minTemp = minET.getText().toString();
 
-                String maxLight = lightmaxET.getText().toString();
-                String minLight = lightmaxET.getText().toString();
+                //adding in the database
+                if (TextUtils.isEmpty(minTemp) && TextUtils.isEmpty(maxTemp)) {
+                    // if the text fields are empty
+                    // then show the below message.
+                    Toast.makeText(getActivity(), "Please add some data.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // else call the method to add
+                    // data to our database.
 
-                //michael light code
-                lightRef.child("light").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
-                            String server_data_light = snapshot.getValue(String.class);
-                            if(maxLight.equals(server_data_light)){
+                    addDatatoFirebaseTemp(maxTemp,minTemp);
+                    // getDataFromFirebase();
 
-                                lightRef.child("op").setValue("close");
-                                Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
-
-                            }
-                            else if(minLight.equals(server_data_light)){
-
-                                lightRef.child("op").setValue("open");
-                                Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
-
-                            } else{
-                                Toast.makeText(getActivity(),"Blind is set as it is and didn't hit any of the max/min value from user",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        throw error.toException(); // never ignore errors
-                    }
-                });
+                }
 
 
                 //Chris temperature code
@@ -232,10 +217,10 @@ public class MonitoringFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                             String server_data_temp = snapshot.getValue(String.class);
-                           // currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
+                            // currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
                             if(maxTemp.equals(server_data_temp)){
 
-                                tempRef.child("op").setValue("close");
+                               // tempRef.child("maxTemp").setValue(maxTemp);
                                 Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
 
 
@@ -243,7 +228,7 @@ public class MonitoringFragment extends Fragment {
                             }
                             else if(minTemp.equals(server_data_temp)){
 
-                                tempRef.child("op").setValue("open");
+                               // tempRef.child("minTemp").setValue(minTemp);
                                 Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
 
                             }
@@ -261,6 +246,68 @@ public class MonitoringFragment extends Fragment {
                         throw error.toException(); // never ignore errors
                     }
                 });
+
+            }
+        });
+
+        submitbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //comparing the values from the sensors data in realtime database
+                //firebase initial setup
+                String blindkey = String.valueOf(blindsspinner.getSelectedItem());
+                dRef =firebaseDatabase.getReference(blindkey);
+                DatabaseReference lightRef = dRef.child("ULight");
+
+
+                String maxLight = lightmaxET.getText().toString();
+                String minLight = lightminET.getText().toString();
+                //adding in the database
+                if (TextUtils.isEmpty(minLight) && TextUtils.isEmpty(maxLight)) {
+                    // if the text fields are empty
+                    // then show the below message.
+                    Toast.makeText(getActivity(), "Please add some data.", Toast.LENGTH_SHORT).show();
+                } else {
+                    // else call the method to add
+                    // data to our database.
+
+                    addDatatoFirebaseLight(maxLight,minLight);
+                    // getDataFromFirebase();
+
+                }
+
+                //michael light code
+                lightRef.child("light").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            String server_data_light = snapshot.getValue(String.class);
+                            if(maxLight.equals(server_data_light)){
+
+                                //lightRef.child("op").setValue("close");
+                                Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if(minLight.equals(server_data_light)){
+
+                                //lightRef.child("op").setValue("open");
+                                Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
+
+                            } else{
+                                Toast.makeText(getActivity(),"Blind is set as it is and didn't hit any of the max/min value from user",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        throw error.toException(); // never ignore errors
+                    }
+                });
+
+
+
 
 
 
@@ -313,6 +360,27 @@ public class MonitoringFragment extends Fragment {
 //        lightswitch.setChecked(switchOnOff);
 //
 //    }
+
+    private void addDatatoFirebaseTemp(String maxTemp, String minTemp) {
+        monitoringInfo.setMaxTemp(maxTemp);
+        monitoringInfo.setMinTemp(minTemp);
+
+        dRef.child("UTemp").child("maxTemp").setValue(maxTemp);
+        dRef.child("UTemp").child("minTemp").setValue(minTemp);
+
+
+    }
+
+    private void addDatatoFirebaseLight(String maxLight, String minLight) {
+        monitoringInfo.setMaxTemp(maxLight);
+        monitoringInfo.setMinTemp(minLight);
+
+        dRef.child("ULight").child("maxLight").setValue(maxLight);
+        dRef.child("ULight").child("minLight").setValue(minLight);
+
+
+    }
+
 
 
 

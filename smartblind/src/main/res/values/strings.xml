@@ -89,6 +89,7 @@
     <string name="monitoring_room_temperature">Room Temperature</string>
     <string name="maximum">Maximum:</string>
     <string name="minimum">Minimum:</string>
+    <string name="monitoring_apply">Apply</string>
 
 
     <string-array name="contact_emails">

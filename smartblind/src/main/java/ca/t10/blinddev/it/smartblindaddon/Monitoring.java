@@ -4,6 +4,10 @@ public class Monitoring {
     private String  operation;
     private String light;
     private String temp;
+    private String maxTemp;
+    private String minTemp;
+    private String maxLight;
+    private String minLight;
     private String location;
 
     public Monitoring(){
@@ -42,5 +46,37 @@ public class Monitoring {
 
     public void setTemp(String temp) {
         this.temp = temp;
+    }
+
+    public String getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(String maxTemp) {
+        this.maxTemp = maxTemp;
+    }
+
+    public String getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(String minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    public String getMaxLight() {
+        return maxLight;
+    }
+
+    public void setMaxLight(String maxLight) {
+        this.maxLight = maxLight;
+    }
+
+    public String getMinLight() {
+        return minLight;
+    }
+
+    public void setMinLight(String minLight) {
+        this.minLight = minLight;
     }
 }

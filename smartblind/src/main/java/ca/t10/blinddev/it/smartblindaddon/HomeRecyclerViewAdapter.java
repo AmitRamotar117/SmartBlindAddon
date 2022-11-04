@@ -54,7 +54,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
         boolean d = sharedPreferences.getBoolean("dark",false);
         String t = sharedPreferences.getString("size","");
-        String m = sharedPreferences.getString("mode","man");
+        String m = sharedPreferences.getString("mode","");
         if(d){enableDarkMode();}
         if (t.equals("large")){setTextSize(20);}
         if (t.equals("medium")){setTextSize(17);}
@@ -62,9 +62,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         if(m.equals("auto")){
             mode.setChecked(true);
         }
-        if(m.equals("man")){
-            mode.setChecked(false);
-        }
+
     }
     public void setTextSize(int size){
         loc.setTextSize(size);
@@ -77,6 +75,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         loc.setTextColor(context.getResources().getColor(R.color.white));
         light.setTextColor(context.getResources().getColor(R.color.white));
         temp.setTextColor(context.getResources().getColor(R.color.white));
+        mode.setSwitchTextAppearance(context,R.style.SwitchColorChange);
+        mode.setTextColor(context.getResources().getColor(R.color.white));
     }
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
@@ -142,6 +142,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 Toast.makeText(view.getContext(), view.getContext().getString(R.string.closing) + location, Toast.LENGTH_SHORT).show();
             }
         });
+
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
         SharedPreferences.Editor data = sharedPreferences.edit();
         holder.mode.setOnClickListener(new View.OnClickListener() {
@@ -150,17 +151,18 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 if(mode.isChecked()){
                     x.blindsMode("auto");
                     data.putString("mode","auto");
-                    data.commit();
+                    //data.commit();
                     Toast.makeText(view.getContext(),"Blind set to automatic mode", Toast.LENGTH_SHORT).show();
 
                 }else {
                     x.blindsMode("man");
                     data.putString("mode","man");
-                    data.commit();
+                    //data.commit();
                     Toast.makeText(view.getContext(),"Blind set to manual mode", Toast.LENGTH_SHORT).show();
                 }
-
+                data.commit();
             }
+
         });
 
     }

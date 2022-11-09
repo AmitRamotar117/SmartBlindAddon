@@ -85,12 +85,17 @@
     <string name="open_close">OPEN/CLOSE</string>
     <string name="light_percentage">0%</string>
     <string name="set_light">Set light</string>
-    <string name="monitoring_submit">Submit</string>
+    <string name="monitoring_submit">Apply</string>
     <string name="monitoring_room_temperature">Room Temperature</string>
     <string name="maximum">Maximum:</string>
     <string name="minimum">Minimum:</string>
     <string name="monitoring_apply">Apply</string>
     <string name="manual_automatic">Manual/Automatic</string>
+    <string name="room_light">Room Light</string>
+    <string name="maximum_light">Maximum:</string>
+    <string name="minimum_light">Minimum:</string>
+    <string name="room_light_">Room Light</string>
+    <string name="maximum_light_">Maximum:</string>
 
 
     <string-array name="contact_emails">

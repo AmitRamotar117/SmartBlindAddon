@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     TextView loc,light,temp;
     Button open,close;
     String location;
+    Switch mode;
+
 
     public HomeRecyclerViewAdapter(ArrayList<HomeBlinds> test,Context context){
     this.testblinds = test;
@@ -43,6 +46,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         temp = view.findViewById(R.id.home_rec_temp);
         open = view.findViewById(R.id.home_rec_open);
         close = view.findViewById(R.id.home_rec_close);
+        mode = view.findViewById(R.id.home_rec_mode);
         applySettings();
         return new HomeViewHolder(view);
     }
@@ -50,10 +54,15 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
         boolean d = sharedPreferences.getBoolean("dark",false);
         String t = sharedPreferences.getString("size","");
+        String m = sharedPreferences.getString("mode","");
         if(d){enableDarkMode();}
         if (t.equals("large")){setTextSize(20);}
         if (t.equals("medium")){setTextSize(17);}
         if (t.equals("small")){setTextSize(13);}
+        if(m.equals("auto")){
+            mode.setChecked(true);
+        }
+
     }
     public void setTextSize(int size){
         loc.setTextSize(size);
@@ -66,6 +75,8 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         loc.setTextColor(context.getResources().getColor(R.color.white));
         light.setTextColor(context.getResources().getColor(R.color.white));
         temp.setTextColor(context.getResources().getColor(R.color.white));
+        mode.setSwitchTextAppearance(context,R.style.SwitchColorChange);
+        mode.setTextColor(context.getResources().getColor(R.color.white));
     }
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
@@ -114,10 +125,6 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             }
         });
 
-
-
-
-
         //when open button is pressed status value on firebase = open
         holder.open.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,6 +143,28 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             }
         });
 
+        SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
+        SharedPreferences.Editor data = sharedPreferences.edit();
+        holder.mode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mode.isChecked()){
+                    x.blindsMode("auto");
+                    data.putString("mode","auto");
+                    //data.commit();
+                    Toast.makeText(view.getContext(),"Blind set to automatic mode", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    x.blindsMode("man");
+                    data.putString("mode","man");
+                    //data.commit();
+                    Toast.makeText(view.getContext(),"Blind set to manual mode", Toast.LENGTH_SHORT).show();
+                }
+                data.commit();
+            }
+
+        });
+
     }
     @Override
     public int getItemCount() {
@@ -145,6 +174,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     public static class HomeViewHolder extends RecyclerView.ViewHolder{
         TextView loc,light,temp;
         Button open,close;
+        Switch mode;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             loc = itemView.findViewById(R.id.home_rec_loc);
@@ -152,6 +182,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             light = itemView.findViewById(R.id.home_rec_light);
             temp = itemView.findViewById(R.id.home_rec_temp);
             close = itemView.findViewById(R.id.home_rec_close);
+            mode = itemView.findViewById(R.id.home_rec_mode);
         }
     }
 

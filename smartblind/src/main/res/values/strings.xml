@@ -90,6 +90,7 @@
     <string name="maximum">Maximum:</string>
     <string name="minimum">Minimum:</string>
     <string name="monitoring_apply">Apply</string>
+    <string name="manual_automatic">Manual/Automatic</string>
 
 
     <string-array name="contact_emails">

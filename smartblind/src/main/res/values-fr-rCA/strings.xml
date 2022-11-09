@@ -80,4 +80,5 @@
     <string name="new_user_submit_new_user">Soumettre un nouvel utilisateur</string>
     <string name="logout">Se déconnecter</string>
     <string name="troubleshooting">Troubleshooting</string>
+    <string name="manual_automatic">Manual/Automatic</string>
 </resources>

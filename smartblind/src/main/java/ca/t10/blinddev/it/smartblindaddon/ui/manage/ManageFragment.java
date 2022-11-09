@@ -204,6 +204,17 @@ public class ManageFragment extends Fragment {
                 addToBlind.child("Status").setValue(arr[select]);
                 addToBlind.child("Light").setValue(String.valueOf(Math.floor(Math.random() * 100)));
                 addToBlind.child("Temperature").setValue(String.valueOf(Math.floor(Math.random() * 100)));
+                addToBlind.child("Mode").setValue("man");
+
+                addToBlind.child("ULight").child("maxLight").setValue("0");
+                addToBlind.child("ULight").child("minLight").setValue("0");
+
+                addToBlind.child("UTemp").child("maxTemp").setValue("0");
+                addToBlind.child("UTemp").child("minTemp").setValue("0");
+
+                addToBlind.child("Schedule").child("date").setValue("0");
+                addToBlind.child("Schedule").child("operation").setValue("0");
+                addToBlind.child("Schedule").child("time").setValue("0");
 
             }
         });

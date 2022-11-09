@@ -31,5 +31,11 @@ public class HomeBlinds {
         ref.child("Status").setValue("close");
     }
 
+    public void blindsMode(String mode){
+        ref.child("Mode").setValue(mode);
+    }
+
+
+
 
 }

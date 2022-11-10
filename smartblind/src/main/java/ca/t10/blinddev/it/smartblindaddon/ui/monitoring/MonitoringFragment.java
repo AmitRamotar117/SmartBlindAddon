@@ -101,8 +101,7 @@ public class MonitoringFragment extends Fragment {
 
 
         retrieveTV = view.findViewById(R.id.retrieveLocation);
-        currentTemp = view.findViewById(R.id.currentTemp);
-        currentLight = view.findViewById(R.id.currentLight);
+
         blindsspinner = view.findViewById(R.id.blindsspinner);
 
         submitbutton = view.findViewById(R.id.submitbutton);
@@ -159,7 +158,7 @@ public class MonitoringFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 String server_data_temp = snapshot.getValue(String.class);
-                currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
+
             }
 
             @Override
@@ -174,7 +173,7 @@ public class MonitoringFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 String server_data_light = snapshot.getValue(String.class);
-                currentLight.setText("Current Light: \n"+server_data_light+" brightness");
+
             }
 
             @Override

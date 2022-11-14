@@ -18,9 +18,6 @@ public class HomeBlinds {
         this.blindkey = blindkey;
         ref = FirebaseDatabase.getInstance().getReference(blindkey);
     }
-
-
-
     //when this method is called it will set the status node of the blind to open which is then read
     // by the device
     public void openBlinds(){
@@ -31,8 +28,10 @@ public class HomeBlinds {
         ref.child("Status").setValue("close");
     }
 
-    public void blindsMode(String mode){
-        ref.child("Mode").setValue(mode);
+    public void blindsMode(String mode,String bk){
+        DatabaseReference r = FirebaseDatabase.getInstance().getReference(bk);
+        r.child("Mode").setValue(mode);
+        //ref.child("Mode").setValue(mode);
     }
 
 

@@ -145,6 +145,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
         SharedPreferences sharedPreferences = context.getSharedPreferences("saved", Context.MODE_PRIVATE);
         SharedPreferences.Editor data = sharedPreferences.edit();
+        String m = sharedPreferences.getString("mode"+x.blindkey,"man");
+
+        if (m.equals("auto")){
+            mode.setChecked(true);
+        }
 
         holder.mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

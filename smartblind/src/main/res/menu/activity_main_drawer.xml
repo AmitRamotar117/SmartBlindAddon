@@ -29,5 +29,12 @@
             android:icon="@drawable/ic_baseline_device_thermostat_24"
             android:title="@string/monitoring"/>
 
+        <item
+            android:id="@+id/nav_distance"
+            android:icon="@drawable/ic_baseline_compare_arrows_24"
+            android:title="@string/distance"
+            />
+
+
     </group>
 </menu>

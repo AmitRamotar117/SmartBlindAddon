@@ -99,12 +99,16 @@
 
 
     <string-array name="contact_emails">
-    <item>Developer\'s Contact</item>
-    <item>chrisjanellemutuc@gmail.com</item>
-    <item>amitpunit117@gmail.com</item>
-    <item>gazaboy1001@gmail.com</item>
-    <item>vypere1994@gmail.com</item>
-</string-array>
+        <item>Developer\'s Contact</item>
+        <item>chrisjanellemutuc@gmail.com</item>
+        <item>amitpunit117@gmail.com</item>
+        <item>gazaboy1001@gmail.com</item>
+        <item>vypere1994@gmail.com</item>
+    </string-array>
+
+    <string name="distance_readings">Current Distance: </string>
+    <string name="distance">Distance</string>
+
 
 
 </resources>

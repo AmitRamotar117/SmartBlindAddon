@@ -37,6 +37,13 @@
         android:name="ca.t10.blinddev.it.smartblindaddon.ui.monitoring.MonitoringFragment"
         android:label="Monitoring Blinds"
         tools:layout="@layout/fragment_monitoring" />
+    <fragment
+        android:id="@+id/nav_distance"
+        android:name="ca.t10.blinddev.it.smartblindaddon.ui.distance.DistanceFragment"
+        android:label="Distance"
+        tools:layout="@layout/fragment_distance" />
+
+
 
 
 

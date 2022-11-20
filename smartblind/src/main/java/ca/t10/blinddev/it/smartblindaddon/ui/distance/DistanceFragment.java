@@ -27,6 +27,7 @@ public class DistanceFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_distance, container, false);
         currentDistance = view.findViewById(R.id.distancereadings);
 
     dRef = FirebaseDatabase.getInstance().getReference();
@@ -47,7 +48,7 @@ public class DistanceFragment extends Fragment {
             }
         });
 
-        return inflater.inflate(R.layout.fragment_distance, container, false);
+        return view;
     }
 
 

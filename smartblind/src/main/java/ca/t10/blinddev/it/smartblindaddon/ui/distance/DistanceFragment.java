@@ -22,29 +22,29 @@ import ca.t10.blinddev.it.smartblindaddon.R;
 public class DistanceFragment extends Fragment {
     private View view;
     private TextView currentDistance;
-    private DatabaseReference dRef;
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_distance, container, false);
         currentDistance = view.findViewById(R.id.distancereadings);
+        myRef = database.getReference("currentdistance");
 
-    dRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference distanceRef =  dRef.child("Distance");
-        distanceRef.child("Distance").addValueEventListener(new ValueEventListener() {
+      myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String server_data_distance = String.valueOf(snapshot.getValue());
 
-                String server_data_distance = snapshot.getValue(String.class);
                 currentDistance.setText("Current Distance: "+server_data_distance);
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                throw error.toException(); // never ignore errors
+                throw error.toException();
             }
         });
 

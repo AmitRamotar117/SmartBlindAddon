@@ -203,7 +203,12 @@ public class MonitoringFragment extends Fragment {
                 } else {
                     // else call the method to add
                     // data to our database.
-
+                    if (maxTemp.equals("")){
+                        maxTemp = "0";
+                    }
+                    if (minTemp.equals("")){
+                        minTemp = "0";
+                    }
                     addDatatoFirebaseTemp(maxTemp,minTemp);
                     // getDataFromFirebase();
 
@@ -211,13 +216,15 @@ public class MonitoringFragment extends Fragment {
 
 
                 //Chris temperature code
+                String finalMaxTemp = maxTemp;
+                String finalMinTemp = minTemp;
                 tempRef.child("temp").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                             String server_data_temp = snapshot.getValue(String.class);
                             // currentTemp.setText("Current Temperature: \n"+server_data_temp+" degrees");
-                            if(maxTemp.equals(server_data_temp)){
+                            if(finalMaxTemp.equals(server_data_temp)){
 
                                // tempRef.child("maxTemp").setValue(maxTemp);
                                 Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
@@ -225,7 +232,7 @@ public class MonitoringFragment extends Fragment {
 
 
                             }
-                            else if(minTemp.equals(server_data_temp)){
+                            else if(finalMinTemp.equals(server_data_temp)){
 
                                // tempRef.child("minTemp").setValue(minTemp);
                                 Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
@@ -261,6 +268,13 @@ public class MonitoringFragment extends Fragment {
 
                 String maxLight = lightmaxET.getText().toString();
                 String minLight = lightminET.getText().toString();
+
+                if (maxLight.equals("")){
+                    maxLight = "0";
+                }
+                if (minLight.equals("")){
+                    minLight = "0";
+                }
                 //adding in the database
                 if (TextUtils.isEmpty(minLight) && TextUtils.isEmpty(maxLight)) {
                     // if the text fields are empty
@@ -276,18 +290,20 @@ public class MonitoringFragment extends Fragment {
                 }
 
                 //michael light code
+                String finalMaxLight = maxLight;
+                String finalMinLight = minLight;
                 lightRef.child("light").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                             String server_data_light = snapshot.getValue(String.class);
-                            if(maxLight.equals(server_data_light)){
+                            if(finalMaxLight.equals(server_data_light)){
 
                                 //lightRef.child("op").setValue("close");
                                 Toast.makeText(getActivity(),"Blinds is set to Close",Toast.LENGTH_SHORT).show();
 
                             }
-                            else if(minLight.equals(server_data_light)){
+                            else if(finalMinLight.equals(server_data_light)){
 
                                 //lightRef.child("op").setValue("open");
                                 Toast.makeText(getActivity(),"Blinds is set to Open",Toast.LENGTH_SHORT).show();
